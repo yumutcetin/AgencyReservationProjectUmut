@@ -1,0 +1,166 @@
+﻿@page
+@model RegisterModel
+@using RezerVanaUmv.Resources
+@{
+    // Sayfa başlığı da resource'dan gelsin
+    ViewData["Title"] = Resource.KayitOl;
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>RezerVana - @Resource.KayitOl</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/dist/css/adminlte.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body class="register-page bg-body-secondary">
+    <center>
+        <div class="register-box">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <a href="/" class="link-dark text-center">
+                        <h1 class="mb-0"><b>RezerVana</b></h1>
+                    </a>
+                </div>
+                <div class="card-body register-card-body">
+                    <p class="register-box-msg">@Resource.YeniUyelikOlustur</p>
+
+                    @*
+                    <div class="text-center mb-3">
+                    <div class="btn-group" role="group">
+                    <button type="button" id="tab-bireysel" class="btn btn-outline-primary active" onclick="showTab('bireysel')">Bireysel</button>
+                    <button type="button" id="tab-kurumsal" class="btn btn-outline-primary" onclick="showTab('kurumsal')">Kurumsal</button>
+                    </div>
+                    </div>
+                    *@
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <hr />
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <div id="kurumsal-section" style="display:none;">
+                            <input type="hidden" name="Input.AccountType" value="KURUMSAL" />
+                        </div>
+
+                        <div class="input-group mb-1">
+                            <div class="form-floating">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="@Resource.EPosta" />
+                                <label asp-for="Input.Email">@Resource.EPosta</label>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="input-group-text"><i class="bi bi-envelope"></i></div>
+                        </div>
+                        <br />
+
+                        <div class="input-group mb-1">
+                            <div class="form-floating">
+                                <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" placeholder="@Resource.Şifre" />
+                                <label asp-for="Input.Password">@Resource.Şifre</label>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                        </div>
+
+                        <div class="text-start w-100">
+                            <small class="text-muted mt-2 d-block" id="passwordHelp">
+                                <strong>@Resource.SifreKurallariBaslik</strong><br />
+                                ✅ @Resource.SifreKuralUzunluk<br />
+                                ✅ @Resource.SifreKuralBuyukHarf<br />
+                                ✅ @Resource.SifreKuralKucukHarf<br />
+                                ✅ @Resource.SifreKuralRakam<br />
+                                ✅ @Resource.SifreKuralOzelKarakter<br />
+                            </small>
+                            <span id="passwordError" class="text-danger" style="display:none;"></span>
+                        </div>
+                        <br />
+
+                        <div class="input-group mb-1">
+                            <div class="form-floating">
+                                <input asp-for="Input.ConfirmPassword" type="password" class="form-control" autocomplete="new-password" placeholder="@Resource.SifreTekrar" />
+                                <label asp-for="Input.ConfirmPassword">@Resource.SifreTekrar</label>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                        </div>
+                        <br />
+
+                        <input type="text" name="hiddenField" style="display:none;" autocomplete="off" />
+
+                        <div class="text-center my-3">
+                            <div class="g-recaptcha" data-sitekey="6Lc88nUrAAAAAMPK34Ycb0fgIv0QDto_movtDG89"></div>
+                        </div>
+
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">@Resource.UyeOlButton</button>
+
+                        <div id="bireysel-section">
+                            <input type="hidden" name="Input.AccountType" value="BIREYSEL" />
+                        </div>
+                    </form>
+
+                    <p class="mb-0">
+                        <a href="/Identity/Account/Login" class="link-primary text-center">@Resource.ZatenHesabinVarMi</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </center>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (e) {
+            const passwordInput = document.querySelector("input[name='Input.Password']");
+            const password = passwordInput.value;
+            const errorEl = document.getElementById("passwordError");
+
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            const hasDigit = /[0-9]/.test(password);
+            const hasSpecial = /[!#\$%\^\&*\)\(+=._-]/.test(password);
+            const isLongEnough = password.length >= 8;
+
+            if (!hasUpper || !hasLower || !hasDigit || !hasSpecial || !isLongEnough) {
+                e.preventDefault();
+                // JS içerisindeki hata mesajı Resource'dan çekildi
+                errorEl.textContent = "@Html.Raw(Resource.SifreKuralHataMesaji)";
+                errorEl.style.display = "block";
+                passwordInput.focus();
+            } else {
+                errorEl.style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        function showTab(tabName) {
+            const bireyselTab = document.getElementById("bireysel-section");
+            const kurumsalTab = document.getElementById("kurumsal-section");
+
+            const btnBireysel = document.getElementById("tab-bireysel");
+            const btnKurumsal = document.getElementById("tab-kurumsal");
+
+            const formTitle = document.getElementById("form-title");
+
+            if (tabName === 'bireysel') {
+                bireyselTab.style.display = "block";
+                kurumsalTab.style.display = "none";
+                btnBireysel.classList.add("active");
+                btnKurumsal.classList.remove("active");
+                if (formTitle) formTitle.innerText = "@Html.Raw(Resource.YeniHesapBireysel)";
+            } else {
+                bireyselTab.style.display = "none";
+                kurumsalTab.style.display = "block";
+                btnBireysel.classList.remove("active");
+                btnKurumsal.classList.add("active");
+                if (formTitle) formTitle.innerText = "@Html.Raw(Resource.YeniHesapKurumsal)";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

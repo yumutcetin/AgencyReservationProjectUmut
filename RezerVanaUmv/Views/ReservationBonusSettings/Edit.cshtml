@@ -1,0 +1,97 @@
+﻿@model RezerVanaUmv.Models.ReservationBonusSetting
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-4">📝 @RezerVanaUmv.Resources.Resource.Edit</h2>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white fw-bold">
+        @RezerVanaUmv.Resources.Resource.ReservationBonusSetting
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="BonusProcedureUrl" class="form-label">@RezerVanaUmv.Resources.Resource.Bonus_Prosedür_Adresi</label>
+                    <input asp-for="BonusProcedureUrl" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="CreatedAt" class="form-label">@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</label>
+                    <input asp-for="CreatedAt" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="BonusInfoEmail" class="form-label">@RezerVanaUmv.Resources.Resource.Bonus_Bilgi_Maili</label>
+                    <input asp-for="BonusInfoEmail" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="SearchType" class="form-label">@RezerVanaUmv.Resources.Resource.Arama_Tipi</label>
+                    <input asp-for="SearchType" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MinStayDay" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Stay</label>
+                    <input asp-for="MinStayDay" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MaxStayDay" class="form-label">@RezerVanaUmv.Resources.Resource.Max_Stay</label>
+                    <input asp-for="MaxStayDay" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MinReservationDay" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Reservation_Day</label>
+                    <input asp-for="MinReservationDay" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MaxReservationDay" class="form-label">@RezerVanaUmv.Resources.Resource.Max_Reservation_Day</label>
+                    <input asp-for="MaxReservationDay" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MinBalance" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Balance</label>
+                    <input asp-for="MinBalance" class="form-control" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="YearlyUsePoint" class="form-label">@RezerVanaUmv.Resources.Resource.Yearly_Use_Point</label>
+                    <input asp-for="YearlyUsePoint" class="form-control" required />
+                </div>
+
+                <div class="col-md-6 form-check">
+                    <input class="form-check-input" asp-for="IsBonusProcEnabled" />
+                    <label class="form-check-label" asp-for="IsBonusProcEnabled">@Html.DisplayNameFor(model => model.IsBonusProcEnabled)</label>
+                </div>
+
+                <div class="col-md-6 form-check">
+                    <input class="form-check-input" asp-for="IsExcheckinDateControl" />
+                    <label class="form-check-label" asp-for="IsExcheckinDateControl">@Html.DisplayNameFor(model => model.IsExcheckinDateControl)</label>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="TenantId" class="form-label">@RezerVanaUmv.Resources.Resource.Tenant</label>
+                    <select asp-for="TenantId" class="form-select" asp-items="ViewBag.TenantId" required></select>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success px-5">💾 @RezerVanaUmv.Resources.Resource.KAYDET</button>
+                <a asp-action="Index" class="btn btn-secondary ms-2">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

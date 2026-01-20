@@ -1,0 +1,63 @@
+﻿@model RezerVanaUmv.Models.Campaign
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Edit</h1>
+
+<h4>@RezerVanaUmv.Resources.Resource.Kampanya</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+
+            <div class="form-group">
+                <label asp-for="TenantId" class="control-label">Tenant</label>
+                <select asp-for="TenantId" class="form-control" asp-items="ViewBag.TenantId" required></select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">@RezerVanaUmv.Resources.Resource.Unvan</label>
+                <input asp-for="Description" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">@RezerVanaUmv.Resources.Resource.Açıklama</label>
+                <input asp-for="Description" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="TargetRoomType" class="control-label">@RezerVanaUmv.Resources.Resource.TargetRoomType</label>
+                <input asp-for="TargetRoomType" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">@RezerVanaUmv.Resources.Resource.Start_Date</label>
+                <input asp-for="StartDate" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label">@RezerVanaUmv.Resources.Resource.End_Date</label>
+                <input asp-for="EndDate" class="form-control" required />
+            </div>
+         
+        
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label">@RezerVanaUmv.Resources.Resource.Aktif?</label>
+                <input asp-for="IsActive" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

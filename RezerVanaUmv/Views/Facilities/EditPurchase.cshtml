@@ -1,0 +1,46 @@
+﻿@model RezerVanaUmv.Models.Purchase
+
+@{
+    ViewData["Title"] = "Satın Alma Düzenle";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2>@RezerVanaUmv.Resources.Resource.Satın_Alma_Düzenle</h2>
+<hr />
+
+<form asp-action="EditPurchase" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="GuestId" class="form-label">@RezerVanaUmv.Resources.Resource.Satın_Alan</label>
+        <input asp-for="GuestId" class="form-control" />
+        <span asp-validation-for="GuestId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="MenuItemId" class="form-label">@RezerVanaUmv.Resources.Resource.Menü_Öğesi</label>
+        <input asp-for="MenuItemId" class="form-control" />
+        <span asp-validation-for="MenuItemId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="form-label">@RezerVanaUmv.Resources.Resource.Fiyat (₺)</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Quantity" class="form-label">@RezerVanaUmv.Resources.Resource.Adet</label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="PurchasedAt" class="form-label">@RezerVanaUmv.Resources.Resource.Satın_Alma_Tarihi</label>
+        <input asp-for="PurchasedAt" type="datetime-local" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">@RezerVanaUmv.Resources.Resource.KAYDET</button>
+    <a asp-action="GetPurchasesToday" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.İptal</a>
+</form>

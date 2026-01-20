@@ -1,0 +1,71 @@
+﻿@model ErrorViewModel
+@inject IWebHostEnvironment HostEnvironment
+@{
+    ViewData["Title"] = $"Error {Model.StatusCode}";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="error-card shadow-sm p-4">
+                <div class="error-icon mb-3">
+                    @if (Model.StatusCode == 404)
+                    {
+                        <i class="bi bi-exclamation-octagon-fill text-warning" style="font-size: 3rem;"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-x-circle-fill text-danger" style="font-size: 3rem;"></i>
+                    }
+                </div>
+
+                <h1 class="error-title display-4">Error @Model.StatusCode</h1>
+
+                <h2 class="error-message h4 mb-4">
+                    @Model.ErrorMessage
+                </h2>
+
+                <div class="error-actions d-flex justify-content-center gap-3">
+                    <a href="/" class="btn btn-primary px-4">
+                        <i class="bi bi-house-door me-2"></i>@RezerVanaUmv.Resources.Resource.Anasayfa
+                    </a>
+                    <a href="mailto:info@bagsfollow.com" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-envelope me-2"></i>@RezerVanaUmv.Resources.Resource.Support
+                    </a>
+                </div>
+
+                @if (HostEnvironment.IsDevelopment() && Model.ShowRequestId)
+                {
+                    <div class="error-details mt-4 pt-3 border-top">
+                        <p class="text-muted small mb-1">
+                            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                        </p>
+                        @if (!string.IsNullOrEmpty(Model.OriginalPath))
+                        {
+                            <p class="text-muted small mb-0">
+                                <strong>Path:</strong> <code>@Model.OriginalPath</code>
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-card {
+        background: white;
+        border-radius: 10px;
+    }
+
+    .error-title {
+        color: var(--bs-danger);
+        margin-bottom: 1rem;
+    }
+
+    .error-message {
+        color: var(--bs-gray-700);
+    }
+</style>

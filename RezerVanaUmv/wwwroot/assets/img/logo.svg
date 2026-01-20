@@ -1,0 +1,20 @@
+<svg viewBox="0 0 130 35" xmlns="http://www.w3.org/2000/svg">
+	<!-- Background -->
+	<rect width="130" height="35" fill="white"/>
+
+	<!-- Bigger Sun (more prominent, no rays) -->
+	<defs>
+		<radialGradient id="realSunGradient" cx="50%" cy="50%" r="50%">
+			<stop offset="0%" stop-color="#fffcd5" />
+			<stop offset="60%" stop-color="#f7c842" />
+			<stop offset="100%" stop-color="#f1a501" />
+		</radialGradient>
+	</defs>
+	<circle cx="12" cy="18" r="8" fill="url(#realSunGradient)" />
+
+	<!-- RezerVanaUmv text (shifted slightly right) -->
+	<text x="68" y="20" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0066cc">RezerVanaUmv</text>
+
+	<!-- Your Travel Compass text (also shifted) -->
+	<text x="68" y="30" font-family="Arial, sans-serif" font-size="7" text-anchor="middle" fill="#666666">Your Travel Compass</text>
+</svg>

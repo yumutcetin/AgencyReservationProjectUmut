@@ -1,0 +1,39 @@
+﻿@model List<RezerVanaUmv.ViewModels.TenantWithStatusViewModel>
+
+@{
+    ViewData["Title"] = "Bağlı Olduğunuz Oteller";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2> @RezerVanaUmv.Resources.Resource.Bağlı_Olduğunuz_Oteller</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tenant @RezerVanaUmv.Resources.Resource.Ad</th>
+                <th>@RezerVanaUmv.Resources.Resource.EPosta </th>
+                <th>@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tenant in Model)
+            {
+                <tr class="@(tenant.IsActive ? "" : "table-danger")">
+                    <td>@tenant.Id</td>
+                    <td>@tenant.Name</td>
+                    <td>@tenant.ContactEmail</td>
+                    <td>@tenant.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        @RezerVanaUmv.Resources.Resource.Herhangi_bir_otel_bulunamadı_
+    </div>
+}

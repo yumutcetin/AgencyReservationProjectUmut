@@ -1,0 +1,37 @@
+﻿@model RezerVanaUmv.Models.DavetKoduTablosu
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Details</h1>
+
+<div>
+    <h4>@RezerVanaUmv.Resources.Resource.Davet_Kodu_Tablosu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DavetKodu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DavetKodu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenantId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenantId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AgencyId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AgencyId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">@RezerVanaUmv.Resources.Resource.Edit</a> |
+    <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>

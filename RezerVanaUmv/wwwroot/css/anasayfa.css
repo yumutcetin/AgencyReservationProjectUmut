@@ -1,0 +1,500 @@
+﻿.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.navbar .navbar-nav .nav-link {
+    margin-left: 15px;
+    font-size: 18px;
+    transition: .5s;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+
+svg {
+    margin: 0;
+    padding: 0;
+    left: 0;
+    width: 18rem;
+}
+
+.language-dropdown {
+    background-color: #312F38 !important;
+}
+
+.navbar-container {
+    z-index: 9998;
+    position: sticky;
+    width: 100%;
+    background-color: #312F38;
+    margin-top: 0;
+    padding-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+nav {
+    background-color: #312F38;
+}
+
+.navbar {
+    background-color: #312F38;
+    padding: 0px;
+    margin: 0px;
+    height: 100px;
+    width: 100%;
+}
+
+.navbar-nav {
+    background-color: #312F38;
+}
+
+
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+@media (min-width: 1200px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        border: 0;
+        transition: .5s;
+        opacity: 0;
+    }
+}
+
+.dropdown .dropdown-menu a:hover {
+    background: var(--bs-secondary);
+    color: var(--bs-primary);
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: #312F38 !important;
+    border-radius: 10px !important;
+    transition: .5s;
+    opacity: 1;
+}
+
+
+
+
+
+.barcod-div {
+    margin-left: 25px;
+}
+
+.hero-header {
+    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(~/BagsImage/plane.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+
+
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: #2C3E4F;
+    color: white;
+    text-align: center;
+}
+
+
+    footer p {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+    }
+
+    footer li {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+
+    footer .fa-brands {
+        margin-top: 1rem;
+        font-size: 2.5rem;
+        background-color: #2C3E4F;
+    }
+
+.about-icons {
+    margin: 0 auto;
+}
+
+.copyright {
+    background-color: #212529;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+    color: white;
+    text-align: center;
+}
+
+.more-info {
+    font-size: 1.5rem;
+}
+
+.tabs-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+    .tabs-list button {
+        flex: 1;
+        min-width: 100px;
+        margin: 5px;
+    }
+
+.tab-content {
+    display: none;
+}
+
+    .tab-content.active {
+        display: block;
+    }
+
+@media (max-width: 768px) {
+    .tabs-list {
+        flex-direction: column;
+    }
+
+        .tabs-list button {
+            width: 100%;
+        }
+
+    td {
+        display: inline-block;
+    }
+
+    .odd td {
+        display: table-cell;
+    }
+
+    .even td {
+        display: table-cell;
+    }
+}
+
+/* Default olarak tab-content kapal� */
+.tab-content {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .tab-content {
+        display: block; /* B�y�k ekranlarda a��k */
+    }
+}
+
+.tab-content.active {
+    display: block; /* K���k ekranlarda aktif olan sekme */
+}
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-item {
+    width: 100%;
+    margin: 10px;
+}
+
+#resim .pic-selection {
+    display: flex;
+}
+
+@media (min-width: 769px) {
+    .flex-container {
+        flex-direction: row;
+    }
+
+    .flex-item {
+        margin: 15px;
+    }
+
+    .form-row {
+        display: flex;
+    }
+
+    #yolcu .flex-item {
+        width: 44%;
+    }
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table input {
+    width: 100%;
+}
+
+.case-td {
+    width: 5%;
+}
+
+@media (max-width: 768px) {
+    .table td {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+        .table td:nth-child(1) {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+    .case-td {
+        width: 100%;
+    }
+
+        .case-td .case {
+            justify-items: left;
+        }
+
+    #resim .pic-selection {
+        display: inline-block;
+    }
+}
+
+
+.dt-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dt-button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+    .dt-button:hover {
+        background-color: #0056b3;
+    }
+
+.dataTables_filter {
+    margin-top: 20px;
+}
+
+    .dataTables_filter label {
+        display: flex;
+        align-items: center;
+    }
+
+    .dataTables_filter input {
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+@media (max-width: 600px) {
+    .dt-buttons {
+        flex-direction: column;
+    }
+
+    .dataTables_filter {
+        margin-top: 10px;
+    }
+
+        .dataTables_filter label {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .dataTables_filter input {
+            margin-left: 0;
+            margin-top: 5px;
+            width: 100%;
+        }
+}
+
+
+/* General pagination styles */
+.dataTables_paginate {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .dataTables_paginate .paginate_button {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        color: #333;
+        text-decoration: none;
+    }
+
+        .dataTables_paginate .paginate_button:hover {
+            background: #f1f1f1;
+            border-color: #bbb;
+        }
+
+        .dataTables_paginate .paginate_button.disabled {
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .dataTables_paginate .paginate_button.current {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .dataTables_paginate .paginate_button {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+        .dataTables_paginate .paginate_button:not(.current) {
+            display: none;
+        }
+
+        .dataTables_paginate .paginate_button.current {
+            flex: 1;
+        }
+}
+
+@media (max-width: 400px) {
+    .dataTables_paginate {
+        flex-direction: column;
+    }
+
+        .dataTables_paginate .paginate_button {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+}
+/* Responsive adjustments */
+
+@media (min-width: 1200px) {
+
+
+    .main-content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1200px) {
+
+
+    .main-content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1000px) {
+
+
+    .link-button {
+        font-size: 0.9rem;
+    }
+
+    .main-content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main-content {
+        width: 80%;
+    }
+
+    .link-button {
+        font-size: 0.8rem;
+    }
+
+    .datatable {
+        font-size: 0.8rem;
+    }
+
+    .create-tbody {
+        display: table-caption;
+    }
+
+    .create-td {
+        width: 50% !important;
+        display: table-cell !important;
+    }
+
+    .create-td2 {
+        margin-buttom: 0;
+    }
+
+
+    svg {
+        margin: 0;
+        padding: 0;
+        left: 0;
+        width: 18rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .datatable {
+        font-size: 0.7rem;
+        width: 50%;
+    }
+
+
+    svg {
+        margin: 0;
+        padding: 0;
+        left: 0;
+        width: 15rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .table-wrapper {
+        flex: 1 1 45%; /* Adjust percentage width for larger screens */
+    }
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .sus-header {
+        font-size: x-small;
+        font-weight: 100
+    }
+}

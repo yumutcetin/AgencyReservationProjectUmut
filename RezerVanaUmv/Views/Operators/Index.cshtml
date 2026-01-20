@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.Operator>
+
+@{
+    ViewData["Title"] = "Operatör Listesi";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<h2 class="mb-4">📋 @RezerVanaUmv.Resources.Resource.Operatör_Tanımları </h2>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-lg"></i> @RezerVanaUmv.Resources.Resource.Yeni_Operatör_Ekle
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>@RezerVanaUmv.Resources.Resource.Operatör_Adı</th>
+                    <th>@RezerVanaUmv.Resources.Resource.Oluşturulma</th>
+                    <th>@RezerVanaUmv.Resources.Resource.Güncellenme</th>
+                    <th class="text-end">@RezerVanaUmv.Resources.Resource.İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@item.UpdatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td class="text-end">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">
+                                <i class="bi bi-pencil-square"></i> @RezerVanaUmv.Resources.Resource.Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger"
+                               onclick="return confirm('Silmek istediğinize emin misiniz?');">
+                                <i class="bi bi-trash"></i> @RezerVanaUmv.Resources.Resource.Sil
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

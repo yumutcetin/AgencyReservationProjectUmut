@@ -1,0 +1,2579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Acele Bagaj Dosya Sırası" xml:space="preserve">
+    <value>Dringende Gepäck-Dateireihenfolge</value>
+  </data>
+  <data name="Acele Bagaj Uçuş Bilgileri" xml:space="preserve">
+    <value>Dringende Gepäck-Fluginformationen</value>
+  </data>
+  <data name="Acele Etiket No" xml:space="preserve">
+    <value>Dringende Etikett-Nr.</value>
+  </data>
+  <data name="Acele Gönderim Mesajı" xml:space="preserve">
+    <value>Dringende Versandnachricht</value>
+  </data>
+  <data name="Acele Hava Yolu" xml:space="preserve">
+    <value>Dringende Fluggesellschaft</value>
+  </data>
+  <data name="Acele Mesaj Bilgileri" xml:space="preserve">
+    <value>Dringende Nachrichteninformationen</value>
+  </data>
+  <data name="Acele Sefer" xml:space="preserve">
+    <value>Dringender Flug</value>
+  </data>
+  <data name="Acele Sefer Bilgileri" xml:space="preserve">
+    <value>Dringende Fluginformationen</value>
+  </data>
+  <data name="ADI" xml:space="preserve">
+    <value>NAME</value>
+  </data>
+  <data name="ADI-1" xml:space="preserve">
+    <value>NAME-1</value>
+  </data>
+  <data name="ADI-2" xml:space="preserve">
+    <value>NAME-2</value>
+  </data>
+  <data name="Adres" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Adres İli" xml:space="preserve">
+    <value>Adressprovinz</value>
+  </data>
+  <data name="Adres İlçesi" xml:space="preserve">
+    <value>Adressbezirk</value>
+  </data>
+  <data name="ADRES:" xml:space="preserve">
+    <value>ADRESSE:</value>
+  </data>
+  <data name="ADRESE SEVK FORM" xml:space="preserve">
+    <value>Zustellformular</value>
+  </data>
+  <data name="Adresgec" xml:space="preserve">
+    <value>Vorübergehende Adresse</value>
+  </data>
+  <data name="Adreskal" xml:space="preserve">
+    <value>Dauerhafte Adresse</value>
+  </data>
+  <data name="Adı" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Adı Soyadı" xml:space="preserve">
+    <value>Vor- und Nachname</value>
+  </data>
+  <data name="Ahl Kayıt No" xml:space="preserve">
+    <value>AHL-Registrierungsnummer</value>
+  </data>
+  <data name="ALACAK HAKKI" xml:space="preserve">
+    <value>FORDERUNGSRECHT</value>
+  </data>
+  <data name="Alacak Hakkı" xml:space="preserve">
+    <value>Forderungsrecht</value>
+  </data>
+  <data name="Alacak Hakkı Bilgileri" xml:space="preserve">
+    <value>Informationen zum Forderungsrecht</value>
+  </data>
+  <data name="Alacak Hakkı Tutarı" xml:space="preserve">
+    <value>Betrag des Forderungsrechts</value>
+  </data>
+  <data name="AliciAdres" xml:space="preserve">
+    <value>Empfängeradresse</value>
+  </data>
+  <data name="ALT" xml:space="preserve">
+    <value>UNTEN</value>
+  </data>
+  <data name="Amba" xml:space="preserve">
+    <value>Lager</value>
+  </data>
+  <data name="Ambar" xml:space="preserve">
+    <value>Lager</value>
+  </data>
+  <data name="Ambar Adı/Depolama Yeri" xml:space="preserve">
+    <value>Lagername/Speicherort</value>
+  </data>
+  <data name="Ambar Bilgileri" xml:space="preserve">
+    <value>Lagerinformationen</value>
+  </data>
+  <data name="Anasayfa" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="ARA" xml:space="preserve">
+    <value>SUCHEN</value>
+  </data>
+  <data name="Arama" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="Asıl Etiket No" xml:space="preserve">
+    <value>Originaletikett-Nr.</value>
+  </data>
+  <data name="Asıl Hava Yolu" xml:space="preserve">
+    <value>Originalfluggesellschaft</value>
+  </data>
+  <data name="Asıl Sefer" xml:space="preserve">
+    <value>Originalflug</value>
+  </data>
+  <data name="Asıl Sefer Bilgileri" xml:space="preserve">
+    <value>Originalfluginformationen</value>
+  </data>
+  <data name="AY" xml:space="preserve">
+    <value>MONAT</value>
+  </data>
+  <data name="AYAK TEKERLER" xml:space="preserve">
+    <value>FÜSSE/RÄDER</value>
+  </data>
+  <data name="AÇIK" xml:space="preserve">
+    <value>OFFEN</value>
+  </data>
+  <data name="AÇIKLAMA" xml:space="preserve">
+    <value>BESCHREIBUNG</value>
+  </data>
+  <data name="AÇIKLAMALAR" xml:space="preserve">
+    <value>BESCHREIBUNGEN</value>
+  </data>
+  <data name="Açıklama" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Açıklamalar" xml:space="preserve">
+    <value>Beschreibungen</value>
+  </data>
+  <data name="Açılış Tarihi" xml:space="preserve">
+    <value>Eröffnungsdatum</value>
+  </data>
+  <data name="AĞIRLIĞI" xml:space="preserve">
+    <value>GEWICHT</value>
+  </data>
+  <data name="Ağırlığı" xml:space="preserve">
+    <value>Gewicht</value>
+  </data>
+  <data name="Bagaj" xml:space="preserve">
+    <value>Gepäck</value>
+  </data>
+  <data name="BAGAJ SAYISI" xml:space="preserve">
+    <value>Anzahl der Gepäckstücke</value>
+  </data>
+  <data name="BAGAJIN BİLGİLERİ" xml:space="preserve">
+    <value>Gepäckinformationen</value>
+  </data>
+  <data name="BAGAJIN ROTASI" xml:space="preserve">
+    <value>Gepäckroute</value>
+  </data>
+  <data name="Bagajlarınız için" xml:space="preserve">
+    <value>Für Ihr Gepäck können Sie unter www.bagsfollow.com einen zusätzlichen Sicherheitsbarcode erwerben.</value>
+  </data>
+  <data name="Bagajın Asıl Uçuş Bilgileri" xml:space="preserve">
+    <value>Originale Fluginformationen des Gepäcks</value>
+  </data>
+  <data name="Bagajın Ayrıntıları" xml:space="preserve">
+    <value>Gepäckdetails</value>
+  </data>
+  <data name="Bagajın Bilgileri" xml:space="preserve">
+    <value>Gepäckinformationen</value>
+  </data>
+  <data name="Bagajın Hasar Durumu" xml:space="preserve">
+    <value>Schadensstatus des Gepäcks</value>
+  </data>
+  <data name="Bagajın Rota Bilgileri" xml:space="preserve">
+    <value>Routeninformationen des Gepäcks</value>
+  </data>
+  <data name="Bagajın Rotası" xml:space="preserve">
+    <value>Route des Gepäcks</value>
+  </data>
+  <data name="Bagajın İçerik Bilgileri" xml:space="preserve">
+    <value>Inhaltsinformationen des Gepäcks</value>
+  </data>
+  <data name="BagsFollow Kalan" xml:space="preserve">
+    <value>Verbleibende BagsFollow-Gepäckregistrierungsinformationen</value>
+  </data>
+  <data name="Barkod" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="Barkod Numarası" xml:space="preserve">
+    <value>Barcodenummer</value>
+  </data>
+  <data name="Barkod Satın Al" xml:space="preserve">
+    <value>Gepäckverfolgung kaufen</value>
+  </data>
+  <data name="BAY" xml:space="preserve">
+    <value>HERR</value>
+  </data>
+  <data name="BAYAN" xml:space="preserve">
+    <value>FRAU</value>
+  </data>
+  <data name="BAĞLAR" xml:space="preserve">
+    <value>VERBINDUNGEN</value>
+  </data>
+  <data name="Baş Harfleri" xml:space="preserve">
+    <value>Initialen</value>
+  </data>
+  <data name="BAŞ HARFLERİ" xml:space="preserve">
+    <value>INITIALEN</value>
+  </data>
+  <data name="BAŞLANGIÇ TARİHİ" xml:space="preserve">
+    <value>BEGINNDATUM</value>
+  </data>
+  <data name="BDO YAP" xml:space="preserve">
+    <value>BDO AUSFÜHREN</value>
+  </data>
+  <data name="BH-1" xml:space="preserve">
+    <value>BH-1</value>
+  </data>
+  <data name="BH-2" xml:space="preserve">
+    <value>BH-2</value>
+  </data>
+  <data name="BOŞ" xml:space="preserve">
+    <value>Bitte auswählen...</value>
+  </data>
+  <data name="Buluntu" xml:space="preserve">
+    <value>Fundstück</value>
+  </data>
+  <data name="Buluntu Bilgi" xml:space="preserve">
+    <value>Fundinformationen</value>
+  </data>
+  <data name="Buluntu Güncelle" xml:space="preserve">
+    <value>Fundstück aktualisieren</value>
+  </data>
+  <data name="Buluntu Kapama" xml:space="preserve">
+    <value>Fundstück abschließen / übergeben</value>
+  </data>
+  <data name="Buluntu Kayıt" xml:space="preserve">
+    <value>Fundstück registrieren</value>
+  </data>
+  <data name="BÜYÜK" xml:space="preserve">
+    <value>GROSS</value>
+  </data>
+  <data name="BİTİŞ TARİHİ" xml:space="preserve">
+    <value>ENDDATUM</value>
+  </data>
+  <data name="FERMUAR" xml:space="preserve">
+    <value>REISSVERSCHLUSS</value>
+  </data>
+  <data name="Fiyat" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="Fwd Kayıt No" xml:space="preserve">
+    <value>Fwd-Registrierungsnummer</value>
+  </data>
+  <data name="Gelişmiş/İleri" xml:space="preserve">
+    <value>Erweitert/Fortgeschritten</value>
+  </data>
+  <data name="GenelBagajBilgileri" xml:space="preserve">
+    <value>Allgemeine Gepäckinformationen</value>
+  </data>
+  <data name="Geçici Adres Bilgileri" xml:space="preserve">
+    <value>Vorübergehende Adressinformationen</value>
+  </data>
+  <data name="GEÇİCİ ADRESİ" xml:space="preserve">
+    <value>VORÜBERGEHENDE ADRESSE</value>
+  </data>
+  <data name="Giriş" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Giriş Yap" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
+  <data name="Gönder" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="GÜNCEL" xml:space="preserve">
+    <value>AKTUELL</value>
+  </data>
+  <data name="Güncelle" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="Hakkımızda" xml:space="preserve">
+    <value>Über uns</value>
+  </data>
+  <data name="HakkımızdaP1" xml:space="preserve">
+    <value>Dieser Traum, der 2016 begann, wurde 2021 Wirklichkeit.</value>
+  </data>
+  <data name="HakkımızdaP2" xml:space="preserve">
+    <value>Drei Freunde, die im Bereich Luftfahrt und Finanzen tätig sind, schlossen sich zusammen, um die Abhängigkeit unseres Landes von ausländischer Software in der Luftfahrt zu beenden und eine nationale Luftfahrtssoftware zu entwickeln.</value>
+  </data>
+  <data name="HakkımızdaP3" xml:space="preserve">
+    <value>Auch wenn nicht alles wie erwartet verlief, haben wir in kurzer Zeit große Fortschritte gemacht. Unsere alternative Webanwendung BagsFollow zur internationalen Lost-and-Found-Lösung wurde 2017 in die Inkubationsphase bei ITÜ Çekirdek aufgenommen. Da wir nicht nach Istanbul ziehen konnten, mussten wir das Projekt auf Eis legen, aber wir haben gesehen, was wir leisten können.</value>
+  </data>
+  <data name="HakkımızdaP4" xml:space="preserve">
+    <value>In der Zwischenzeit haben wir unsere Projekte weiterentwickelt und große Fortschritte erzielt. Im August 2021 haben wir uns unter dem Namen UMV Yazılım Ltd. Şti. zusammengeschlossen. Wir haben nicht nur in der Lost-and-Found-Branche, sondern auch in Fluginformationssystemen Softwarelösungen entwickelt.</value>
+  </data>
+  <data name="HakkımızdaP5" xml:space="preserve">
+    <value>Unser amateurhafter Geist verband sich mit unserem nationalen Bewusstsein, und wir sagten: „Wir schaffen das.“ Und tatsächlich hatten wir recht. Unsere Tests haben gezeigt, dass wir die Rate verlorener Gepäckstücke auf ein Minimum senken konnten. Unser Fluginformationssystem wurde durch die Rückmeldungen unserer Kunden optimiert. Wir standen 24/7 hinter unserem Projekt. Kurz gesagt: Wir haben versucht, zu verhindern, dass das Know-how unseres Landes ins Ausland abwandert.</value>
+  </data>
+  <data name="HakkımızdaP6" xml:space="preserve">
+    <value>Wir sind stolz darauf, unsere Arbeit bestmöglich zu machen. In Kürze werden wir auf viele Anfragen von Bodenabfertigungs- und Fluggesellschaften reagieren können. Unser Ziel ist es, in diesem Rahmen weltweit zu wachsen…</value>
+  </data>
+  <data name="HakkımızdaP7" xml:space="preserve">
+    <value>Wir vergessen nicht: Kein Wind kann einem Schiff helfen, das nicht weiß, welchen Hafen es ansteuern soll.</value>
+  </data>
+  <data name="HakkımızdaP8" xml:space="preserve">
+    <value>Wir wissen, welchen Hafen wir ansteuern…</value>
+  </data>
+  <data name="HakkımızdaP9" xml:space="preserve">
+    <value>Mit freundlichen Grüßen,</value>
+  </data>
+  <data name="Hasar" xml:space="preserve">
+    <value>Schaden</value>
+  </data>
+  <data name="Hasar Bilgisi" xml:space="preserve">
+    <value>Schadensinformation</value>
+  </data>
+  <data name="HASAR DURUMU" xml:space="preserve">
+    <value>SCHADENSSTATUS</value>
+  </data>
+  <data name="HASARLI BAGAJ RAPORU" xml:space="preserve">
+    <value>BERICHT ÜBER BESCHÄDIGTES GEPÄCK</value>
+  </data>
+  <data name="Hasarlı" xml:space="preserve">
+    <value>Beschädigt</value>
+  </data>
+  <data name="Hasarlı Bagaj" xml:space="preserve">
+    <value>Beschädigtes Gepäck</value>
+  </data>
+  <data name="HASARSIZ" xml:space="preserve">
+    <value>UNBESCHÄDIGT</value>
+  </data>
+  <data name="Hata Bilgileri" xml:space="preserve">
+    <value>Fehlerinformationen</value>
+  </data>
+  <data name="Hata Kodları" xml:space="preserve">
+    <value>Fehlercodes</value>
+  </data>
+  <data name="Hata Kodu" xml:space="preserve">
+    <value>Fehlercode</value>
+  </data>
+  <data name="Hatalı İstasyon" xml:space="preserve">
+    <value>Fehlerhafte Station</value>
+  </data>
+  <data name="Hava Yolu" xml:space="preserve">
+    <value>Fluggesellschaft</value>
+  </data>
+  <data name="Havayol" xml:space="preserve">
+    <value>Fluggesellschaft</value>
+  </data>
+  <data name="HAVAYOLU" xml:space="preserve">
+    <value>FLUGGESELLSCHAFT</value>
+  </data>
+  <data name="Havayolu:" xml:space="preserve">
+    <value>Fluggesellschaft:</value>
+  </data>
+  <data name="HEPSİ" xml:space="preserve">
+    <value>ALLE</value>
+  </data>
+  <data name="Hoşgeldiniz" xml:space="preserve">
+    <value>Willkommen</value>
+  </data>
+  <data name="Kadın" xml:space="preserve">
+    <value>Frau</value>
+  </data>
+  <data name="Kalan" xml:space="preserve">
+    <value>Verbleibend</value>
+  </data>
+  <data name="Kalan Bagaj" xml:space="preserve">
+    <value>Zurückgebliebenes Gepäck</value>
+  </data>
+  <data name="Kalan Bagaj Kayıt Bilgileri" xml:space="preserve">
+    <value>Registrierungsinformationen zum zurückgebliebenen Gepäck</value>
+  </data>
+  <data name="Kalıcı İletişim Bilgileri" xml:space="preserve">
+    <value>Dauerhafte Kontaktdaten</value>
+  </data>
+  <data name="KAPALI" xml:space="preserve">
+    <value>GESCHLOSSEN</value>
+  </data>
+  <data name="Kapanış Tarihi" xml:space="preserve">
+    <value>Abschlussdatum</value>
+  </data>
+  <data name="Kapat" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Kategori" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="KAYDET" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="KAYIT SIRASI" xml:space="preserve">
+    <value>REGISTRIERREIHENFOLGE</value>
+  </data>
+  <data name="KAYIŞ" xml:space="preserve">
+    <value>RIEMEN</value>
+  </data>
+  <data name="Kayıp" xml:space="preserve">
+    <value>Verlust</value>
+  </data>
+  <data name="Kayıp Bagaj" xml:space="preserve">
+    <value>Verlorenes Gepäck</value>
+  </data>
+  <data name="Kayıp Bagaj Kayıt Bilgileri" xml:space="preserve">
+    <value>Registrierungsinformationen für verlorenes Gepäck</value>
+  </data>
+  <data name="Kayıp Esya" xml:space="preserve">
+    <value>Verlorener Gegenstand</value>
+  </data>
+  <data name="Kayıp Sebebi" xml:space="preserve">
+    <value>Verlustgrund</value>
+  </data>
+  <data name="Kayıt" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Kayıt Ol" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="Konum" xml:space="preserve">
+    <value>Standort</value>
+  </data>
+  <data name="Kullanıcı Adı" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Kullanım Şartları" xml:space="preserve">
+    <value>Nutzungsbedingungen</value>
+  </data>
+  <data name="KULP SAP" xml:space="preserve">
+    <value>GRIFF/STIEL</value>
+  </data>
+  <data name="KVKK" xml:space="preserve">
+    <value>DSGVO</value>
+  </data>
+  <data name="KVKKnotice" xml:space="preserve">
+    <value>Hinweis zum Schutz und zur Verarbeitung personenbezogener Daten</value>
+  </data>
+  <data name="KVKKp1" xml:space="preserve">
+    <value>Als Bagsfollow („UMV Bilgisayar Yazılım Ltd. Şti.“, „das Unternehmen“ oder „wir“ genannt), legen wir großen Wert auf die rechtmäßige Verarbeitung personenbezogener Daten unserer Kunden. Mit dieser Datenschutzerklärung („Erklärung“) streben wir die Einhaltung der geltenden nationalen und internationalen Vorschriften an, insbesondere des türkischen Datenschutzgesetzes Nr. 6698 („Gesetz“) und der Allgemeinen Datenschutzverordnung der Europäischen Union („DSGVO“).</value>
+  </data>
+  <data name="KVKKp10" xml:space="preserve">
+    <value>4. Übermittlung personenbezogener Daten  
+Ihre personenbezogenen Daten können an unsere Lieferanten, rechtlichen Berater und Geschäftspartner weitergegeben werden, die uns bei der Begründung, Durchführung und Beendigung Ihrer Geschäftsbeziehung unterstützen, einschließlich der Parteien, mit denen wir zur Bereitstellung von Produkten und Dienstleistungen zusammenarbeiten. Ihre Daten können auch im Rahmen der gesetzlichen Befugnisse an zuständige öffentliche Stellen und private Institutionen weitergegeben werden. In diesen Fällen ergreifen wir alle erforderlichen Maßnahmen, um sicherzustellen, dass die Empfänger der Daten die in dieser Erklärung festgelegten Regeln und gesetzlichen Vorschriften einhalten.
+
+Ihre personenbezogenen Daten können im Einklang mit den in den Artikeln 8 und 9 des Gesetzes festgelegten Bedingungen und Zwecken an unsere Tochtergesellschaften, Geschäftspartner, Lieferanten, gesetzlich autorisierte öffentliche Institutionen und Organisationen sowie rechtliche Berater und berechtigte private Institutionen weitergegeben und ins Ausland übermittelt werden. In diesem Zusammenhang können Ihre personenbezogenen Daten zur Erfüllung betrieblicher Anforderungen und zur Einhaltung der zivilen Luftfahrtvorschriften, insbesondere Artikel 40 des türkischen Zivilluftfahrtgesetzes Nr. 2920, an die zuständigen Behörden und berechtigten Dritten im Reiseland weitergegeben werden.
+
+Die Übermittlung personenbezogener Daten ins Ausland kann erfolgen, wenn:
+
+* Ihre ausdrückliche Einwilligung vorliegt oder
+
+* keine Einwilligung vorliegt, aber eine oder mehrere der im Gesetz genannten Datenverarbeitungsbedingungen erfüllt sind:
+
+* Es liegt ein angemessenes Schutzniveau im Empfängerland vor oder
+
+* Wenn kein angemessenes Schutzniveau besteht, verpflichtet sich unser Unternehmen zur Einhaltung eines angemessenen Schutzniveaus im Empfängerland.
+
+* Die Übermittlung erfolgt im Einklang mit den einschlägigen gesetzlichen Bestimmungen.</value>
+  </data>
+  <data name="KVKKp11" xml:space="preserve">
+    <value>5. Speicherung personenbezogener Daten  
+Bei der Festlegung der Aufbewahrungsdauer personenbezogener Daten berücksichtigen wir die geltenden Vorschriften sowie die Zwecke der Datenverarbeitung. Wenn der Zweck der Verarbeitung entfällt, werden die personenbezogenen Daten gelöscht, vernichtet oder anonymisiert, sofern keine andere gesetzliche Grundlage für die Speicherung besteht.</value>
+  </data>
+  <data name="KVKKp12" xml:space="preserve">
+    <value>6. Grundsätze der Verarbeitung personenbezogener Daten
+„Handeln im Einklang mit Gesetz und Treu und Glauben“, „Richtigkeit und Aktualität“, „Verarbeitung für bestimmte, klare und rechtmäßige Zwecke“, „Verarbeitung nur in Bezug auf den Zweck, begrenzt und verhältnismäßig“, „Speicherung für den in der relevanten Gesetzgebung vorgesehenen oder für den Zweck erforderlichen Zeitraum“ sind unsere grundlegenden Prinzipien bei der Verarbeitung Ihrer personenbezogenen Daten.</value>
+  </data>
+  <data name="KVKKp13" xml:space="preserve">
+    <value>7. Verwendung von Cookies
+Als UMV Bilgisayar Yazılım Ltd. Şti. verwenden wir bei Ihrem Besuch unserer Online-Plattformen Technologien wie Cookies, Pixel und GIFs („Cookies“), um Ihr Erlebnis zu verbessern. Die Nutzung dieser Technologien erfolgt in Übereinstimmung mit dem Gesetz und der DSGVO sowie den geltenden Vorschriften.
+
+Für detaillierte Informationen zu Cookies empfehlen wir, unsere „Cookie-Richtlinie“ auf der Website zu lesen.</value>
+  </data>
+  <data name="KVKKp14" xml:space="preserve">
+    <value>8. Nutzung digitaler Plattformen
+Während Ihrer Nutzung digitaler Plattformen können Ihre personenbezogenen Daten verarbeitet werden, um den Betrieb und die Verwaltung der Website zu gewährleisten, die Benutzererfahrung zu verbessern, die Nutzungsmuster zu verfolgen, standortbezogene Funktionen bereitzustellen und Sie über verfügbare Dienste an Ihrem Standort zu informieren.
+
+Wenn Sie Produkte oder Dienstleistungen innerhalb der Anwendung nutzen möchten, werden Ihre personenbezogenen Daten nur zum Zweck der Bereitstellung dieser Leistungen verarbeitet.</value>
+  </data>
+  <data name="KVKKp15" xml:space="preserve">
+    <value>9. Verwendung von CCTV (Videoüberwachung)
+In unseren Einrichtungen werden visuelle und akustische Daten über CCTV-Systeme erfasst und nur zu folgenden Zwecken gespeichert: Verhinderung und Verfolgung antisozialen oder strafbaren Verhaltens, Sicherung der Einrichtungen und des Eigentums sowie Schutz von Besuchern und Mitarbeitenden. Alle erforderlichen technischen und organisatorischen Maßnahmen zum Schutz der Daten werden unsererseits getroffen.</value>
+  </data>
+  <data name="KVKKp16" xml:space="preserve">
+    <value>10. Rechte der betroffenen Person
+Gemäß Artikel 11 des Gesetzes hat die betroffene Person folgende Rechte gegenüber dem Verantwortlichen:
+
+* Erfahren, ob personenbezogene Daten verarbeitet wurden,
+* Informationen über die Verarbeitung anfordern,
+* Zweck der Verarbeitung und dessen Übereinstimmung überprüfen,
+* Dritte kennen, an die die Daten weitergegeben wurden,
+* Berichtigung unvollständiger oder falscher Daten verlangen,
+* Löschung oder Vernichtung gemäß den gesetzlichen Voraussetzungen fordern,
+* Mitteilung über vorgenommene Berichtigungen oder Löschungen an Dritte verlangen,
+* Widerspruch gegen automatisierte Entscheidungen, die ihr nachteilig sind,
+* Schadenersatz verlangen bei unrechtmäßiger Verarbeitung.</value>
+  </data>
+  <data name="KVKKp17" xml:space="preserve">
+    <value>11. Ausübung der Rechte durch die betroffene Person
+Innerhalb der gesetzlichen Grenzen beantworten wir Anfragen von betroffenen Personen innerhalb von 30 Tagen. Wenn eine dritte Person im Namen handelt, muss eine notariell beglaubigte Vollmacht vorgelegt werden.
+
+Anträge werden grundsätzlich kostenlos bearbeitet. Sollte der Datenschutzrat Gebühren festlegen, wird diese angewendet.
+
+Zur Verifizierung der Identität können zusätzliche Informationen oder Rückfragen erfolgen.
+
+Kontakt für Rechteausübung:
+
+UMV Bilgisayar Yazılım Ltd. Şti. Generalverwaltung  
+AOSB 3. Teil Mah. 40. Straße, Antalya OSB Technopark Gebäude Nr.: Z01 Döşemealtı Antalya, Türkei  
++90 507 7097343 Murat Ozkan (Herr)  
++90 542 2050778 Umut Cetin (Herr)  
+www.bagsfollow.com</value>
+  </data>
+  <data name="KVKKp18" xml:space="preserve">
+    <value>12. Datensicherheit  
+Um die Sicherheit Ihrer personenbezogenen Daten zu gewährleisten, treffen wir angemessene technische und organisatorische Maßnahmen, um Risiken eines unbefugten Zugriffs, zufälligen Datenverlusts, absichtlicher Löschung oder Beschädigung zu verhindern.
+
+* Wir setzen Software und Hardware wie Virenschutzsysteme, Firewalls und Angriffsschutzsysteme ein, um Datensicherheit zu gewährleisten.
+
+* Innerhalb unseres Unternehmens wird der Zugriff auf personenbezogene Daten kontrolliert und auf Basis von Abteilung/Rolle/Anwendung im Einklang mit der Art der Daten verwaltet.
+
+* Gemäß Artikel 12 des Gesetzes führen wir notwendige Audits durch, um sicherzustellen, dass die Bestimmungen des Gesetzes eingehalten werden.
+
+* Wir stellen sicher, dass die Datenverarbeitung mit unseren internen Richtlinien und Verfahren im Einklang mit dem Gesetz erfolgt.
+
+* Der Zugriff auf besonders sensible personenbezogene Daten unterliegt strengeren Schutzmaßnahmen.
+
+* Wenn externe Dienstleister aus Gründen wie Outsourcing auf personenbezogene Daten zugreifen, holen wir deren Zusicherungen zur Einhaltung des Gesetzes ein.
+
+* Wir informieren insbesondere alle Mitarbeiter mit Zugriff auf personenbezogene Daten über ihre Aufgaben und Verantwortlichkeiten gemäß dem Gesetz.</value>
+  </data>
+  <data name="KVKKp19" xml:space="preserve">
+    <value>13. Begriffsbestimmungen  
+* Einwilligung: Die Zustimmung, die sich auf ein bestimmtes Thema bezieht, auf Information basiert und freiwillig von der betroffenen Person abgegeben wird.
+
+* Anonymisierung: Die Verarbeitung personenbezogener Daten in einer Weise, dass die betreffende Person nicht mehr identifiziert werden kann – auch nicht durch Verknüpfung mit anderen Daten.
+
+* Betroffene Person: Die natürliche Person, deren personenbezogene Daten verarbeitet werden.
+
+* Personenbezogene Daten: Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.
+
+* Besondere Kategorien personenbezogener Daten: Daten, die im Falle einer Offenlegung oder eines Verlustes zu Nachteilen oder Diskriminierung der betroffenen Person führen können und daher unter besonders strengen Schutzbestimmungen stehen.
+
+* Verarbeitung personenbezogener Daten: Jede Tätigkeit im Zusammenhang mit personenbezogenen Daten wie Erhebung, Speicherung, Aufbewahrung, Veränderung, Weitergabe, Klassifizierung oder Sperrung – ob automatisiert oder nicht.
+
+* Datenaufzeichnungssystem: Ein strukturiertes System, in dem personenbezogene Daten nach bestimmten Kriterien verarbeitet werden.
+
+* Verantwortlicher: Die natürliche oder juristische Person, die über die Zwecke und Mittel der Datenverarbeitung entscheidet und für die Einrichtung und Verwaltung des Datenaufzeichnungssystems verantwortlich ist.</value>
+  </data>
+  <data name="KVKKp2" xml:space="preserve">
+    <value>Die Sicherheit der personenbezogenen Daten unserer Kunden ist unser oberstes Ziel. Daher teilen wir Ihre Daten ausschließlich mit vertrauenswürdigen Geschäftspartnern in minimalem Umfang und treffen alle Sicherheitsmaßnahmen gemäß den geltenden Gesetzen, um einen unrechtmäßigen Zugriff oder ein Datenleck zu verhindern.</value>
+  </data>
+  <data name="KVKKp3" xml:space="preserve">
+    <value>Transparenz ist einer der wichtigsten Grundsätze für uns im Bereich Datenschutz. Diese Erklärung wurde erstellt, um Sie sowohl im Rahmen unserer gesetzlichen Verpflichtungen als auch zur Verbesserung Ihres Kundenerlebnisses über die Verarbeitung Ihrer personenbezogenen Daten zu informieren. Detaillierte Informationen darüber, welche personenbezogenen Daten zu welchem Zweck verarbeitet werden, finden Sie unter den Abschnitten „Welche personenbezogenen Daten verarbeiten wir?“ und „Zu welchen Zwecken verarbeiten wir Ihre personenbezogenen Daten?“.</value>
+  </data>
+  <data name="KVKKp4" xml:space="preserve">
+    <value>Ein weiterer wichtiger Punkt ist das Kontrollrecht unserer Kunden über ihre eigenen Daten. Wir treffen die notwendigen Maßnahmen, um es unseren Kunden zu ermöglichen, ihre Präferenzen selbst zu steuern, und respektieren diese Präferenzen in höchstem Maße. Sie können Ihre Anfragen über die unter „Rechte der betroffenen Person“ angegebenen Kommunikationskanäle übermitteln. Die Definitionen der in dieser Mitteilung verwendeten Begriffe finden Sie im Abschnitt „Begriffsbestimmungen“.</value>
+  </data>
+  <data name="KVKKp5" xml:space="preserve">
+    <value>Datensicherheit, Transparenz und das Kontrollrecht über eigene personenbezogene Daten bilden für uns die wichtigsten Grundpfeiler der Einhaltung gesetzlicher Bestimmungen. In diesem Zusammenhang bieten wir Ihnen mit dieser Erklärung umfassende Informationen zur Verarbeitung Ihrer personenbezogenen Daten.</value>
+  </data>
+  <data name="KVKKp6" xml:space="preserve">
+    <value>Wie erfassen wir Ihre personenbezogenen Daten?  
+Diese Erklärung enthält unsere Erläuterungen und Erklärungen zur Verarbeitung personenbezogener Daten im Einklang mit nationalen und internationalen Vorschriften, insbesondere dem Datenschutzgesetz und der DSGVO.
+
+Wir behalten uns das Recht vor, Änderungen an dieser Erklärung vorzunehmen, um Sie über aktuelle Praktiken und rechtliche Regelungen im Datenschutz zu informieren. Wesentliche Änderungen werden über geeignete Kanäle mitgeteilt.
+
+Die Erklärung informiert darüber, welche personenbezogenen Daten UMV Bilgisayar Yazılım Ltd. Şti. im Rahmen seiner Geschäftstätigkeit verarbeitet, zu welchen Zwecken und an welche Dritten diese Daten ggf. weitergegeben werden. Die Daten werden über die folgenden Kanäle erhoben:
+
+* Callcenter, Ticketverkaufsstellen, Check-in-Schalter, Kioske, Inflight-Entertainment-Systeme, Mitgliederanfragen und -beschwerden, Boarding-Kontrollpunkte, Umfragen, Messen und Veranstaltungen, sowie mündlich, schriftlich oder elektronisch über automatisierte oder nicht-automatisierte Methoden.
+
+* Autorisierte Reisebüros und Online-Vertriebskanäle, soziale Medien, Kundengespräche, SMS-Kanäle, Partnerunternehmen – über schriftliche, mündliche und elektronische Wege.
+
+* Webseiten, Software und Apps von UMV, Social-Media-Konten, Messaging-Plattformen wie WhatsApp, Telegram, Facebook Messenger, WeChat, BiP usw.</value>
+  </data>
+  <data name="KVKKp7" xml:space="preserve">
+    <value>2. Welche personenbezogenen Daten verarbeiten wir?  
+Die von uns erhobenen personenbezogenen Daten variieren je nach Art der Beziehung, die Sie mit uns eingehen. Die Kategorien lauten:
+
+* Identitätsdaten (Name, Nachname, Ausweis-/Passnummer etc.)
+
+* Kontaktdaten (E-Mail-Adresse, Telefonnummer, Adresse usw.)
+
+* Erweiterte Passagierdaten (API/PNR)
+
+* Daten zu Familienangehörigen und nahestehenden Personen (einschl. Haustierangaben)
+
+* Kundenaktivitätsdaten (CDR, Callcenter-Aufzeichnungen, Belege etc.)
+
+* Zugangssicherheitsdaten (Benutzername, Passwort)
+
+* Risikomanagementdaten (z. B. Flugverbote, IP-Adressen, Meldeinformationen)
+
+* Finanzdaten (Kreditkarten-, IBAN-, Kontostandinformationen usw.)
+
+* Sicherheitsdaten von physischen Standorten (Ein-/Ausgangsprotokolle, Kameraaufnahmen)
+
+* Rechtliche Verfahrensdaten (gerichtliche oder behördliche Auskunftsersuchen)
+
+* Prüfungsdaten (Rechtsverfolgung, Forderungsschutz etc.)
+
+* Besondere personenbezogene Daten (z. B. Gesundheitsdaten, Essenspräferenzen, Behinderung)
+
+* Marketingdaten (Gewohnheiten, Umfragen, Kampagnenergebnisse usw.)
+
+* Beschwerde-/Anfragedaten (einschließlich Berichtsdaten)
+
+* Visuelle und akustische Daten (Fotos, Videos, Tonaufnahmen)</value>
+  </data>
+  <data name="KVKKp8" xml:space="preserve">
+    <value>3. Zu welchen Zwecken verarbeiten wir Ihre personenbezogenen Daten? Was ist die rechtliche Grundlage dafür?  
+Gemäß dem Gesetz dürfen personenbezogene Daten nur unter den in den Artikeln 5 und 6 genannten Voraussetzungen und/oder wenn bestimmte Bedingungen des internationalen Rechts erfüllt sind, verarbeitet werden.
+
+In diesem Rahmen verarbeiten wir bei UMV Bilgisayar Yazılım Ltd. Şti. personenbezogene Daten unserer Kunden im Rahmen unseres berechtigten Interesses, sofern dies gesetzlich vorgesehen ist, für den Abschluss oder die Durchführung eines Vertrags erforderlich ist (z. B. Durchführung von Lufttransportdiensten, UBS-Fluginformationsdienste, Bearbeitung verlorener Gepäckstücke, zugehörige Maßnahmen), und unter Einhaltung nationaler und internationaler Gesetze, ohne die Grundrechte und -freiheiten unserer Kunden zu verletzen.
+
+In bestimmten Fällen können wir Sie um Ihre ausdrückliche Einwilligung zur Verarbeitung bitten. In solchen Fällen erfolgt die Verarbeitung nur im Rahmen Ihrer freiwillig erteilten Einwilligung, die Sie jederzeit über unsere Kontaktkanäle widerrufen können.
+
+Ihre personenbezogenen Daten können zu folgenden Zwecken verarbeitet werden:</value>
+  </data>
+  <data name="KVKKp9" xml:space="preserve">
+    <value>Verwaltung Ihrer Reisebuchungen und Bereitstellung unserer Dienstleistungen  
+Wenn Sie Buchungen über Dritte oder andere Websites vornehmen, z. B. bei Verlustmeldung von Gepäck, UBS-Fluginformationen oder Flugreservierungen, wird ein Benutzerkonto erstellt, über das Sie Ihre Reservierungen verwalten können. Die dabei erhobenen Identifikationsdaten werden verwendet, um Ihre Identität bei Check-in, Gepäckabgabe, Sicherheitskontrollen und Boarding zu bestätigen.
+
+Wir verwenden Ihre personenbezogenen Daten, um verlorenes Gepäck zu identifizieren, Ihr Bagsfollow-Barcodesystem zu generieren, Gepäckverfolgungen durchzuführen und bei Fund Ihr Gepäck anhand Ihrer Angaben zuzustellen.
+
+Kommunikation mit Kunden und Kundenbeziehungsmanagement  
+In einigen Fällen ist es notwendig, Ihnen Informationen bereitzustellen – z. B. wenn Ihr verlorenes Gepäck gefunden wurde, bei Zahlungsinformationen oder Flugdetails. Wir kontaktieren Sie per SMS, E-Mail oder telefonisch. App-Nutzer erhalten Informationen auch über In-App-Benachrichtigungen.
+
+Wir weisen darauf hin, dass solche Mitteilungen gemäß Artikel 6 der Verordnung über kommerzielle Kommunikation auch ohne Ihre ausdrückliche Zustimmung versendet werden dürfen, sofern sie nicht zu Marketingzwecken dienen.
+
+Ihre Anfragen und Rückmeldungen  
+Ihre über digitale oder andere Kanäle übermittelten Fragen, Anfragen oder Beschwerden werden zur Bearbeitung verarbeitet. Um die Qualität unserer Dienstleistungen zu bewerten, verarbeiten wir Ihre Daten ggf. auch im Rahmen von Umfragen.
+
+Personalisierung und Verbesserung des Kundenerlebnisses  
+Wir verarbeiten Ihre Daten, um Ihnen ein personalisiertes Erlebnis zu bieten, indem wir unsere Angebote an Ihre Bedürfnisse, Vorlieben und Interessen anpassen. Daten zu bisherigen Flügen und Interaktionen können zur Ableitung Ihrer Reisewünsche und zur Erstellung maßgeschneiderter Angebote genutzt werden.
+
+Diese Daten können auch zur Durchführung von Segmentierungen sowie für Kampagnen, Werbeaktionen und Einladungen zu Veranstaltungen verwendet werden.
+
+Produkt- und Serviceinformationen  
+Mit Ihrer Zustimmung können wir Ihnen Informationen zu Flügen, Gepäck oder Reisen sowie zu Angeboten und Aktionen unserer Partnerunternehmen zukommen lassen.
+
+Bearbeitung von Beschwerden und Anfragen  
+Ihre Daten werden verwendet, um Änderungswünsche, Sonderanfragen oder Beschwerden zu bestehenden Dienstleistungen zu bearbeiten.
+
+Erfüllung gesetzlicher Verpflichtungen  
+Ihre Daten werden verarbeitet zur Einhaltung gesetzlicher Pflichten, wie z. B. Dokumentations-, Aufbewahrungs- oder Meldepflichten, insbesondere bei Steuerangelegenheiten, internationalen Sanktionen oder der Suche nach verlorenem Gepäck.
+
+Im Rahmen von Identifikationspflichten, z. B. zur Verhinderung von Betrug oder Geldwäsche, kann die Verarbeitung auch rechtlich erforderlich sein.
+
+Datenweitergabe an Behörden im In- und Ausland  
+Zur Einhaltung internationaler und nationaler Luftfahrtvorschriften können Ihre Daten auf rechtmäßige Anfrage an Behörden oder Regulierungsstellen weitergegeben oder zugänglich gemacht werden.
+
+Finanz- und Buchhaltungsprozesse  
+Ihre Daten werden verwendet zur Identitätsverifikation, zur Betrugsprävention, für Zahlungen und ggf. Rückerstattungen.
+
+IT-Infrastruktur und Datensicherheit  
+Ihre Daten werden verarbeitet zur Verwaltung und Kontrolle von IT-Systemen, für Systemtests (einschließlich Live-Daten), zur Sicherstellung von Verfügbarkeit und Zuverlässigkeit sowie zur Weiterentwicklung der Systeme im Zusammenhang mit verlorenem Gepäck.
+
+Betrugsprävention  
+Wir verarbeiten Ihre Daten zur Vorbeugung, Aufklärung und Dokumentation betrügerischer Aktivitäten sowie zur Einleitung rechtlicher Schritte.
+
+Zugriffsberechtigungen von Partnern und Lieferanten  
+Ihre Daten werden verwendet, um Partnern und externen Dienstleistern, die z. B. bei der Gepäcksuche oder Reiseorganisation helfen, Zugang zu notwendigen Informationen zu gewähren.</value>
+  </data>
+  <data name="KÜÇÜK" xml:space="preserve">
+    <value>KLEIN</value>
+  </data>
+  <data name="KİLİT" xml:space="preserve">
+    <value>SCHLOSS</value>
+  </data>
+  <data name="KİRLENMİŞ" xml:space="preserve">
+    <value>VERSCHMUTZT</value>
+  </data>
+  <data name="KŞP0" xml:space="preserve">
+    <value>Allgemeine Bestimmungen</value>
+  </data>
+  <data name="KŞP1" xml:space="preserve">
+    <value>Nutzungsbedingungen für die Bagsfollow-Website und mobile App</value>
+  </data>
+  <data name="KŞP2" xml:space="preserve">
+    <value>Vielen Dank, dass Sie die Bagsfollow-Website besuchen und/oder die mobile App (im Folgenden für Mobiltelefone und Tablets verwendet) nutzen. Die Website und/oder App (im Folgenden „Website“ genannt) ist Eigentum von Bagsfollow mit Hauptsitz unter folgender Adresse und wird von Bagsfollow betrieben:
+Güzeloluk Mah. 1835 Sok. Nr. 5/4 MURATPAŞA/ANTALYA 07200 TÜRKİYE  
+Handelsregisternummer: 115086  
+Mobiltelefon: +90 507 709 7343  
+E-Mail: info@bagsfollow.com</value>
+  </data>
+  <data name="KŞP3" xml:space="preserve">
+    <value>Alle Informationen, die Sie durch Käufe oder andere Transaktionen über die Website erhalten, unterliegen diesen Nutzungsbedingungen. Bitte lesen Sie diese Bedingungen sorgfältig, bevor Sie die Website nutzen.</value>
+  </data>
+  <data name="KŞP4" xml:space="preserve">
+    <value>Im Rahmen der Nutzungsbedingungen bezeichnet „wir“ Bagsfollow und „Sie“ die Person, die auf die Website zugreift (einschließlich derjenigen, die im Namen anderer handeln). „Material/Materialien“ bezeichnet Software, Programme, Daten, Informationen und Datenbanken.</value>
+  </data>
+  <data name="KŞP5" xml:space="preserve">
+    <value>Durch den Zugriff auf die Website und deren Nutzung akzeptieren Sie diese Nutzungsbedingungen („Vertrag“) bedingungslos und unwiderruflich.</value>
+  </data>
+  <data name="KŞP6" xml:space="preserve">
+    <value>Mit der Nutzung der Website erklären und garantieren Sie, dass Sie ein volljähriger Erwachsener mit gesetzlichem Recht und der Befugnis sind, verbindliche Verträge zu schließen und die Website gemäß allen Bedingungen dieses Vertrags zu nutzen. Sie sind für alle Zahlungen verantwortlich, die bei Buchungen durch Sie oder andere, die Ihre Zugangsdaten verwenden, an uns zu leisten sind.</value>
+  </data>
+  <data name="KŞP7" xml:space="preserve">
+    <value>Wenn Sie minderjährig sind, nicht zur Nutzung der Website berechtigt sind oder die Bedingungen dieses Vertrags nicht akzeptieren, nutzen Sie die Website bitte nicht und verlassen Sie sie sofort.</value>
+  </data>
+  <data name="KŞP8" xml:space="preserve">
+    <value>Diese Vertragsbedingungen gelten auch für die Nutzung von Teilen der Website über andere Websites, die teilweise oder vollständigen Zugang zur Website gewähren.</value>
+  </data>
+  <data name="LEKELİ" xml:space="preserve">
+    <value>BEFLECKT</value>
+  </data>
+  <data name="Liman" xml:space="preserve">
+    <value>Hafen</value>
+  </data>
+  <data name="Listele" xml:space="preserve">
+    <value>Auflisten</value>
+  </data>
+  <data name="Lütfen Seçiniz" xml:space="preserve">
+    <value>Bitte wählen</value>
+  </data>
+  <data name="Lütfen yolcu biletini" xml:space="preserve">
+    <value>Bitte bewahren Sie das Flugticket und den Gepäckanhänger auf. Dieser Bericht stellt keine Haftungsübernahme dar.</value>
+  </data>
+  <data name="LİMAN" xml:space="preserve">
+    <value>HAFEN</value>
+  </data>
+  <data name="Marka" xml:space="preserve">
+    <value>Marke</value>
+  </data>
+  <data name="MARKAP" xml:space="preserve">
+    <value>MARKE</value>
+  </data>
+  <data name="MENTEŞELER" xml:space="preserve">
+    <value>SCHARNIERE</value>
+  </data>
+  <data name="Mobil/Cep Telefonu" xml:space="preserve">
+    <value>Mobiltelefon</value>
+  </data>
+  <data name="Mühür NO" xml:space="preserve">
+    <value>SIEGEL-NR.</value>
+  </data>
+  <data name="Nereden" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="Nereye" xml:space="preserve">
+    <value>Nach</value>
+  </data>
+  <data name="Nüsha" xml:space="preserve">
+    <value>Ausfertigung</value>
+  </data>
+  <data name="ODA NO" xml:space="preserve">
+    <value>ZIMMERNUMMER</value>
+  </data>
+  <data name="OHD KAYIT NO" xml:space="preserve">
+    <value>OHD-REGISTRIERNUMMER</value>
+  </data>
+  <data name="Ohd Kayıt No" xml:space="preserve">
+    <value>Ohd-Registrierungsnummer</value>
+  </data>
+  <data name="Parça" xml:space="preserve">
+    <value>Stück</value>
+  </data>
+  <data name="Parça Sayısı" xml:space="preserve">
+    <value>Anzahl der Stücke</value>
+  </data>
+  <data name="ParçaSayısı" xml:space="preserve">
+    <value>Anzahl der Stücke</value>
+  </data>
+  <data name="PNR NO" xml:space="preserve">
+    <value>PNR-NR</value>
+  </data>
+  <data name="Profil" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="REFERANS NO" xml:space="preserve">
+    <value>REFERENZNUMMER</value>
+  </data>
+  <data name="Referanslarımız" xml:space="preserve">
+    <value>Unsere Referenzen</value>
+  </data>
+  <data name="Renk" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
+  <data name="Renk Tip" xml:space="preserve">
+    <value>Farbe/Typ</value>
+  </data>
+  <data name="RENK TİP" xml:space="preserve">
+    <value>Farbe/Typ</value>
+  </data>
+  <data name="Resim" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="Resim Seçiniz" xml:space="preserve">
+    <value>Bild auswählen</value>
+  </data>
+  <data name="Resim Yok" xml:space="preserve">
+    <value>Kein Bild vorhanden</value>
+  </data>
+  <data name="Resmi Sil" xml:space="preserve">
+    <value>Bild löschen</value>
+  </data>
+  <data name="RESİM" xml:space="preserve">
+    <value>BILD</value>
+  </data>
+  <data name="Rota" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="Rush Bagaj Uçuş Bilgileri" xml:space="preserve">
+    <value>Fluginformationen für Rush-Gepäck</value>
+  </data>
+  <data name="Rush Etiket" xml:space="preserve">
+    <value>(Rush) Etikettennummer</value>
+  </data>
+  <data name="Rush_Hava" xml:space="preserve">
+    <value>(Rush) Fluggesellschaft</value>
+  </data>
+  <data name="SAP" xml:space="preserve">
+    <value>SAP</value>
+  </data>
+  <data name="Sefer" xml:space="preserve">
+    <value>Flug</value>
+  </data>
+  <data name="Sefer Bilgileri" xml:space="preserve">
+    <value>Fluginformationen</value>
+  </data>
+  <data name="SEFER SAYISI ROTA" xml:space="preserve">
+    <value>FLUGNUMMER / ROUTE</value>
+  </data>
+  <data name="SEFER SAYISI TARİH" xml:space="preserve">
+    <value>FLUGNUMMER / DATUM</value>
+  </data>
+  <data name="Sefer Sayısı" xml:space="preserve">
+    <value>Anzahl der Flüge</value>
+  </data>
+  <data name="Sevk Formunu Görüntüle" xml:space="preserve">
+    <value>Versandformular anzeigen</value>
+  </data>
+  <data name="Seçiniz" xml:space="preserve">
+    <value>Bitte wählen</value>
+  </data>
+  <data name="Seçme Butonu" xml:space="preserve">
+    <value>Auswahlknopf</value>
+  </data>
+  <data name="Sil" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="SINIF" xml:space="preserve">
+    <value>KLASSE</value>
+  </data>
+  <data name="Sizelere verilen raporlarla" xml:space="preserve">
+    <value>Bitte kontaktieren Sie unbedingt die Stelle, bei der Sie den Bericht erhalten haben, um Informationen zu Ihrem Bericht zu erhalten.</value>
+  </data>
+  <data name="Sorgula" xml:space="preserve">
+    <value>Abfragen</value>
+  </data>
+  <data name="Sorumluluk Bilgisi" xml:space="preserve">
+    <value>Haftungsinformation</value>
+  </data>
+  <data name="SOY İSİM" xml:space="preserve">
+    <value>NACHNAME</value>
+  </data>
+  <data name="SOYADI" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="SOYADI-1" xml:space="preserve">
+    <value>Nachname-1</value>
+  </data>
+  <data name="SOYADI-2" xml:space="preserve">
+    <value>Nachname-2</value>
+  </data>
+  <data name="Soyadı" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Soyadı/Adı" xml:space="preserve">
+    <value>Nachname/Vorname</value>
+  </data>
+  <data name="Soyisim İsim" xml:space="preserve">
+    <value>NACHNAME/VORNAME</value>
+  </data>
+  <data name="SUSTURULAN HERHANGİ BİR BAGAJ BULUNMAMAKTADIR" xml:space="preserve">
+    <value>ES GIBT KEIN STUMMGESCHALTETES GEPÄCK</value>
+  </data>
+  <data name="SUSTURULDU" xml:space="preserve">
+    <value>STUMMGESCHALTET</value>
+  </data>
+  <data name="T KOD" xml:space="preserve">
+    <value>T CODE</value>
+  </data>
+  <data name="TALEP" xml:space="preserve">
+    <value>ANFRAGE</value>
+  </data>
+  <data name="Tarih" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Tarihçe" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="TARİH" xml:space="preserve">
+    <value>DATUM</value>
+  </data>
+  <data name="Taşımacı İmza" xml:space="preserve">
+    <value>Unterschrift des Transportunternehmens</value>
+  </data>
+  <data name="Taşıyıcı Şirket" xml:space="preserve">
+    <value>Transportgesellschaft</value>
+  </data>
+  <data name="TEKERLER AYAKLAR" xml:space="preserve">
+    <value>RÄDER/FÜSSE</value>
+  </data>
+  <data name="Telefon" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="TELEFON:" xml:space="preserve">
+    <value>TELEFON:</value>
+  </data>
+  <data name="Teslim" xml:space="preserve">
+    <value>Übergabe</value>
+  </data>
+  <data name="Teslim Alan İmza" xml:space="preserve">
+    <value>Unterschrift des Empfängers</value>
+  </data>
+  <data name="Teslim Edilen Bagajın Bilgileri" xml:space="preserve">
+    <value>Informationen zum übergebenen Gepäck</value>
+  </data>
+  <data name="Teslim Formu" xml:space="preserve">
+    <value>Übergabeformular</value>
+  </data>
+  <data name="TeslimEdilenBagajBilgileri" xml:space="preserve">
+    <value>Gepäckübergabeinformationen</value>
+  </data>
+  <data name="Tip" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="ToplamAğırlığı" xml:space="preserve">
+    <value>Gesamtgewicht</value>
+  </data>
+  <data name="TR" xml:space="preserve">
+    <value>TR</value>
+  </data>
+  <data name="Uçuş Bilgileri" xml:space="preserve">
+    <value>Fluginformationen</value>
+  </data>
+  <data name="Uçuş Servisi" xml:space="preserve">
+    <value>FLUGDIENST</value>
+  </data>
+  <data name="Web World" xml:space="preserve">
+    <value>Web_World Tracer Verbleibende Gepäckregistrierung</value>
+  </data>
+  <data name="ya da" xml:space="preserve">
+    <value>oder</value>
+  </data>
+  <data name="YAN" xml:space="preserve">
+    <value>SEITE</value>
+  </data>
+  <data name="Yazdır" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="Yeni Şifre" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="Yeni Şifre Tekrarı" xml:space="preserve">
+    <value>Passwort wiederholen</value>
+  </data>
+  <data name="Yer Hizmetleri İmza" xml:space="preserve">
+    <value>Bodenabfertigung Unterschrift</value>
+  </data>
+  <data name="YER HİZM" xml:space="preserve">
+    <value>BODENDIENST</value>
+  </data>
+  <data name="YER HİZMETLERİ ŞİRKETİ" xml:space="preserve">
+    <value>BODENDIENSTLEISTUNGSUNTERNEHMEN</value>
+  </data>
+  <data name="YIL" xml:space="preserve">
+    <value>JAHR</value>
+  </data>
+  <data name="YILP" xml:space="preserve">
+    <value>JAHR</value>
+  </data>
+  <data name="YIRTIK" xml:space="preserve">
+    <value>GERISSEN</value>
+  </data>
+  <data name="Yolcu" xml:space="preserve">
+    <value>PASSAGIER</value>
+  </data>
+  <data name="Yolcu Beyan Tutarı" xml:space="preserve">
+    <value>Erklärter Betrag des Passagiers</value>
+  </data>
+  <data name="Yolcu Beyanı" xml:space="preserve">
+    <value>Passagiererklärung</value>
+  </data>
+  <data name="Yolcu Bilgileri" xml:space="preserve">
+    <value>Passagierinformationen</value>
+  </data>
+  <data name="Yolcu Kimliği" xml:space="preserve">
+    <value>Passagierausweis</value>
+  </data>
+  <data name="Yolcu Rotası" xml:space="preserve">
+    <value>Passagierroute</value>
+  </data>
+  <data name="Yolcunun BagsFollow Hesap Numarası" xml:space="preserve">
+    <value>BagsFollow-Kontonummer des Passagiers</value>
+  </data>
+  <data name="YOLCUNUN ROTASI" xml:space="preserve">
+    <value>ROUTE DES PASSAGIERS</value>
+  </data>
+  <data name="YOLCUYA_SEVK_FORM" xml:space="preserve">
+    <value>VERSANDFORMULAR AN DEN PASSAGIER</value>
+  </data>
+  <data name="Yıl" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="Yılı" xml:space="preserve">
+    <value>Jahresangabe</value>
+  </data>
+  <data name="ÇERÇEVE" xml:space="preserve">
+    <value>RAHMEN</value>
+  </data>
+  <data name="ÇİZELGE" xml:space="preserve">
+    <value>TABELLE</value>
+  </data>
+  <data name="ÇİZİK" xml:space="preserve">
+    <value>KRATZER</value>
+  </data>
+  <data name="Çıkış" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Önce İstasyon Seçiniz" xml:space="preserve">
+    <value>Bitte zuerst eine Station auswählen</value>
+  </data>
+  <data name="Özellik" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="Ülke Kodu" xml:space="preserve">
+    <value>Ländercode</value>
+  </data>
+  <data name="ÜNVA" xml:space="preserve">
+    <value>TITEL</value>
+  </data>
+  <data name="Ünvan" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="ÜST" xml:space="preserve">
+    <value>OBEN</value>
+  </data>
+  <data name="İKAMET ADRESİ" xml:space="preserve">
+    <value>WOHNSITZADRESSE</value>
+  </data>
+  <data name="İl" xml:space="preserve">
+    <value>Provinz</value>
+  </data>
+  <data name="İlçe" xml:space="preserve">
+    <value>Bezirk</value>
+  </data>
+  <data name="İstasyon" xml:space="preserve">
+    <value>STATION</value>
+  </data>
+  <data name="İSTASYON HAVAYOLU" xml:space="preserve">
+    <value>STATION/FLUGGESELLSCHAFT</value>
+  </data>
+  <data name="İSİM" xml:space="preserve">
+    <value>NAME</value>
+  </data>
+  <data name="İyi Niyet" xml:space="preserve">
+    <value>GUTER WILLE</value>
+  </data>
+  <data name="İçerik Açıklama-1" xml:space="preserve">
+    <value>Inhaltsbeschreibung-1</value>
+  </data>
+  <data name="İçerik Açıklama-2" xml:space="preserve">
+    <value>Inhaltsbeschreibung-2</value>
+  </data>
+  <data name="İçerik Açıklama-3" xml:space="preserve">
+    <value>Inhaltsbeschreibung-3</value>
+  </data>
+  <data name="İçerik Kategori-1" xml:space="preserve">
+    <value>Inhaltskategorie-1</value>
+  </data>
+  <data name="İçerik Kategori-2" xml:space="preserve">
+    <value>Inhaltskategorie-2</value>
+  </data>
+  <data name="İçerik Kategori-3" xml:space="preserve">
+    <value>Inhaltskategorie-3</value>
+  </data>
+  <data name="İÇERİK" xml:space="preserve">
+    <value>INHALT</value>
+  </data>
+  <data name="İşlemler" xml:space="preserve">
+    <value>VORGÄNGE</value>
+  </data>
+  <data name="Şifre" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Şifreyi Onayla" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Bagaj Rotası" xml:space="preserve">
+    <value>Gepäckroute</value>
+  </data>
+  <data name="Hata Bilgiler" xml:space="preserve">
+    <value>Fehlerinformationen</value>
+  </data>
+  <data name="Uçak_Altı" xml:space="preserve">
+    <value>Unter dem Flugzeug</value>
+  </data>
+  <data name="Ucak_Alti_Yukleme" xml:space="preserve">
+    <value>Beladung unter dem Flugzeug</value>
+  </data>
+  <data name="Ucak_Alti_Bosaltma" xml:space="preserve">
+    <value>Entladung unter dem Flugzeug</value>
+  </data>
+  <data name="Sut_Alti_Bosaltma" xml:space="preserve">
+    <value>Entladung unter dem Rutschband</value>
+  </data>
+  <data name="Sut_Alti_Yukleme" xml:space="preserve">
+    <value>Beladung unter dem Rutschband</value>
+  </data>
+  <data name="ozelMenu" xml:space="preserve">
+    <value>Spezialmenü</value>
+  </data>
+  <data name="DosyaSay" xml:space="preserve">
+    <value>Dateianzahl</value>
+  </data>
+  <data name="ozelMenu2" xml:space="preserve">
+    <value>Spezielles Menü</value>
+  </data>
+  <data name="EPosta" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AllStations" xml:space="preserve">
+    <value>Alle Stationen</value>
+  </data>
+  <data name="AdminMenu" xml:space="preserve">
+    <value>Admin-Menü</value>
+  </data>
+  <data name="Dosya_Seciniz" xml:space="preserve">
+    <value>Datei auswählen</value>
+  </data>
+  <data name="dmguaReport" xml:space="preserve">
+    <value>Schadensbericht</value>
+  </data>
+  <data name="hasarAlanı" xml:space="preserve">
+    <value>Schadensbereich</value>
+  </data>
+  <data name="hasarSekli" xml:space="preserve">
+    <value>Schadensart</value>
+  </data>
+  <data name="hasarOrani" xml:space="preserve">
+    <value>Schadensgrad</value>
+  </data>
+  <data name="Bant" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="SutAlti" xml:space="preserve">
+    <value>Unter dem Rutschband</value>
+  </data>
+  <data name="BagPcs" xml:space="preserve">
+    <value>Anzahl Gepäckstücke</value>
+  </data>
+  <data name="Gelis" xml:space="preserve">
+    <value>Ankunftsroute</value>
+  </data>
+  <data name="Gidis" xml:space="preserve">
+    <value>Abflugroute</value>
+  </data>
+  <data name="AdminMenuQr" xml:space="preserve">
+    <value>Admin-Menü QR</value>
+  </data>
+  <data name="BagsFollowReference" xml:space="preserve">
+    <value>BagsFollow-Referenz</value>
+  </data>
+  <data name="Planlama" xml:space="preserve">
+    <value>Planung</value>
+  </data>
+  <data name="İletişim" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="Bagaj Sayısı" xml:space="preserve">
+    <value>Anzahl Gepäckstücke</value>
+  </data>
+  <data name="Cum" xml:space="preserve">
+    <value>Fr</value>
+  </data>
+  <data name="Cumartesi" xml:space="preserve">
+    <value>Samstag</value>
+  </data>
+  <data name="Deneme" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="DHC Sayısı" xml:space="preserve">
+    <value>Anzahl DHC</value>
+  </data>
+  <data name="Dönem Başlangıç" xml:space="preserve">
+    <value>Periodenbeginn</value>
+  </data>
+  <data name="Dönem Bitiş" xml:space="preserve">
+    <value>Periodenende</value>
+  </data>
+  <data name="Düzenli Tarife" xml:space="preserve">
+    <value>Regelmäßiger Flugplan</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Geliş Tarihi" xml:space="preserve">
+    <value>Ankunftsdatum</value>
+  </data>
+  <data name="Geliş Uçuş" xml:space="preserve">
+    <value>Ankunftsflug</value>
+  </data>
+  <data name="Geliş Uçuş Tipi" xml:space="preserve">
+    <value>Flugtyp (Ankunft)</value>
+  </data>
+  <data name="Geliş Çağrı" xml:space="preserve">
+    <value>Ankunftsrufzeichen</value>
+  </data>
+  <data name="Gidiş Tarihi" xml:space="preserve">
+    <value>Abflugdatum</value>
+  </data>
+  <data name="Gidiş Uçuş" xml:space="preserve">
+    <value>Abflug</value>
+  </data>
+  <data name="Gidiş Uçuş Tipi" xml:space="preserve">
+    <value>Flugtyp (Abflug)</value>
+  </data>
+  <data name="Gidiş Çağrı" xml:space="preserve">
+    <value>Abflugrufzeichen</value>
+  </data>
+  <data name="Hepsini Seç" xml:space="preserve">
+    <value>Alle auswählen</value>
+  </data>
+  <data name="Kargo" xml:space="preserve">
+    <value>Fracht</value>
+  </data>
+  <data name="Kombi" xml:space="preserve">
+    <value>Kombi</value>
+  </data>
+  <data name="Listeye_Geri" xml:space="preserve">
+    <value>Zurück zur Liste</value>
+  </data>
+  <data name="Meydanlar" xml:space="preserve">
+    <value>Flughäfen</value>
+  </data>
+  <data name="Milliyeti" xml:space="preserve">
+    <value>Nationalität</value>
+  </data>
+  <data name="Ops Adı" xml:space="preserve">
+    <value>Ops-Name</value>
+  </data>
+  <data name="PAD Sayısı" xml:space="preserve">
+    <value>Anzahl PAD</value>
+  </data>
+  <data name="Park Pozisyonu" xml:space="preserve">
+    <value>Parkposition</value>
+  </data>
+  <data name="Pazar" xml:space="preserve">
+    <value>Sonntag</value>
+  </data>
+  <data name="Pazartesi" xml:space="preserve">
+    <value>Montag</value>
+  </data>
+  <data name="Perm Sayısı" xml:space="preserve">
+    <value>Anzahl Perm</value>
+  </data>
+  <data name="Perm Tipi" xml:space="preserve">
+    <value>Perm-Typ</value>
+  </data>
+  <data name="Perşembe" xml:space="preserve">
+    <value>Donnerstag</value>
+  </data>
+  <data name="Salı" xml:space="preserve">
+    <value>Dienstag</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Auswählen</value>
+  </data>
+  <data name="Silmek_İstiyor" xml:space="preserve">
+    <value>Möchten Sie das wirklich löschen?</value>
+  </data>
+  <data name="Silmek_İstiyor2" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie diese Flüge löschen möchten? Alle zugehörigen Serviceformulare und Dienstleistungen werden ebenfalls gelöscht. Diese Änderungen können nicht rückgängig gemacht werden und die Daten werden dauerhaft entfernt!</value>
+  </data>
+  <data name="TARİFELİ" xml:space="preserve">
+    <value>Planmäßig</value>
+  </data>
+  <data name="Tazele" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="TekliUçuş" xml:space="preserve">
+    <value>Einzelflug erstellen</value>
+  </data>
+  <data name="TekliUçuşKılavuz1" xml:space="preserve">
+    <value>Beim Erstellen eines Einzelflugs</value>
+  </data>
+  <data name="TekliUçuşKılavuz2" xml:space="preserve">
+    <value>darf das Feld keinesfalls verwendet werden. Stellen Sie sicher, dass alle anderen Felder vollständig ausgefüllt sind.</value>
+  </data>
+  <data name="TEKNİK" xml:space="preserve">
+    <value>TECHNIK</value>
+  </data>
+  <data name="Temsilci" xml:space="preserve">
+    <value>Vertreter</value>
+  </data>
+  <data name="Transfer Bagaj Sayısı" xml:space="preserve">
+    <value>Anzahl Transfergepäck</value>
+  </data>
+  <data name="Transfer Yolcu Sayısı" xml:space="preserve">
+    <value>Anzahl Transferpassagiere</value>
+  </data>
+  <data name="Transit Bagaj Sayısı" xml:space="preserve">
+    <value>Anzahl Transitgepäck</value>
+  </data>
+  <data name="Transit Yolcu Sayısı" xml:space="preserve">
+    <value>Anzahl Transitpassagiere</value>
+  </data>
+  <data name="Uçak Tipi" xml:space="preserve">
+    <value>Flugzeugtyp</value>
+  </data>
+  <data name="Uçuş Durumu" xml:space="preserve">
+    <value>Flugstatus</value>
+  </data>
+  <data name="Uçuş Tipi" xml:space="preserve">
+    <value>Flugtyp</value>
+  </data>
+  <data name="Uçuş Türü" xml:space="preserve">
+    <value>Flugart</value>
+  </data>
+  <data name="Yolcu Sayısı" xml:space="preserve">
+    <value>Anzahl Passagiere</value>
+  </data>
+  <data name="Çarşamba" xml:space="preserve">
+    <value>Mittwoch</value>
+  </data>
+  <data name="ÇokluUçuş" xml:space="preserve">
+    <value>Mehrfachflug erstellen</value>
+  </data>
+  <data name="ÇokluUçuşKılavuz1" xml:space="preserve">
+    <value>Beim Erstellen eines Mehrfachflugs</value>
+  </data>
+  <data name="ÇokluUçuşKılavuz2" xml:space="preserve">
+    <value>darf das Feld keinesfalls verwendet werden. Stellen Sie sicher, dass alle anderen Felder vollständig ausgefüllt sind.</value>
+  </data>
+  <data name="İptal" xml:space="preserve">
+    <value>Stornieren</value>
+  </data>
+  <data name="Açık" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Gecikme Açıklamaları" xml:space="preserve">
+    <value>Verspätungsgründe</value>
+  </data>
+  <data name="GELİŞ GECİKME BİLGİLERİ" xml:space="preserve">
+    <value>ANKUNFTSVERSPÄTUNG</value>
+  </data>
+  <data name="Genel Müdürlük" xml:space="preserve">
+    <value>Generaldirektion</value>
+  </data>
+  <data name="GİDİŞ GECİKME BİLGİLERİ" xml:space="preserve">
+    <value>ABFLUGVERSPÄTUNG</value>
+  </data>
+  <data name="Hizmet Formu" xml:space="preserve">
+    <value>Dienstleistungsformular</value>
+  </data>
+  <data name="Köprü" xml:space="preserve">
+    <value>Brücke</value>
+  </data>
+  <data name="PDF RAPOR" xml:space="preserve">
+    <value>PDF-BERICHT</value>
+  </data>
+  <data name="PDF İndir" xml:space="preserve">
+    <value>PDF herunterladen</value>
+  </data>
+  <data name="Posta" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Yeni Oluştur" xml:space="preserve">
+    <value>Neu erstellen</value>
+  </data>
+  <data name="Pzt" xml:space="preserve">
+    <value>Mo</value>
+  </data>
+  <data name="Sal" xml:space="preserve">
+    <value>Di</value>
+  </data>
+  <data name="Çar" xml:space="preserve">
+    <value>Mi</value>
+  </data>
+  <data name="Per" xml:space="preserve">
+    <value>Do</value>
+  </data>
+  <data name="Cmt" xml:space="preserve">
+    <value>Sa</value>
+  </data>
+  <data name="Paz" xml:space="preserve">
+    <value>So</value>
+  </data>
+  <data name="Cuma" xml:space="preserve">
+    <value>Freitag</value>
+  </data>
+  <data name="Big Total" xml:space="preserve">
+    <value>Gesamtsumme</value>
+  </data>
+  <data name="Excele Aktar" xml:space="preserve">
+    <value>In Excel exportieren</value>
+  </data>
+  <data name="Group Total" xml:space="preserve">
+    <value>Gruppensumme</value>
+  </data>
+  <data name="Görüntüle" xml:space="preserve">
+    <value>Anzeigen</value>
+  </data>
+  <data name="Hizmet" xml:space="preserve">
+    <value>Dienstleistung</value>
+  </data>
+  <data name="Kayıt Ekle" xml:space="preserve">
+    <value>Eintrag hinzufügen</value>
+  </data>
+  <data name="Kayıt Ekleme" xml:space="preserve">
+    <value>Eintrag hinzufügen</value>
+  </data>
+  <data name="Kuyruk" xml:space="preserve">
+    <value>Warteschlange</value>
+  </data>
+  <data name="Miktar" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="SCF ADD" xml:space="preserve">
+    <value>SCF HINZUFÜGEN</value>
+  </data>
+  <data name="SERVICES REQUEST" xml:space="preserve">
+    <value>Dienstleistungsanfragen</value>
+  </data>
+  <data name="Servis Ekle" xml:space="preserve">
+    <value>Dienstleistung hinzufügen</value>
+  </data>
+  <data name="Servisler" xml:space="preserve">
+    <value>Dienstleistungen</value>
+  </data>
+  <data name="Yükle" xml:space="preserve">
+    <value>Hochladen</value>
+  </data>
+  <data name="Ekle" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Complete" xml:space="preserve">
+    <value>Abschließen</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Abteilung</value>
+  </data>
+  <data name="Edit Request" xml:space="preserve">
+    <value>Anfrage bearbeiten</value>
+  </data>
+  <data name="Edit Task" xml:space="preserve">
+    <value>Aufgabe bearbeiten</value>
+  </data>
+  <data name="End Time" xml:space="preserve">
+    <value>Endzeit</value>
+  </data>
+  <data name="flights" xml:space="preserve">
+    <value>Flüge</value>
+  </data>
+  <data name="Görev" xml:space="preserve">
+    <value>Aufgabe</value>
+  </data>
+  <data name="HAREKAT" xml:space="preserve">
+    <value>EINSATZ</value>
+  </data>
+  <data name="No records" xml:space="preserve">
+    <value>Keine Einträge gefunden.</value>
+  </data>
+  <data name="Personnel" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="Personnel Schedule" xml:space="preserve">
+    <value>Personalplan</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Fortschritt</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Start Time" xml:space="preserve">
+    <value>Startzeit</value>
+  </data>
+  <data name="Task ID" xml:space="preserve">
+    <value>Aufgaben-ID</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Upload_Excel_File" xml:space="preserve">
+    <value>Excel-Datei hochladen</value>
+  </data>
+  <data name="YOLCU HİZMETLERİ" xml:space="preserve">
+    <value>PASSAGIERDIENSTE</value>
+  </data>
+  <data name="Adet Fiyatlı Rapor" xml:space="preserve">
+    <value>Stückpreisliste Bericht</value>
+  </data>
+  <data name="AIRPORT CARGO AND MAIL FEE" xml:space="preserve">
+    <value>FLUGHAFENFRACHT- UND POSTGEBÜHR</value>
+  </data>
+  <data name="AIRPORT LOAD CONTROL FEE" xml:space="preserve">
+    <value>FLUGHAFEN-LADEKONTROLLGEBÜHR</value>
+  </data>
+  <data name="AIPORT_PAX_FEE" xml:space="preserve">
+    <value>FLUGHAFEN-PAX-GEBÜHR</value>
+  </data>
+  <data name="AIRPORT RAMP FEE" xml:space="preserve">
+    <value>FLUGHAFEN-RAMPENGEBÜHR</value>
+  </data>
+  <data name="CARGO HANDLING" xml:space="preserve">
+    <value>FRACHTABWICKLUNG</value>
+  </data>
+  <data name="COUNT" xml:space="preserve">
+    <value>ANZAHL</value>
+  </data>
+  <data name="End Date" xml:space="preserve">
+    <value>Enddatum</value>
+  </data>
+  <data name="FLIGHT OPERATIONS SERVICE" xml:space="preserve">
+    <value>FLUGBETRIEBSDIENST</value>
+  </data>
+  <data name="Haftalık Rapor" xml:space="preserve">
+    <value>Wöchentlicher Bericht</value>
+  </data>
+  <data name="HANDLING PACKAGE" xml:space="preserve">
+    <value>ABFERTIGUNGSPAKET</value>
+  </data>
+  <data name="LOAD CONTROL" xml:space="preserve">
+    <value>LADEKONTROLLE</value>
+  </data>
+  <data name="Lütfen bir istasyon" xml:space="preserve">
+    <value>Bitte wählen Sie eine Station</value>
+  </data>
+  <data name="Record Creation" xml:space="preserve">
+    <value>Datensatz erstellen</value>
+  </data>
+  <data name="Start Date" xml:space="preserve">
+    <value>Startdatum</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>GESAMT</value>
+  </data>
+  <data name="UNIT" xml:space="preserve">
+    <value>EINHEIT</value>
+  </data>
+  <data name="Tazminat" xml:space="preserve">
+    <value>Entschädigung</value>
+  </data>
+  <data name="Delete_Task" xml:space="preserve">
+    <value>Aufgaben löschen</value>
+  </data>
+  <data name="Başlatıldı" xml:space="preserve">
+    <value>Gestartet</value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agentur</value>
+  </data>
+  <data name="Ajans silme" xml:space="preserve">
+    <value>Möchten Sie diese Agentur wirklich löschen?</value>
+  </data>
+  <data name="Ajans Adı" xml:space="preserve">
+    <value>Agenturname</value>
+  </data>
+  <data name="Kullanıcı" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="Silme Onayı" xml:space="preserve">
+    <value>Löschbestätigung</value>
+  </data>
+  <data name="Temel Bilgiler" xml:space="preserve">
+    <value>Grundlegende Informationen</value>
+  </data>
+  <data name="Vergi No" xml:space="preserve">
+    <value>Steuernummer</value>
+  </data>
+  <data name="Ajans" xml:space="preserve">
+    <value>Agentur</value>
+  </data>
+  <data name="Ajans Detayı" xml:space="preserve">
+    <value>Agenturdetails</value>
+  </data>
+  <data name="Ajanslar" xml:space="preserve">
+    <value>Agenturen</value>
+  </data>
+  <data name="Alan Kodu" xml:space="preserve">
+    <value>Vorwahl</value>
+  </data>
+  <data name="Davet Kodları" xml:space="preserve">
+    <value>Einladungscodes</value>
+  </data>
+  <data name="Davet Kodu" xml:space="preserve">
+    <value>Einladungscode</value>
+  </data>
+  <data name="Davet Kodu Güncelle" xml:space="preserve">
+    <value>Mit Einladungscode Hotel verbinden</value>
+  </data>
+  <data name="Davet Kodu Oluştur" xml:space="preserve">
+    <value>Einladungscode erstellen</value>
+  </data>
+  <data name="Kampanya" xml:space="preserve">
+    <value>Kampagne</value>
+  </data>
+  <data name="Kişisel_İletişim" xml:space="preserve">
+    <value>Persönlicher Kontakt</value>
+  </data>
+  <data name="Kurumsal Bilgiler" xml:space="preserve">
+    <value>Firmeninformationen</value>
+  </data>
+  <data name="Oluşturulma Tarihi" xml:space="preserve">
+    <value>Erstellungsdatum</value>
+  </data>
+  <data name="Sistem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Unvan" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Vazgeç" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Yeni Ajans" xml:space="preserve">
+    <value>Neue Agentur</value>
+  </data>
+  <data name="Yeni Davet Kodu" xml:space="preserve">
+    <value>Neuer Einladungscode</value>
+  </data>
+  <data name="Ülke" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="İşlem" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="Şehir" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="Şirket Adresi" xml:space="preserve">
+    <value>Firmenadresse</value>
+  </data>
+  <data name="Şirket Bilgileri" xml:space="preserve">
+    <value>Firmendaten</value>
+  </data>
+  <data name="Şirket Lokasyonu" xml:space="preserve">
+    <value>Firmenstandort</value>
+  </data>
+  <data name="Şirket Tel Alan Kodu" xml:space="preserve">
+    <value>Telefonvorwahl der Firma</value>
+  </data>
+  <data name="Şirket Telefonu" xml:space="preserve">
+    <value>Firmentelefon</value>
+  </data>
+  <data name="Şirket Ülkesi" xml:space="preserve">
+    <value>Firmenland</value>
+  </data>
+  <data name="Şirket Şehri" xml:space="preserve">
+    <value>Firmenstadt</value>
+  </data>
+  <data name="Otele_Baglan" xml:space="preserve">
+    <value>Mit Hotel verbinden</value>
+  </data>
+  <data name="Ad" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="Ajans ve Sistem" xml:space="preserve">
+    <value>Agentur und System</value>
+  </data>
+  <data name="Cinsiyet" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="Doğum_Tarihi" xml:space="preserve">
+    <value>Geburtsdatum</value>
+  </data>
+  <data name="Giriş Tarihi" xml:space="preserve">
+    <value>Einreisedatum</value>
+  </data>
+  <data name="Kayıt_Tarihi" xml:space="preserve">
+    <value>Registrierungsdatum</value>
+  </data>
+  <data name="Konaklama" xml:space="preserve">
+    <value>Unterkunft</value>
+  </data>
+  <data name="Konaklama Süresi" xml:space="preserve">
+    <value>Aufenthaltsdauer</value>
+  </data>
+  <data name="Konuyu_Girin" xml:space="preserve">
+    <value>Geben Sie das Thema ein...</value>
+  </data>
+  <data name="Misafir Ekle" xml:space="preserve">
+    <value>Gast hinzufügen</value>
+  </data>
+  <data name="Misafirler" xml:space="preserve">
+    <value>Gäste</value>
+  </data>
+  <data name="Misafir_Adı" xml:space="preserve">
+    <value>Name des Gastes</value>
+  </data>
+  <data name="Notlar" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="Oda Tipi" xml:space="preserve">
+    <value>Zimmertyp</value>
+  </data>
+  <data name="Oda_Sayısı" xml:space="preserve">
+    <value>Anzahl der Zimmer</value>
+  </data>
+  <data name="Otel_Adı" xml:space="preserve">
+    <value>Hotelname</value>
+  </data>
+  <data name="Puan" xml:space="preserve">
+    <value>Bewertung</value>
+  </data>
+  <data name="Rezervasyon" xml:space="preserve">
+    <value>Buchung</value>
+  </data>
+  <data name="Rezervasyon Detayı" xml:space="preserve">
+    <value>Buchungsdetails</value>
+  </data>
+  <data name="Rezervasyon Kodu" xml:space="preserve">
+    <value>Buchungscode</value>
+  </data>
+  <data name="Rezervasyonlar" xml:space="preserve">
+    <value>Buchungen</value>
+  </data>
+  <data name="Rezervasyon_Tarihi" xml:space="preserve">
+    <value>Buchungsdatum</value>
+  </data>
+  <data name="Soyad" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Tarihler" xml:space="preserve">
+    <value>Termine</value>
+  </data>
+  <data name="Toplam Puan" xml:space="preserve">
+    <value>Gesamtpunktzahl</value>
+  </data>
+  <data name="Toplam_Tutar" xml:space="preserve">
+    <value>Gesamtbetrag</value>
+  </data>
+  <data name="Voucher No" xml:space="preserve">
+    <value>Buchungsnummer</value>
+  </data>
+  <data name="Yeni_Rezervasyon" xml:space="preserve">
+    <value>Neue Buchung</value>
+  </data>
+  <data name="Yolcu bilgisi bulunamadı." xml:space="preserve">
+    <value>Passagierinformation nicht gefunden.</value>
+  </data>
+  <data name="Çıkış Tarihi" xml:space="preserve">
+    <value>Abreisedatum</value>
+  </data>
+  <data name="İletişim_Formu" xml:space="preserve">
+    <value>Kontaktformular</value>
+  </data>
+  <data name="Şirket" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="ANA_NAVIGASYON" xml:space="preserve">
+    <value>HAUPTNAVIGATION</value>
+  </data>
+  <data name="Ayarlar" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ConnectToHotels" xml:space="preserve">
+    <value>Mit Hotels verbinden</value>
+  </data>
+  <data name="Harcamalar" xml:space="preserve">
+    <value>Ausgaben</value>
+  </data>
+  <data name="Kampanyalar" xml:space="preserve">
+    <value>Kampagnen</value>
+  </data>
+  <data name="Kullanıcılar" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="LoyaltyPoints" xml:space="preserve">
+    <value>Treuepunkte</value>
+  </data>
+  <data name="Rewards" xml:space="preserve">
+    <value>Belohnungen</value>
+  </data>
+  <data name="Oda Tanımlamaları" xml:space="preserve">
+    <value>Zimmerdefinitionen</value>
+  </data>
+  <data name="OdaTipiKayit" xml:space="preserve">
+    <value>Zimmertyp registrieren</value>
+  </data>
+  <data name="OdaTipleriListe" xml:space="preserve">
+    <value>Zimmertypenliste</value>
+  </data>
+  <data name="RezervasyonTanimEkle" xml:space="preserve">
+    <value>Buchungsdefinition hinzufügen</value>
+  </data>
+  <data name="RezervasyonTanimListe" xml:space="preserve">
+    <value>Buchungsdefinitionsliste</value>
+  </data>
+  <data name="DavetKoduUret" xml:space="preserve">
+    <value>Einladungscode generieren</value>
+  </data>
+  <data name="Uret" xml:space="preserve">
+    <value>Generieren</value>
+  </data>
+  <data name="Aktif Kullanıcılar" xml:space="preserve">
+    <value>Aktive Benutzer</value>
+  </data>
+  <data name="AktifListe" xml:space="preserve">
+    <value>Aktive Liste</value>
+  </data>
+  <data name="Pasif Kullanıcılar" xml:space="preserve">
+    <value>Inaktive Benutzer</value>
+  </data>
+  <data name="PasifListe" xml:space="preserve">
+    <value>Inaktive Liste</value>
+  </data>
+  <data name="field_required" xml:space="preserve">
+    <value>Dieses Feld ist erforderlich.</value>
+  </data>
+  <data name="Herhangi bir otel bulunamadı." xml:space="preserve">
+    <value>Kein Hotel gefunden.</value>
+  </data>
+  <data name="Otel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="Rezervasyon_Bilgileri" xml:space="preserve">
+    <value>Buchungsinformationen</value>
+  </data>
+  <data name="Aktif" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="Pasif" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="TargetRoomType" xml:space="preserve">
+    <value>Zielzimmertyp</value>
+  </data>
+  <data name="Yeni_Yolcu" xml:space="preserve">
+    <value>Neuer Passagier</value>
+  </data>
+  <data name="ACELE" xml:space="preserve">
+    <value>EILIG</value>
+  </data>
+  <data name="SON" xml:space="preserve">
+    <value>LETZTE</value>
+  </data>
+  <data name="Durum" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Durum1" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="Acenta_bağ_silme" xml:space="preserve">
+    <value>Möchten Sie die Verbindung zu dieser Agentur wirklich löschen? Dieser Vorgang kann nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="Acenta_Seç" xml:space="preserve">
+    <value>Agentur auswählen</value>
+  </data>
+  <data name="Aksiyonlar" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="Arama Tipi" xml:space="preserve">
+    <value>Suchtyp</value>
+  </data>
+  <data name="Bağlı Olduğunuz Oteller" xml:space="preserve">
+    <value>Hotels, mit denen Sie verbunden sind</value>
+  </data>
+  <data name="Bonus Bilgi Maili" xml:space="preserve">
+    <value>Bonus-Info-E-Mail</value>
+  </data>
+  <data name="Bonus Prosedür Adresi" xml:space="preserve">
+    <value>Bonusverfahren-Adresse</value>
+  </data>
+  <data name="Bonus Prosedür Kontrol" xml:space="preserve">
+    <value>Bonusverfahren-Kontrolle</value>
+  </data>
+  <data name="Bonus_Parametreleri" xml:space="preserve">
+    <value>Bonusparameter</value>
+  </data>
+  <data name="Checkin Kontrol" xml:space="preserve">
+    <value>Check-in-Kontrolle</value>
+  </data>
+  <data name="Davet_Kodu_Tablosu" xml:space="preserve">
+    <value>Einladungscode-Tabelle</value>
+  </data>
+  <data name="Devam_Et" xml:space="preserve">
+    <value>Fortfahren</value>
+  </data>
+  <data name="Evet" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="ExCheckin Date Kontrol" xml:space="preserve">
+    <value>Kontrolle des früheren Check-in-Datums</value>
+  </data>
+  <data name="Gece_Fiyatı" xml:space="preserve">
+    <value>Preis pro Nacht</value>
+  </data>
+  <data name="Gerekli_Puan" xml:space="preserve">
+    <value>Erforderliche Punkte</value>
+  </data>
+  <data name="Hayır" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="Henüz bir acenteniz yok." xml:space="preserve">
+    <value>Sie haben noch keine Agentur.</value>
+  </data>
+  <data name="Kapasite" xml:space="preserve">
+    <value>Kapazität</value>
+  </data>
+  <data name="Kazanç Dönemi" xml:space="preserve">
+    <value>Verdienstzeitraum</value>
+  </data>
+  <data name="Kazanç Dönemi Kullanılsın" xml:space="preserve">
+    <value>Verdienstzeitraum verwenden</value>
+  </data>
+  <data name="Konaklama_Bilgileri" xml:space="preserve">
+    <value>Unterkunftsinformationen</value>
+  </data>
+  <data name="Konu" xml:space="preserve">
+    <value>Thema</value>
+  </data>
+  <data name="Logo Url" xml:space="preserve">
+    <value>Logo-URL</value>
+  </data>
+  <data name="LoyaltyPoint" xml:space="preserve">
+    <value>Treuepunkt</value>
+  </data>
+  <data name="Lütfen bir oda tipi seçiniz" xml:space="preserve">
+    <value>Bitte wählen Sie einen Zimmertyp</value>
+  </data>
+  <data name="Max Reservation Day" xml:space="preserve">
+    <value>Maximale Buchungstage</value>
+  </data>
+  <data name="Max Stay" xml:space="preserve">
+    <value>Maximaler Aufenthalt</value>
+  </data>
+  <data name="Mesajınız" xml:space="preserve">
+    <value>Ihre Nachricht</value>
+  </data>
+  <data name="Min Balance" xml:space="preserve">
+    <value>Mindestguthaben</value>
+  </data>
+  <data name="Min Reservation Day" xml:space="preserve">
+    <value>Minimale Buchungstage</value>
+  </data>
+  <data name="Min Stay" xml:space="preserve">
+    <value>Mindestaufenthalt</value>
+  </data>
+  <data name="Oda Tipi ve Dönem Bilgileri" xml:space="preserve">
+    <value>Zimmertyp- und Zeitraumdaten</value>
+  </data>
+  <data name="Oluşturulma" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="Otel_Seç" xml:space="preserve">
+    <value>Hotel auswählen</value>
+  </data>
+  <data name="Parametreler" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="Pasifleri Göster" xml:space="preserve">
+    <value>Inaktive anzeigen</value>
+  </data>
+  <data name="Prosedür Aktif" xml:space="preserve">
+    <value>Verfahren aktiv</value>
+  </data>
+  <data name="Redemption" xml:space="preserve">
+    <value>Einlösung</value>
+  </data>
+  <data name="ReservationBonusSetting" xml:space="preserve">
+    <value>Buchungsbonus-Einstellung</value>
+  </data>
+  <data name="RewardCatalog" xml:space="preserve">
+    <value>Prämienkatalog</value>
+  </data>
+  <data name="Rezervasyon_Düzenle" xml:space="preserve">
+    <value>Buchung bearbeiten</value>
+  </data>
+  <data name="Sağ taraftan yeni bir acente oluşturun." xml:space="preserve">
+    <value>Erstellen Sie rechts eine neue Agentur.</value>
+  </data>
+  <data name="Subdomain" xml:space="preserve">
+    <value>Subdomain</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Tarayıcınız video etiketini desteklemiyor." xml:space="preserve">
+    <value>Ihr Browser unterstützt das Video-Tag nicht.</value>
+  </data>
+  <data name="Yatak_Sayısı" xml:space="preserve">
+    <value>Anzahl der Betten</value>
+  </data>
+  <data name="Yearly Use Point" xml:space="preserve">
+    <value>Jährlicher Nutzungspunkt</value>
+  </data>
+  <data name="Yeni Acente Oluştur" xml:space="preserve">
+    <value>Neue Agentur erstellen</value>
+  </data>
+  <data name="Yeni Kayıt Ekle" xml:space="preserve">
+    <value>Neuen Eintrag hinzufügen</value>
+  </data>
+  <data name="Yeni_Dönem_Puanı_Ekle" xml:space="preserve">
+    <value>Neue Zeitraum-Punkte hinzufügen</value>
+  </data>
+  <data name="Ödül Dönem Listesi" xml:space="preserve">
+    <value>Prämienzeitraum-Liste</value>
+  </data>
+  <data name="İletişim_Epostası" xml:space="preserve">
+    <value>Kontakt-E-Mail</value>
+  </data>
+  <data name="acenta_calisaniyim" xml:space="preserve">
+    <value>I am a current agency employee</value>
+  </data>
+  <data name="Onayla" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Acenteler" xml:space="preserve">
+    <value>Agenturen</value>
+  </data>
+  <data name="Added_Point" xml:space="preserve">
+    <value>Hinzugefügte Punkte</value>
+  </data>
+  <data name="Aksiyon" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Bonus</value>
+  </data>
+  <data name="Bonus_Parametreleri_Kayıt" xml:space="preserve">
+    <value>Bonusparameter Eintrag</value>
+  </data>
+  <data name="Bonus_Parametreleri_Liste" xml:space="preserve">
+    <value>Bonusparameter</value>
+  </data>
+  <data name="Bonus_Puan" xml:space="preserve">
+    <value>Bonuspunkte</value>
+  </data>
+  <data name="Diğer" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="Gerekli_Gecelik_Puan" xml:space="preserve">
+    <value>Erforderliche Nächtigungspunkte</value>
+  </data>
+  <data name="Geri" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Harcama_Kayıt" xml:space="preserve">
+    <value>Ausgabeneintrag</value>
+  </data>
+  <data name="Harcama_Tanımları" xml:space="preserve">
+    <value>Ausgabendefinitionen</value>
+  </data>
+  <data name="Harcanabilecek_Gecelik_Puanlar" xml:space="preserve">
+    <value>Verwendbare Nächtigungspunkte</value>
+  </data>
+  <data name="Kazanç_Tanımları" xml:space="preserve">
+    <value>Gewinndefinitionen</value>
+  </data>
+  <data name="Kazanılabilecek_Gecelik_Puanlar" xml:space="preserve">
+    <value>Erwerbbare Nächtigungspunkte</value>
+  </data>
+  <data name="Kullanıcı_Seç" xml:space="preserve">
+    <value>Benutzer auswählen</value>
+  </data>
+  <data name="Misafir_Bilgileri" xml:space="preserve">
+    <value>Gastinformationen</value>
+  </data>
+  <data name="Onaylanmış_Rezervasyonlar" xml:space="preserve">
+    <value>Bestätigte Reservierungen</value>
+  </data>
+  <data name="Operatör_seçiniz" xml:space="preserve">
+    <value>Bitte Operator wählen</value>
+  </data>
+  <data name="Points_Earned" xml:space="preserve">
+    <value>Verdiente Punkte</value>
+  </data>
+  <data name="Points_Pending" xml:space="preserve">
+    <value>Ausstehende Punkte</value>
+  </data>
+  <data name="Points_Spendable" xml:space="preserve">
+    <value>Verwendbare Punkte</value>
+  </data>
+  <data name="Points_Spent" xml:space="preserve">
+    <value>Ausgegebene Punkte</value>
+  </data>
+  <data name="Resmi Adı" xml:space="preserve">
+    <value>Offizieller Name</value>
+  </data>
+  <data name="Reward" xml:space="preserve">
+    <value>Belohnung</value>
+  </data>
+  <data name="Spent" xml:space="preserve">
+    <value>Ausgegeben</value>
+  </data>
+  <data name="Tabela_Adı" xml:space="preserve">
+    <value>Firmenschild-Name</value>
+  </data>
+  <data name="Ödül_Geçmişi" xml:space="preserve">
+    <value>Belohnungsverlauf</value>
+  </data>
+  <data name="Şirket_Profili" xml:space="preserve">
+    <value>Firmenprofil</value>
+  </data>
+  <data name="Oluştur" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="Acente_Profili" xml:space="preserve">
+    <value>Agenturprofil</value>
+  </data>
+  <data name="Aktifleştir" xml:space="preserve">
+    <value>Aktivieren</value>
+  </data>
+  <data name="Bonus_Points" xml:space="preserve">
+    <value>Bonuspunkte</value>
+  </data>
+  <data name="Bonus_Puan_Listesi" xml:space="preserve">
+    <value>Bonuspunktenliste</value>
+  </data>
+  <data name="Harcama_Rezervasyonları" xml:space="preserve">
+    <value>Ausgabe-Reservierungen</value>
+  </data>
+  <data name="Harcama_Rezervasyon_Düzenle" xml:space="preserve">
+    <value>Ausgabe-Reservierung bearbeiten</value>
+  </data>
+  <data name="Pending_Spent" xml:space="preserve">
+    <value>Ausstehend (Ausgegeben)</value>
+  </data>
+  <data name="Spendable" xml:space="preserve">
+    <value>Verfügbar zum Ausgeben</value>
+  </data>
+  <data name="Yeni_Operatör_Tanımı" xml:space="preserve">
+    <value>Neue Betreiber-Definition</value>
+  </data>
+  <data name="Bağlı_Otel_Listesi" xml:space="preserve">
+    <value>Verbundene Hotelliste</value>
+  </data>
+  <data name="Bonus_Puan_Ekle" xml:space="preserve">
+    <value>Bonuspunkte hinzufügen</value>
+  </data>
+  <data name="Bu_operatörü_silmek" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie diesen Betreiber löschen möchten?</value>
+  </data>
+  <data name="Dönem_Ekle" xml:space="preserve">
+    <value>Zeitraum hinzufügen</value>
+  </data>
+  <data name="Evet_Sil" xml:space="preserve">
+    <value>Ja, löschen</value>
+  </data>
+  <data name="Güncellenme" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="Güncellenme_Tarihi" xml:space="preserve">
+    <value>Aktualisierungsdatum</value>
+  </data>
+  <data name="Harcama Ve Kazanç Tanımları Listesi" xml:space="preserve">
+    <value>Liste der Ausgaben- und Ertragsdefinitionen</value>
+  </data>
+  <data name="Oda Tipine Göre" xml:space="preserve">
+    <value>Pro Nacht Verdienst nach Zimmertyp</value>
+  </data>
+  <data name="Oda_Tipleri" xml:space="preserve">
+    <value>Zimmertypen</value>
+  </data>
+  <data name="Operatör_Adı" xml:space="preserve">
+    <value>Name des Betreibers</value>
+  </data>
+  <data name="Operatör_Detayları" xml:space="preserve">
+    <value>Betreiberdetails</value>
+  </data>
+  <data name="Operatör_Düzenle" xml:space="preserve">
+    <value>Betreiber bearbeiten</value>
+  </data>
+  <data name="Operatör_Silme" xml:space="preserve">
+    <value>Betreiber löschen</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Silinmiş_Rezervasyonlar" xml:space="preserve">
+    <value>Gelöschte Reservierungen</value>
+  </data>
+  <data name="Yeni_Operatör_Ekle" xml:space="preserve">
+    <value>Neuen Betreiber hinzufügen</value>
+  </data>
+  <data name="Örn_CIS_ANEX_TOUR" xml:space="preserve">
+    <value>Bsp.: (CIS) ANEX TOUR</value>
+  </data>
+  <data name="Aynı_VoucherNo_UserId_varsa_güncelle" xml:space="preserve">
+    <value>Wenn derselbe (VoucherNo + UserId) vorhanden ist, aktualisieren</value>
+  </data>
+  <data name="CSV Dosyası" xml:space="preserve">
+    <value>CSV-Datei</value>
+  </data>
+  <data name="Geri_al" xml:space="preserve">
+    <value>Rückgängig machen</value>
+  </data>
+  <data name="Rezervasyon_onayla" xml:space="preserve">
+    <value>Reservierung bestätigen</value>
+  </data>
+  <data name="Rezervasyon_İçe_Aktar" xml:space="preserve">
+    <value>Reservierung importieren (CSV)</value>
+  </data>
+  <data name="UTF8_Başlık_Satırı" xml:space="preserve">
+    <value>UTF-8, Kopfzeile erforderlich. Datumsangaben können YYYY-MM-DD oder DD.MM.YYYY sein.</value>
+  </data>
+  <data name="İçe_Aktar" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="Status_Pending" xml:space="preserve">
+    <value>Ausstehend</value>
+  </data>
+  <data name="Status_Acquired" xml:space="preserve">
+    <value>Erworben</value>
+  </data>
+	<data name="KayitOl" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+	<data name="YeniUyelikOlustur" xml:space="preserve">
+    <value>Neue Mitgliedschaft erstellen</value>
+  </data>
+	<data name="SifreTekrar" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+	<data name="SifreKurallariBaslik" xml:space="preserve">
+    <value>Passwort-Regeln:</value>
+  </data>
+	<data name="SifreKuralUzunluk" xml:space="preserve">
+    <value>Mindestens 8 Zeichen</value>
+  </data>
+	<data name="SifreKuralBuyukHarf" xml:space="preserve">
+    <value>Mindestens 1 Großbuchstabe (A - Z)</value>
+  </data>
+	<data name="SifreKuralKucukHarf" xml:space="preserve">
+    <value>Mindestens 1 Kleinbuchstabe (a - z)</value>
+  </data>
+	<data name="SifreKuralRakam" xml:space="preserve">
+    <value>Mindestens 1 Zahl (0 - 9)</value>
+  </data>
+	<data name="SifreKuralOzelKarakter" xml:space="preserve">
+    <value>Mindestens 1 Sonderzeichen (+ * ? ! # usw.)</value>
+  </data>
+	<data name="SifreKuralHataMesaji" xml:space="preserve">
+    <value>⚠ Passwort entspricht nicht den Regeln. Bitte geben Sie ein Passwort gemäß den obigen Regeln ein.</value>
+  </data>
+	<data name="UyeOlButton" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+	<data name="ZatenHesabinVarMi" xml:space="preserve">
+    <value>Haben Sie bereits ein Konto? Anmelden</value>
+  </data>
+	<data name="YeniHesapBireysel" xml:space="preserve">
+    <value>Neues Konto erstellen - Privat</value>
+  </data>
+	<data name="YeniHesapKurumsal" xml:space="preserve">
+    <value>Neues Konto erstellen - Geschäftlich</value>
+  </data>
+	<data name="GirisYapBaslik" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+	<data name="OturumAcMesaj" xml:space="preserve">
+    <value>Melden Sie sich an, um Ihre Sitzung zu starten</value>
+  </data>
+	<data name="BeniHatirla" xml:space="preserve">
+    <value>Angemeldet bleiben</value>
+  </data>
+	<data name="GirisYapButton" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+	<data name="SifremiUnuttum" xml:space="preserve">
+    <value>Ich habe mein Passwort vergessen</value>
+  </data>
+	<data name="SifreyiGoster" xml:space="preserve">
+    <value>Passwort anzeigen</value>
+  </data>
+	<data name="SifreyiGizle" xml:space="preserve">
+    <value>Passwort ausblenden</value>
+  </data>
+	<data name="GosterGizle" xml:space="preserve">
+    <value>Anzeigen/Ausblenden</value>
+  </data>
+	<data name="ACENTE_SECIM_INFO" xml:space="preserve">
+    <value>Bitte wählen Sie die Agentur aus, mit der Sie fortfahren möchten.</value>
+  </data>
+	<data name="Adet" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+	<data name="AGENCY_NAME" xml:space="preserve">
+    <value>Agenturname</value>
+  </data>
+	<data name="AGENCY_RESERVATIONS" xml:space="preserve">
+    <value>Agenturreservierungen</value>
+  </data>
+	<data name="Alıcılar" xml:space="preserve">
+    <value>Empfänger</value>
+  </data>
+	<data name="AMOUNT" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+	<data name="Approve_Anyway" xml:space="preserve">
+    <value>Trotzdem genehmigen</value>
+  </data>
+	<data name="ARA_ACENTE_PH" xml:space="preserve">
+    <value>Agentur suchen...</value>
+  </data>
+	<data name="Bugünkü_Satın_Almalar" xml:space="preserve">
+    <value>Heutige Einkäufe</value>
+  </data>
+	<data name="Cancel_Reservation" xml:space="preserve">
+    <value>Reservierung stornieren</value>
+  </data>
+	<data name="CHECK_IN" xml:space="preserve">
+    <value>Anreise (Check-In)</value>
+  </data>
+	<data name="CHECK_OUT" xml:space="preserve">
+    <value>Abreise (Check-Out)</value>
+  </data>
+	<data name="Dönemleri" xml:space="preserve">
+    <value>Zeiträume</value>
+  </data>
+	<data name="Ekstra_Eposta_Adresleri" xml:space="preserve">
+    <value>Zusätzliche E-Mail-Adressen</value>
+  </data>
+	<data name="EPOSTA_AYIRAC_INFO" xml:space="preserve">
+    <value>Verwenden Sie ein Semikolon (;) für mehrere E-Mails.</value>
+  </data>
+	<data name="EPOSTA_ICERIK_PH" xml:space="preserve">
+    <value>E-Mail-Inhalt hier eingeben...</value>
+  </data>
+	<data name="Gövde" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+	<data name="Harcanabilecek_Gecelik_Puan" xml:space="preserve">
+    <value>Ausgebbare Punkte pro Nacht</value>
+  </data>
+	<data name="Harcanabilecek_Puanlar_Gecelik" xml:space="preserve">
+    <value>Ausgebbare Punkte (pro Nacht)</value>
+  </data>
+	<data name="Kazanılabilecek_Gecelik_Puan" xml:space="preserve">
+    <value>Verdienbare Punkte pro Nacht</value>
+  </data>
+	<data name="Kazanılabilecek_ve_Harcanabilecek_Puan_Tablosu" xml:space="preserve">
+    <value>Tabelle der verdienbaren und ausgebbaren Punkte</value>
+  </data>
+	<data name="Kazanılma_Onayı_Bekleyen" xml:space="preserve">
+    <value>Warten auf Verdienstgenehmigung</value>
+  </data>
+	<data name="Kazanılmış" xml:space="preserve">
+    <value>Verdient</value>
+  </data>
+	<data name="Keep_Pending" xml:space="preserve">
+    <value>Ausstehend lassen</value>
+  </data>
+	<data name="KIRMAN_BELAZUR_BONUS" xml:space="preserve">
+    <value>Kirman Belazur Bonus</value>
+  </data>
+	<data name="Konu_yazınız" xml:space="preserve">
+    <value>Betreff eingeben</value>
+  </data>
+	<data name="Kullanıcı_Şifresi" xml:space="preserve">
+    <value>Benutzerpasswort</value>
+  </data>
+	<data name="Kuyruğa_Gönder" xml:space="preserve">
+    <value>In die Warteschlange senden</value>
+  </data>
+	<data name="Menü_Öğeleri" xml:space="preserve">
+    <value>Menüpunkte</value>
+  </data>
+	<data name="Menü_Öğesi" xml:space="preserve">
+    <value>Menüpunkt</value>
+  </data>
+	<data name="Menü_Öğesi_Seçin" xml:space="preserve">
+    <value>Einen Menüpunkt auswählen</value>
+  </data>
+	<data name="Menü_Öğesini_Düzenle" xml:space="preserve">
+    <value>Menüpunkt bearbeiten</value>
+  </data>
+	<data name="Oluşturma_Tarihi" xml:space="preserve">
+    <value>Erstellungsdatum</value>
+  </data>
+	<data name="Operatör_Tanımları" xml:space="preserve">
+    <value>Betreiberdefinitionen</value>
+  </data>
+	<data name="RES_NO" xml:space="preserve">
+    <value>Reservierungs-Nr.</value>
+  </data>
+	<data name="Satın_Alan" xml:space="preserve">
+    <value>Käufer</value>
+  </data>
+	<data name="Satın_Alma_Düzenle" xml:space="preserve">
+    <value>Einkauf bearbeiten</value>
+  </data>
+	<data name="Satın_Alma_Tarihi" xml:space="preserve">
+    <value>Kaufdatum</value>
+  </data>
+	<data name="Select_Agency" xml:space="preserve">
+    <value>Agentur wählen</value>
+  </data>
+	<data name="SILME_ONAYI_KAYIT" xml:space="preserve">
+    <value>Möchten Sie diesen Eintrag wirklich löschen?</value>
+  </data>
+	<data name="SILME_ONAYI_MENU" xml:space="preserve">
+    <value>Möchten Sie diesen Menüpunkt wirklich löschen?</value>
+  </data>
+	<data name="Son_GÜncelleme_Tarihi" xml:space="preserve">
+    <value>Letztes Aktualisierungsdatum</value>
+  </data>
+	<data name="Temizle" xml:space="preserve">
+    <value>Leeren</value>
+  </data>
+	<data name="Tenant" xml:space="preserve">
+    <value>Mandant</value>
+  </data>
+	<data name="Tenant_ID" xml:space="preserve">
+    <value>Mandanten-ID</value>
+  </data>
+	<data name="Tesis" xml:space="preserve">
+    <value>Anlage</value>
+  </data>
+	<data name="Toplu_Eposta" xml:space="preserve">
+    <value>Massen-E-Mail</value>
+  </data>
+	<data name="Toplam" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+	<data name="Tümünü_Seç" xml:space="preserve">
+    <value>Alle auswählen</value>
+  </data>
+	<data name="Viber" xml:space="preserve">
+    <value>Viber</value>
+  </data>
+	<data name="Viber_No" xml:space="preserve">
+    <value>Viber-Nummer</value>
+  </data>
+	<data name="VOUCHER" xml:space="preserve">
+    <value>Gutschein</value>
+  </data>
+	<data name="Yeni_Menü_Öğesi_Ekle" xml:space="preserve">
+    <value>Neuen Menüpunkt hinzufügen</value>
+  </data>
+	<data name="Yeni_Satın_Alma_Ekle" xml:space="preserve">
+    <value>Neuen Einkauf hinzufügen</value>
+  </data>
+	<data name="Yeni_Satın_Alma_Kaydı" xml:space="preserve">
+    <value>Neuer Einkaufsdatensatz</value>
+  </data>
+	<data name="Yeni_Şifre" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+	<data name="Yeni_Şifre_Info" xml:space="preserve">
+    <value>Das neue Passwort muss mindestens 6 Zeichen lang sein.</value>
+  </data>
+	<data name="Yeni_Şifre_Tekrar" xml:space="preserve">
+    <value>Neues Passwort (Wiederholung)</value>
+  </data>
+</root>

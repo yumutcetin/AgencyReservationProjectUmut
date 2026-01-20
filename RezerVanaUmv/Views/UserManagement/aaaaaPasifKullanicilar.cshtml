@@ -1,0 +1,71 @@
+﻿@model List<RezerVanaUmv.ViewModels.EditUserViewModel>
+@{
+    ViewData["Title"] = "Pasif Kullanıcılar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2>@RezerVanaUmv.Resources.Resource.Pasif @RezerVanaUmv.Resources.Resource.Kullanıcılar</h2>
+
+<a class="btn btn-outline-secondary mb-3" asp-action="PasifKullanicilar">@RezerVanaUmv.Resources.Resource.Pasifleri_Göster</a>
+
+<table id="pasifTable" class="table table-bordered table-striped display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+            <th>@RezerVanaUmv.Resources.Resource.Kullanıcı_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ajans</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ülke</th>
+            <th>@RezerVanaUmv.Resources.Resource.Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>@user.AgencyName</td>
+                <td>@user.AgencyCountry</td>
+                <td><span class="badge bg-success">@RezerVanaUmv.Resources.Resource.Aktif</span></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#pasifTable').DataTable({
+                dom: 'Bfrtip',
+                scrollX: true,
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                buttons: [
+                    'copy', 'excel', 'pdf', 'print'
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json'
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,205 @@
+﻿@model RezerVanaUmv.ViewModels.BulkEmailViewModel
+@{
+    ViewData["Title"] = "Toplu E-posta";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<style>
+    .email-editor {
+        text-transform: none !important;
+        background: white;
+    }
+</style>
+
+<h2 class="mb-3 fw-bold"> @RezerVanaUmv.Resources.Resource.Toplu_Eposta</h2>
+
+@if (TempData["Success"] is string ok && !string.IsNullOrWhiteSpace(ok))
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err && !string.IsNullOrWhiteSpace(err))
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<form id="bulkEmailForm" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- ---------------------- -->
+    <!-- 1) E-POSTA İÇERİĞİ -->
+    <!-- ---------------------- -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header fw-semibold">E-posta İçeriği</div>
+
+        <div class="card-body row g-3">
+
+            <div class="col-12">
+                <label class="form-label" for="Subject"> @RezerVanaUmv.Resources.Resource.Konu</label>
+                <input asp-for="Subject" class="form-control" id="Subject" placeholder=" @RezerVanaUmv.Resources.Resource.Konu_yazınız..." />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label"> @RezerVanaUmv.Resources.Resource.Gövde</label>
+
+                <!-- Quill Editor -->
+                <div id="editor" class="email-editor form-control" style="height:300px;"></div>
+
+                <!-- Hidden input -->
+                <input type="hidden" asp-for="BodyHtml" id="BodyHtml" />
+                <span asp-validation-for="BodyHtml" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ---------------------- -->
+    <!-- 2) ALICILAR (AJANSLAR) -->
+    <!-- ---------------------- -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header fw-semibold"> @RezerVanaUmv.Resources.Resource.Alıcılar</div>
+
+        <div class="card-body row g-3">
+
+            <!-- Arama Kutusu -->
+            <div class="col-12">
+                <label class="form-label fw-bold"> @RezerVanaUmv.Resources.Resource.Acenteler</label>
+
+                <input type="text"
+                       id="agencySearch"
+                       class="form-control form-control-sm mb-2"
+                       placeholder=" @RezerVanaUmv.Resources.Resource.ARA_ACENTE_PH">
+
+                <!-- Tümünü Seç -->
+                <div class="form-check mb-2">
+                    <input type="checkbox" id="selectAllAgencies" class="form-check-input case" />
+                    <label for="selectAllAgencies" class="form-check-label"> @RezerVanaUmv.Resources.Resource.Tümünü_Seç</label>
+                </div>
+
+                <!-- Liste -->
+                <div class="border rounded p-2" style="height:230px; overflow-y:auto;">
+                    @foreach (var a in Model.Agencies)
+                    {
+                        <div class="form-check agency-item">
+                            <input class="form-check-input agencyCheck case"
+                                   type="checkbox"
+                                   name="SelectedAgencyIds"
+                                   value="@a.Id"
+                                   id="agency_@a.Id"
+                            @(Model.SelectedAgencyIds.Contains(a.Id) ? "checked" : "") />
+
+                            <label class="form-check-label" for="agency_@a.Id">
+                                @a.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <div class="form-text"> @RezerVanaUmv.Resources.Resource.ACENTE_SECIM_INFO</div>
+            </div>
+
+            <!-- Ekstra e-postalar -->
+            <div class="col-12">
+                <label class="form-label fw-bold" for="AdditionalEmails"> @RezerVanaUmv.Resources.Resource.Ekstra_Eposta_Adresleri</label>
+                <textarea asp-for="AdditionalEmails"
+                          id="AdditionalEmails"
+                          rows="2"
+                          class="form-control"
+                          placeholder="ör: ali@x.com; veli@y.com"></textarea>
+
+                <div class="form-text"> @RezerVanaUmv.Resources.Resource.EPOSTA_AYIRAC_INFO</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- GÖNDER / TEMİZLE -->
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-send"></i>  @RezerVanaUmv.Resources.Resource.Kuyruğa_Gönder
+        </button>
+
+        <a asp-action="Create" class="btn btn-outline-secondary px-4">
+            <i class="bi bi-arrow-counterclockwise"></i>  @RezerVanaUmv.Resources.Resource.Temizle
+        </a>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <!-- Quill -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+
+    <script>
+        //-------------------------
+        // QUILL EDITOR
+        //-------------------------
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link'],
+                    ['clean']
+                ]
+            },
+            placeholder: ' @RezerVanaUmv.Resources.Resource.EPOSTA_ICERIK_PH'
+        });
+
+        const hiddenBody = document.getElementById("BodyHtml");
+        const form = document.getElementById("bulkEmailForm");
+
+        // BodyHtml doluysa Quill içine yerleştir (edit modunda işe yarar)
+        if (hiddenBody.value && hiddenBody.value.trim() !== "") {
+            quill.root.innerHTML = hiddenBody.value;
+        }
+
+        // Yazdıkça güncelle
+        quill.on("text-change", () => {
+            hiddenBody.value = quill.root.innerHTML;
+        });
+
+        // Submit'te son kontrol
+        form.addEventListener("submit", () => {
+            let html = quill.root.innerHTML.trim();
+
+            // Quill boş çıktısını temizle
+            if (html === "<p><br></p>" || html === "") {
+                hiddenBody.value = "";
+            } else {
+                hiddenBody.value = html;
+            }
+        });
+
+
+        //-------------------------
+        // AGENCY LIST SELECT ALL
+        //-------------------------
+        document.getElementById("selectAllAgencies")
+            .addEventListener("change", function () {
+                const state = this.checked;
+                document.querySelectorAll(".agencyCheck").forEach(chk => {
+                    chk.checked = state;
+                });
+            });
+
+        //-------------------------
+        // AGENCY SEARCH FILTER
+        //-------------------------
+        document.getElementById("agencySearch")
+            .addEventListener("keyup", function () {
+                const q = this.value.toLowerCase();
+                document.querySelectorAll(".agency-item").forEach(item => {
+                    const text = item.innerText.toLowerCase();
+                    item.style.display = text.includes(q) ? "" : "none";
+                });
+            });
+    </script>
+}

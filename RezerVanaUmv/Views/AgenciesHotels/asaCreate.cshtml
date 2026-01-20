@@ -1,0 +1,101 @@
+﻿@model RezerVanaUmv.Models.Agency
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Kayıt</h1>
+
+<h4>@RezerVanaUmv.Resources.Resource.Ajans</h4>
+<hr />
+<h4>@RezerVanaUmv.Resources.Resource.Temel_Bilgiler</h4>
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+<div class="form-group">
+        <label asp-for="Name" class="control-label">@RezerVanaUmv.Resources.Resource.Ad</label>
+        <input asp-for="Name" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="TaxId" class="control-label">@RezerVanaUmv.Resources.Resource.Vergi_No</label>
+        <input asp-for="TaxId" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="Email" class="control-label">@RezerVanaUmv.Resources.Resource.EPosta</label>
+        <input asp-for="Email" class="form-control" required />
+</div>
+
+    <h4>@RezerVanaUmv.Resources.Resource.Kişisel_İletişim</h4>
+<div class="form-group">
+        <label asp-for="IletisimAlanKodu" class="control-label">@RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+    <input asp-for="IletisimAlanKodu" class="form-control" />
+</div>
+<div class="form-group">
+        <label asp-for="IletisimTel" class="control-label">@RezerVanaUmv.Resources.Resource.Telefon</label>
+    <input asp-for="IletisimTel" class="form-control" />
+</div>
+<div class="form-group">
+        <label asp-for="WhatsappAlanKodu" class="control-label">WhatsApp @RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+    <input asp-for="WhatsappAlanKodu" class="form-control" />
+</div>
+<div class="form-group">
+    <label asp-for="WhatsappNo" class="control-label">WhatsApp No</label>
+    <input asp-for="WhatsappNo" class="form-control" />
+</div>
+<div class="form-group">
+        <label asp-for="ViberAlanKodu" class="control-label"> @RezerVanaUmv.Resources.Resource.Viber @RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+    <input asp-for="ViberAlanKodu" class="form-control" />
+</div>
+<div class="form-group">
+        <label asp-for="ViberNo" class="control-label">@RezerVanaUmv.Resources.Resource.Viber_No</label>
+    <input asp-for="ViberNo" class="form-control" />
+</div>
+
+    <h4>@RezerVanaUmv.Resources.Resource.Kurumsal_Bilgiler</h4>
+<div class="form-group">
+        <label asp-for="Unvan" class="control-label">@RezerVanaUmv.Resources.Resource.Unvan</label>
+        <input asp-for="Unvan" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="Ulke" class="control-label">@RezerVanaUmv.Resources.Resource.Ülke</label>
+        <input asp-for="Ulke" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="Sehir" class="control-label">@RezerVanaUmv.Resources.Resource.Şehir</label>
+        <input asp-for="Sehir" class="form-control" required />
+</div>
+
+    <h4>@RezerVanaUmv.Resources.Resource.Şirket_Bilgileri</h4>
+<div class="form-group">
+        <label asp-for="SirketTelAlanKodu" class="control-label">@RezerVanaUmv.Resources.Resource.Şirket_Tel_Alan_Kodu</label>
+        <input asp-for="SirketTelAlanKodu" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="SirketTel" class="control-label">@RezerVanaUmv.Resources.Resource.Şirket_Telefonu</label>
+        <input asp-for="SirketTel" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="SirketUlke" class="control-label">@RezerVanaUmv.Resources.Resource.Şirket_Ülkesi</label>
+        <input asp-for="SirketUlke" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="SirketSehir" class="control-label">@RezerVanaUmv.Resources.Resource.Şirket_Şehri</label>
+        <input asp-for="SirketSehir" class="form-control" required />
+</div>
+<div class="form-group">
+        <label asp-for="SirketAdres" class="control-label">@RezerVanaUmv.Resources.Resource.Şirket_Adresi</label>
+        <input asp-for="SirketAdres" class="form-control" required />
+</div>
+
+<div class="form-group">
+        <input type="submit" value="@RezerVanaUmv.Resources.Resource.Kayıt" class="btn btn-primary" />
+</div>
+</form>
+
+<div>
+    <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

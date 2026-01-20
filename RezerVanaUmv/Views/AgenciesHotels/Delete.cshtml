@@ -1,0 +1,71 @@
+﻿@model RezerVanaUmv.Models.Agency
+
+@{
+    ViewData["Title"] = "Ajans Sil";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+
+
+<h1>
+    @RezerVanaUmv.Resources.Resource.Silme_Onayı
+</h1>
+<h3>@RezerVanaUmv.Resources.Resource.Ajans_silme</h3>
+<hr />
+<dl class="row">
+    <h5 class="col-sm-12">📌 @RezerVanaUmv.Resources.Resource.Temel_Bilgiler</h5>
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Ajans_Adı</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Vergi_No</dt>
+    <dd class="col-sm-9">@Model.TaxId</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.EPosta</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Kullanıcı</dt>
+    <dd class="col-sm-9"></dd>
+
+    <h5 class="col-sm-12 mt-4">📱 @RezerVanaUmv.Resources.Resource.Kişisel_İletişim</h5>
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Alan_Kodu</dt>
+    <dd class="col-sm-9">@Model.IletisimAlanKodu</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Telefon</dt>
+    <dd class="col-sm-9">@Model.IletisimTel</dd>
+
+    <dt class="col-sm-3">WhatsApp</dt>
+    <dd class="col-sm-9">(@Model.WhatsappAlanKodu) @Model.WhatsappNo</dd>
+
+    <dt class="col-sm-3">Viber</dt>
+    <dd class="col-sm-9">(@Model.ViberAlanKodu) @Model.ViberNo</dd>
+
+    <h5 class="col-sm-12 mt-4">🏢 @RezerVanaUmv.Resources.Resource.Kurumsal_Bilgiler</h5>
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Unvan</dt>
+    <dd class="col-sm-9">@Model.Unvan</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Ülke / @RezerVanaUmv.Resources.Resource.Şehir</dt>
+    <dd class="col-sm-9">@Model.Ulke / @Model.Sehir</dd>
+
+    <h5 class="col-sm-12 mt-4">🏭 @RezerVanaUmv.Resources.Resource.Şirket_Bilgileri</h5>
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Şirket_Telefonu</dt>
+    <dd class="col-sm-9">(@Model.SirketTelAlanKodu) @Model.SirketTel</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Şirket_Lokasyonu</dt>
+    <dd class="col-sm-9">@Model.SirketUlke / @Model.SirketSehir</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Şirket_Adresi</dt>
+    <dd class="col-sm-9">@Model.SirketAdres</dd>
+
+    <h5 class="col-sm-12 mt-4">⚙️ @RezerVanaUmv.Resources.Resource.Sistem</h5>
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</dt>
+    <dd class="col-sm-9">@Model.CreatedAt?.ToString("dd-MM-yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Tenant_ID</dt>
+    <dd class="col-sm-9"></dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">@RezerVanaUmv.Resources.Resource.Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.Vazgeç</a>
+</form>

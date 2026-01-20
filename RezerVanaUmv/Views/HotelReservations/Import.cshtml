@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Rezervasyon İçe Aktar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+<div class="container mt-4">
+    <.h3>    @RezerVanaUmv.Resources.Resource.Rezervasyon_İçe_Aktar <h3>
+    <form asp-action="Import" asp-controller="Reservations" method="post" enctype="multipart/form-data" class="mt-3">
+        <div class="mb-3">
+                    <label class="form-label">    @RezerVanaUmv.Resources.Resource.CSV_Dosyası</label>
+            <input type="file" name="file" accept=".csv,text/csv" class="form-control" required />
+            <div class="form-text">
+                        @RezerVanaUmv.Resources.Resource.UTF8_Başlık_Satırı
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                        <label class="form-label">@RezerVanaUmv.Resources.Resource.BAŞLANGIÇ_TARİHİ</label>
+                <input type="date" name="fromDate" value="2024-01-01" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Tenant</label>
+                <input type="text" class="form-control" value="1" disabled />
+                <input type="hidden" name="tenantId" value="1" />
+            </div>
+        </div>
+
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" name="updateIfExists" id="updateIfExists" checked>
+            <label class="form-check-label" for="updateIfExists">
+                @RezerVanaUmv.Resources.Resource.Aynı_VoucherNo_UserId_varsa_güncelle
+      
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">@RezerVanaUmv.Resources.Resource.İçe_Aktar</button>
+    </form>
+</div>

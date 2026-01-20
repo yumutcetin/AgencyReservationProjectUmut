@@ -1,0 +1,88 @@
+﻿@model RezerVanaUmv.ViewModels.UserTotalPointsViewModel
+
+@{
+    ViewData["Title"] = "Points Overview by Hotel";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<div class="container py-4">
+    @foreach (var hotel in Model.TenantPoints)
+    {
+        <div class="mb-4">
+            <h4 class="text-primary mb-3">@hotel.HotelName</h4>
+            <div class="row g-3">
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-danger text-white p-3 rounded">
+                            <i class="fas fa-chart-bar fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Earned</h6>
+                            <h4 class="mb-0">@hotel.PointsEarned.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-secondary text-white p-3 rounded">
+                            <i class="fas fa-plus fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Bonus_Points</h6>
+                            <h4 class="mb-0">@hotel.BonusPoints.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-info text-white p-3 rounded">
+                            <i class="fas fa-clock fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Pending</h6>
+                            <h4 class="mb-0">@hotel.PointsPending.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-success text-white p-3 rounded">
+                            <i class="fas fa-arrow-up fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Spent</h6>
+                            <h4 class="mb-0">@hotel.PointsSpent.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-danger text-white p-3 rounded">
+                            <i class="fas fa-hourglass-half fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Pending_Spent</h6>
+                            <h4 class="mb-0">@hotel.PointsSpentPending.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                        <div class="me-2 bg-primary text-white p-3 rounded">
+                            <i class="fas fa-wallet fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Spendable</h6>
+                            <h4 class="mb-0">@hotel.PointsSpendable.ToString("N2")</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

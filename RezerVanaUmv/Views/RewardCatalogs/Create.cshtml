@@ -1,0 +1,72 @@
+﻿@model RezerVanaUmv.Models.RewardCatalog
+
+@{
+    ViewData["Title"] = "➕ Yeni Dönem Puanı";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">➕ @RezerVanaUmv.Resources.Resource.Yeni_Dönem_Puanı_Ekle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- 🔒 Gizli Tenant ID -->
+            <input type="hidden" asp-for="TenantId" />
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">🏨 @RezerVanaUmv.Resources.Resource.Oda_Tipi_ve_Dönem_Bilgileri</h5>
+                </div>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label asp-for="RoomType" class="form-label"> @RezerVanaUmv.Resources.Resource.Oda_Tipi</label>
+                        <select asp-for="RoomType" class="form-control" asp-items="ViewBag.RoomTypeList" required>
+                            <option value="">--  @RezerVanaUmv.Resources.Resource.Lütfen_bir_oda_tipi_seçiniz --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="StartDate" class="form-label">@RezerVanaUmv.Resources.Resource.Start_Date</label>
+                        <input asp-for="StartDate" class="form-control" type="date" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EndDate" class="form-label">@RezerVanaUmv.Resources.Resource.End_Date</label>
+                        <input asp-for="EndDate" class="form-control" type="date" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="RequiredPoints" class="form-label">@RezerVanaUmv.Resources.Resource.Gerekli_Puan</label>
+                        <input asp-for="RequiredPoints" class="form-control" type="number" required />
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" asp-for="UseEarningPeriod" type="checkbox" />
+                        <label class="form-check-label" asp-for="UseEarningPeriod">@RezerVanaUmv.Resources.Resource.Kazanç_Dönemi_Kullanılsın</label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" asp-for="IsActive" type="checkbox" />
+                        <label class="form-check-label" asp-for="IsActive">@RezerVanaUmv.Resources.Resource.Aktif</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-success w-100">💾 @RezerVanaUmv.Resources.Resource.KAYDET</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">← @RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

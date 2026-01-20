@@ -1,0 +1,129 @@
+﻿@model IEnumerable<RezerVanaUmv.ViewModels.AgencyWithStatusViewModel>
+
+@{
+    ViewData["Title"] = "Acenteler";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<h1 class="mb-4">@RezerVanaUmv.Resources.Resource.Acenteler</h1>
+
+<style>
+    #agencyTable {
+        font-size: 0.85rem; /* yazılar küçüldü */
+    }
+
+        #agencyTable th,
+        #agencyTable td {
+            padding: 6px 10px; /* daha kompakt görünüm */
+        }
+
+            /* Puan kolonları sabit ve ortalı */
+            #agencyTable th:nth-child(7),
+            #agencyTable td:nth-child(7),
+            #agencyTable th:nth-child(8),
+            #agencyTable td:nth-child(8),
+            #agencyTable th:nth-child(9),
+            #agencyTable td:nth-child(9) {
+                text-align: center;
+                white-space: nowrap;
+            }
+</style>
+
+<table id="agencyTable" class="table table-bordered table-hover" style="width:100%">
+    <thead class="table-light">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Adı_Soyadı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Şirket </th>
+            <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ülke</th>
+            <th>@RezerVanaUmv.Resources.Resource.Şehir</th>
+            <th>@RezerVanaUmv.Resources.Resource.Telefon</th>
+            <th>@RezerVanaUmv.Resources.Resource.Kazanılmış</th>
+            <th>@RezerVanaUmv.Resources.Resource.Kazanılma_Onayı_Bekleyen</th>
+            <th>@RezerVanaUmv.Resources.Resource.Toplam</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Agency.Name</td>
+                <td>
+                    <a asp-controller="AgenciesHotels"
+                       asp-action="AgenciesDetails"
+                       asp-route-id="@item.Agency?.Id"
+                       style="font-size:11px; font-weight:600;">
+                        @item.Agency?.Unvan
+                    </a>
+                </td>
+                <td>@item.Agency.Email</td>
+                <td>@item.Agency.Ulke</td>
+                <td>@item.Agency.Sehir</td>
+                <td>@item.Agency.SirketTelAlanKodu @item.Agency.SirketTel</td>
+                <td>@item.GainedPoints</td>
+                <td>@item.PendingPoints</td>
+                <td>@item.TotalPoints</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Agency.Id" class="btn btn-warning btn-sm">@RezerVanaUmv.Resources.Resource.Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Agency.Id" class="btn btn-danger btn-sm">@RezerVanaUmv.Resources.Resource.Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.flash.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#agencyTable').DataTable({
+                dom: 'Bfrtip',
+                scrollX: true,
+                autoWidth: true,
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                order: [[0, "asc"]], // Reverted to original order, as the provided snippet's order was for a different column.
+                columnDefs: [
+                    { width: "80px", targets: [6, 7, 8] },           // Kazanılmış, Onay Bekleyen, Toplam
+                    { className: "text-center", targets: [6, 7, 8] } // Ortala
+                ],
+                buttons: ['copy', 'excel', 'pdf', 'print'],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+                },
+                order: [[0, "asc"]]
+            });
+        });
+    </script>
+}

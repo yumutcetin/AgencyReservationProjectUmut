@@ -1,0 +1,82 @@
+﻿@model RezerVanaUmv.Models.Reservation
+@using Microsoft.AspNetCore.Identity
+@using RezerVanaUmv.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<AppUserRoles> RoleManager
+@inject RezerVanaUmv.Data.RzvnUmvUmvKrmnBlzrContext DbContext
+
+@{
+    bool isLoggedIn = User.Identity.IsAuthenticated;
+    string username = isLoggedIn ? User.Identity.Name : "Guest";
+    string currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "Unknown";
+
+    var userRoles = isLoggedIn
+        ? User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+        .Select(c => c.Value).ToList()
+        : new List<string>();
+
+    bool isAdmin = userRoles.Contains("ADMIN");
+    bool isAdminQr = userRoles.Any(role => role.StartsWith("ADMIN/") && role.EndsWith("/QR"));
+    bool isAgencyCrw = userRoles.Any(role => role.EndsWith("AGN"));
+    bool isHotelCrw = userRoles.Any(role => role.EndsWith("HTL"));
+    bool isPassenger = userRoles.Any(role => role.Contains("PASSENGER"));
+}
+@{
+    ViewData["Title"] = "Rezervasyon Detayı";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Rezervasyon_Detayı</h1>
+<hr />
+
+<div class="row">
+    <!-- SOL: Rezervasyon Bilgileri -->
+    <div class="col-md-6">
+        <h5>📅  @RezerVanaUmv.Resources.Resource.Tarihler</h5>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Giriş_Tarihi:</strong> @Model.CheckinDate.</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Çıkış_Tarihi:</strong> @Model.CheckoutDate</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Rezervasyon_Tarihi:</strong> @Model.ReservationDate</p>
+
+        <h5 class="mt-4">🏨  @RezerVanaUmv.Resources.Resource.Konaklama</h5>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Oda_Sayısı:</strong> @Model.RoomCount</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Oda_Tipi:</strong> @Model.RoomType</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Toplam_Tutar:</strong> @Model.TotalAmount ₺</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Rezervasyon_Kodu:</strong> @Model.BookingReference</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Durum:</strong> @Model.Status</p>
+
+        <h5 class="mt-4">🏢  @RezerVanaUmv.Resources.Resource.Ajans_ve_Sistem</h5>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Ajans:</strong> @Model.Agency?.Name</p>
+        <p><strong> @RezerVanaUmv.Resources.Resource.Sistem:</strong> @Model.Tenant?.Name</p>
+    </div>
+
+    <!-- SAĞ: Yolcu Bilgileri -->
+    <div class="col-md-6">
+        <h5>👥  @RezerVanaUmv.Resources.Resource.Yolcu_Bilgileri</h5>
+
+        @if (Model.Passengers != null && Model.Passengers.Any())
+        {
+            int i = 1;
+            foreach (var p in Model.Passengers)
+            {
+                <div class="border p-2 mb-2 rounded">
+                    <p><strong> @RezerVanaUmv.Resources.Resource.Yolcu @i</strong></p>
+                    <p><strong> @RezerVanaUmv.Resources.Resource.Ad:</strong> @p.FirstName</p>
+                    <p><strong> @RezerVanaUmv.Resources.Resource.Soyad:</strong> @p.LastName</p>
+                    <p><strong> @RezerVanaUmv.Resources.Resource.Cinsiyet:</strong> @p.Gender</p>
+                    <p><strong> @RezerVanaUmv.Resources.Resource.Doğum_Tarihi:</strong> @p.BirthDate</p>
+                </div>
+                i++;
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning"> @RezerVanaUmv.Resources.Resource.Yolcu_bilgisi_bulunamadı_</div>
+        }
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> @RezerVanaUmv.Resources.Resource.Edit</a>
+    <a asp-action="Index" class="btn btn-secondary"> @RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>

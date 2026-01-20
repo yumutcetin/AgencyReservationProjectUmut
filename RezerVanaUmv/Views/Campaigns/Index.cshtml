@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.Campaign>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+
+
+<p>
+    <a asp-action="Create">@RezerVanaUmv.Resources.Resource.Yeni_Oluştur</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Multiplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetRoomType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tenant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Multiplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetRoomType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenant.Id)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">@RezerVanaUmv.Resources.Resource.Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">@RezerVanaUmv.Resources.Resource.Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">@RezerVanaUmv.Resources.Resource.Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

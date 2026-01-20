@@ -1,0 +1,45 @@
+﻿@model RezerVanaUmv.Models.LoyaltyPoint
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Kayıt</h1>
+
+<h4>@RezerVanaUmv.Resources.Resource.LoyaltyPoint</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenantId" class="control-label"></label>
+                <select asp-for="TenantId" class ="form-control" asp-items="ViewBag.TenantId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReservationId" class="control-label">@RezerVanaUmv.Resources.Resource.Rezervasyon</label>
+                <select asp-for="ReservationId" class ="form-control" asp-items="ViewBag.ReservationId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgencyId" class="control-label">@RezerVanaUmv.Resources.Resource.Ajans</label>
+                <select asp-for="AgencyId" class ="form-control" asp-items="ViewBag.AgencyId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BasePoints" class="control-label"></label>
+                <input asp-for="BasePoints" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@RezerVanaUmv.Resources.Resource.Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

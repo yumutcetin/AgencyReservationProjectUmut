@@ -1,0 +1,172 @@
+﻿@model RezerVanaUmv.ViewModels.ReservationWithPassengersViewModel
+
+@{
+    ViewData["Title"] = "Yeni Rezervasyon";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Yeni_Rezervasyon</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Reservation.TenantId"></label>
+                        <select asp-for="Reservation.TenantId" class="form-control" asp-items="ViewBag.TenantId"></select>
+                    </div>
+
+                    <input type="hidden" asp-for="Reservation.AgencyId" value="@ViewBag.AgencyId" />
+
+                    <div class="form-group">
+                        <label asp-for="Reservation.BookingReference">@RezerVanaUmv.Resources.Resource.Voucher_No</label>
+                        <input asp-for="Reservation.BookingReference" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.CheckinDate">@RezerVanaUmv.Resources.Resource.Giriş_Tarihi</label>
+                        <input asp-for="Reservation.CheckinDate" class="form-control" type="date" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.CheckoutDate">@RezerVanaUmv.Resources.Resource.Çıkış_Tarihi</label>
+                        <input asp-for="Reservation.CheckoutDate" class="form-control" type="date" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.NightCount">@RezerVanaUmv.Resources.Resource.Konaklama_Süresi</label>
+                        <input asp-for="Reservation.NightCount" class="form-control" type="number" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.RoomType">@RezerVanaUmv.Resources.Resource.Oda_Tipi</label>
+                        <select asp-for="Reservation.RoomType" class="form-control" asp-items="ViewBag.RoomTypeId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.Notes">@RezerVanaUmv.Resources.Resource.Notlar</label>
+                        <textarea asp-for="Reservation.Notes" class="form-control" oninput="this.value = this.value.toUpperCase()"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <h4>@RezerVanaUmv.Resources.Resource.Misafirler</h4>
+                    <table class="table table-bordered" id="passengerTable">
+                        <thead>
+                            <tr>
+                                <th>@RezerVanaUmv.Resources.Resource.Cinsiyet</th>
+                                <th>@RezerVanaUmv.Resources.Resource.Ad</th>
+                                <th>@RezerVanaUmv.Resources.Resource.Soyad</th>
+                                <th>@RezerVanaUmv.Resources.Resource.Doğum_Tarihi</th>
+                                <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passengerRows">
+                            <tr>
+                                <td>
+                                    <select name="Passengers[0].Gender" class="form-control" required>
+                                        <option value="MR">@RezerVanaUmv.Resources.Resource.BAY</option>
+                                        <option value="MRS">@RezerVanaUmv.Resources.Resource.BAYAN</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input name="Passengers[0].FirstName" class="form-control" required oninput="this.value = this.value.toUpperCase()" />
+                                </td>
+                                <td>
+                                    <input name="Passengers[0].LastName" class="form-control" required oninput="this.value = this.value.toUpperCase()" />
+                                </td>
+                                <td>
+                                    <input name="Passengers[0].BirthDate" type="date" class="form-control" required />
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick="this.closest('tr').remove()">@RezerVanaUmv.Resources.Resource.Sil</button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <button type="button" class="btn btn-secondary" onclick="addPassengerRow()">@RezerVanaUmv.Resources.Resource.Misafir_Ekle</button>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        function addPassengerRow() {
+            const index = document.querySelectorAll('#passengerRows tr').length;
+            const row = `
+                <tr>
+                    <td>
+                        <select name="Passengers[${index}].Gender" class="form-control">
+                            <option value="MR">MR</option>
+                            <option value="MRS">MRS</option>
+                        </select>
+                    </td>
+                    <td><input name="Passengers[${index}].FirstName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+                    <td><input name="Passengers[${index}].LastName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+                    <td><input name="Passengers[${index}].BirthDate" type="date" class="form-control" required/></td>
+                    <td><button type="button" class="btn btn-danger" onclick="this.closest('tr').remove()">Sil</button></td>
+                </tr>
+            `;
+            document.getElementById('passengerRows').insertAdjacentHTML('beforeend', row);
+        }
+
+        // 🔁 Giriş/çıkış değiştiğinde gece sayısını hesapla
+        function calculateNights() {
+            const checkin = document.getElementById('Reservation_CheckinDate').value;
+            const checkout = document.getElementById('Reservation_CheckoutDate').value;
+            const nightInput = document.getElementById('Reservation_NightCount');
+
+            if (checkin && checkout) {
+                const checkinDate = new Date(checkin);
+                const checkoutDate = new Date(checkout);
+
+                const timeDiff = checkoutDate - checkinDate;
+                const nights = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                nightInput.value = nights > 0 ? nights : 0;
+            }
+        }
+
+        // Sayfa yüklendiğinde event ekle
+        window.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('Reservation_CheckinDate').addEventListener('change', calculateNights);
+            document.getElementById('Reservation_CheckoutDate').addEventListener('change', calculateNights);
+
+            // Yukarıdaki büyük harf script’i de burada olabilir
+            const textInputs = document.querySelectorAll('input[type="text"], textarea');
+            textInputs.forEach(function (input) {
+                input.addEventListener('input', function () {
+                    this.value = this.value.toUpperCase();
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById("Reservation_TenantId").addEventListener("change", function () {
+            var tenantId = this.value;
+
+            fetch(`/Reservations/GetRoomTypesByTenant?tenantId=${tenantId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var roomTypeSelect = document.getElementById("Reservation_RoomType");
+                    roomTypeSelect.innerHTML = ""; // Önce temizle
+
+                    data.forEach(rt => {
+                        var option = document.createElement("option");
+                        option.value = rt.name; // Eğer RoomType string ise
+                        option.text = rt.name;
+                        roomTypeSelect.appendChild(option);
+                    });
+                });
+        });
+    </script>
+    
+}

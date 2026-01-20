@@ -1,0 +1,237 @@
+﻿@model RezerVanaUmv.Models.Agency
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css" />
+
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">@RezerVanaUmv.Resources.Resource.Yeni_Acente_Oluştur</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="border p-4 bg-light rounded shadow-sm">
+                        <form asp-action="Create" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="mb-3">
+                                <label asp-for="Name" class="form-label">@RezerVanaUmv.Resources.Resource.ADI</label>
+                                <input asp-for="Name" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Unvan" class="form-label">@RezerVanaUmv.Resources.Resource.Unvan</label>
+                                <input asp-for="Unvan" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label">@RezerVanaUmv.Resources.Resource.EPosta</label>
+                                <input asp-for="Email" class="form-control" required />
+                            </div>
+                           
+                            <div class="mb-3">
+                                <label asp-for="SirketAdres" class="form-label">@RezerVanaUmv.Resources.Resource.Şirket_Adresi</label>
+                                <input asp-for="SirketAdres" class="form-control" />
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label asp-for="SirketUlke" class="form-label">@RezerVanaUmv.Resources.Resource.Şirket_Ülkesi</label>
+                                    <input asp-for="SirketUlke" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="SirketSehir" class="form-label">@RezerVanaUmv.Resources.Resource.Şirket_Şehri</label>
+                                    <input asp-for="SirketSehir" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label asp-for="SirketTelAlanKodu" class="form-label">
+                                        @RezerVanaUmv.Resources.Resource.Şirket_Tel_Alan_Kodu
+                                    </label>
+
+                                    <!-- Hidden field bound to your model -->
+                                    <input asp-for="SirketTelAlanKodu" type="hidden" id="dialCodeInput" />
+
+                                    <!-- Visible select for flags + dial code -->
+                                    <select id="dialCodeSelect" class="form-select"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="SirketTel" class="form-label">@RezerVanaUmv.Resources.Resource.Şirket_Telefonu</label>
+                                    <input asp-for="SirketTel" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="text-end">
+                                <input type="submit" value="@RezerVanaUmv.Resources.Resource.Kayıt" class="btn btn-success px-4" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a asp-action="Index" class="btn btn-outline-secondary">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        // Minimal country list; add more as needed
+        const countries = [
+            { name: "Turkey", iso2: "tr", dial: "+90" },
+            { name: "Russia", iso2: "ru", dial: "+7" },
+            { name: "Afghanistan", iso2: "af", dial: "+93" },
+            { name: "Albania", iso2: "al", dial: "+355" },
+            { name: "Algeria", iso2: "dz", dial: "+213" },
+            { name: "Andorra", iso2: "ad", dial: "+376" },
+            { name: "Angola", iso2: "ao", dial: "+244" },
+            { name: "Argentina", iso2: "ar", dial: "+54" },
+            { name: "Armenia", iso2: "am", dial: "+374" },
+            { name: "Australia", iso2: "au", dial: "+61" },
+            { name: "Austria", iso2: "at", dial: "+43" },
+            { name: "Azerbaijan", iso2: "az", dial: "+994" },
+            { name: "Bahrain", iso2: "bh", dial: "+973" },
+            { name: "Bangladesh", iso2: "bd", dial: "+880" },
+            { name: "Belarus", iso2: "by", dial: "+375" },
+            { name: "Belgium", iso2: "be", dial: "+32" },
+            { name: "Bosnia and Herzegovina", iso2: "ba", dial: "+387" },
+            { name: "Brazil", iso2: "br", dial: "+55" },
+            { name: "Bulgaria", iso2: "bg", dial: "+359" },
+            { name: "Canada", iso2: "ca", dial: "+1" },
+            { name: "China", iso2: "cn", dial: "+86" },
+            { name: "Croatia", iso2: "hr", dial: "+385" },
+            { name: "Cyprus", iso2: "cy", dial: "+357" },
+            { name: "Czech Republic", iso2: "cz", dial: "+420" },
+            { name: "Denmark", iso2: "dk", dial: "+45" },
+            { name: "Egypt", iso2: "eg", dial: "+20" },
+            { name: "Estonia", iso2: "ee", dial: "+372" },
+            { name: "Finland", iso2: "fi", dial: "+358" },
+            { name: "France", iso2: "fr", dial: "+33" },
+            { name: "Georgia", iso2: "ge", dial: "+995" },
+            { name: "Germany", iso2: "de", dial: "+49" },
+            { name: "Greece", iso2: "gr", dial: "+30" },
+            { name: "Hungary", iso2: "hu", dial: "+36" },
+            { name: "India", iso2: "in", dial: "+91" },
+            { name: "Indonesia", iso2: "id", dial: "+62" },
+            { name: "Iran", iso2: "ir", dial: "+98" },
+            { name: "Iraq", iso2: "iq", dial: "+964" },
+            { name: "Ireland", iso2: "ie", dial: "+353" },
+            { name: "Israel", iso2: "il", dial: "+972" },
+            { name: "Italy", iso2: "it", dial: "+39" },
+            { name: "Japan", iso2: "jp", dial: "+81" },
+            { name: "Jordan", iso2: "jo", dial: "+962" },
+            { name: "Kazakhstan", iso2: "kz", dial: "+7" },
+            { name: "Kenya", iso2: "ke", dial: "+254" },
+            { name: "Kuwait", iso2: "kw", dial: "+965" },
+            { name: "Kyrgyzstan", iso2: "kg", dial: "+996" },
+            { name: "Latvia", iso2: "lv", dial: "+371" },
+            { name: "Lebanon", iso2: "lb", dial: "+961" },
+            { name: "Libya", iso2: "ly", dial: "+218" },
+            { name: "Lithuania", iso2: "lt", dial: "+370" },
+            { name: "Luxembourg", iso2: "lu", dial: "+352" },
+            { name: "Malaysia", iso2: "my", dial: "+60" },
+            { name: "Mexico", iso2: "mx", dial: "+52" },
+            { name: "Moldova", iso2: "md", dial: "+373" },
+            { name: "Monaco", iso2: "mc", dial: "+377" },
+            { name: "Mongolia", iso2: "mn", dial: "+976" },
+            { name: "Montenegro", iso2: "me", dial: "+382" },
+            { name: "Morocco", iso2: "ma", dial: "+212" },
+            { name: "Nepal", iso2: "np", dial: "+977" },
+            { name: "Netherlands", iso2: "nl", dial: "+31" },
+            { name: "New Zealand", iso2: "nz", dial: "+64" },
+            { name: "Nigeria", iso2: "ng", dial: "+234" },
+            { name: "North Macedonia", iso2: "mk", dial: "+389" },
+            { name: "Norway", iso2: "no", dial: "+47" },
+            { name: "Oman", iso2: "om", dial: "+968" },
+            { name: "Pakistan", iso2: "pk", dial: "+92" },
+            { name: "Palestine", iso2: "ps", dial: "+970" },
+            { name: "Poland", iso2: "pl", dial: "+48" },
+            { name: "Portugal", iso2: "pt", dial: "+351" },
+            { name: "Qatar", iso2: "qa", dial: "+974" },
+            { name: "Romania", iso2: "ro", dial: "+40" },
+            { name: "Saudi Arabia", iso2: "sa", dial: "+966" },
+            { name: "Serbia", iso2: "rs", dial: "+381" },
+            { name: "Singapore", iso2: "sg", dial: "+65" },
+            { name: "Slovakia", iso2: "sk", dial: "+421" },
+            { name: "Slovenia", iso2: "si", dial: "+386" },
+            { name: "South Africa", iso2: "za", dial: "+27" },
+            { name: "South Korea", iso2: "kr", dial: "+82" },
+            { name: "Spain", iso2: "es", dial: "+34" },
+            { name: "Sri Lanka", iso2: "lk", dial: "+94" },
+            { name: "Sweden", iso2: "se", dial: "+46" },
+            { name: "Switzerland", iso2: "ch", dial: "+41" },
+            { name: "Syria", iso2: "sy", dial: "+963" },
+            { name: "Tajikistan", iso2: "tj", dial: "+992" },
+            { name: "Thailand", iso2: "th", dial: "+66" },
+            { name: "Tunisia", iso2: "tn", dial: "+216" },
+            { name: "Turkmenistan", iso2: "tm", dial: "+993" },
+            { name: "Ukraine", iso2: "ua", dial: "+380" },
+            { name: "United Arab Emirates", iso2: "ae", dial: "+971" },
+            { name: "United Kingdom", iso2: "gb", dial: "+44" },
+            { name: "United States", iso2: "us", dial: "+1" },
+            { name: "Uzbekistan", iso2: "uz", dial: "+998" },
+            { name: "Venezuela", iso2: "ve", dial: "+58" },
+            { name: "Vietnam", iso2: "vn", dial: "+84" },
+            { name: "Yemen", iso2: "ye", dial: "+967" }
+        ];
+
+
+        // Function to initialize a select+hidden pair
+        function initDialCodeSelect(selectId, hiddenId, defaultDial = "+90") {
+            const $select = $(selectId);
+            const $hidden = $(hiddenId);
+
+            // Build options
+            countries.forEach(c => {
+                const opt = new Option(`${c.name} (${c.dial})`, c.dial, false, false);
+                $(opt).attr("data-iso", c.iso2);
+                $select.append(opt);
+            });
+
+            // Format option with flag
+            function formatOption(state) {
+                if (!state.id) return state.text;
+                const iso = $(state.element).data("iso");
+                return $(`<span><span class="fi fi-${iso}" style="margin-right:8px;"></span>${state.text}</span>`);
+            }
+
+            // Init Select2
+            $select.select2({
+                width: "100%",
+                templateResult: formatOption,
+                templateSelection: formatOption,
+                minimumResultsForSearch: 5
+            });
+
+            // Set initial value (from model or default)
+            const initialDial = $hidden.val() && $hidden.val().trim() !== "" ? $hidden.val() : defaultDial;
+            $select.val(initialDial).trigger("change");
+            $hidden.val(initialDial);
+
+            // Keep hidden synced
+            $select.on("change", function () {
+                $hidden.val($(this).val());
+            });
+        }
+
+        // Initialize both dropdowns
+        $(document).ready(function () {
+            initDialCodeSelect("#dialCodeSelect", "#dialCodeInput", "+90");
+            initDialCodeSelect("#IletisimAlanKoduSelect", "#IletisimAlanKoduHidden", "+90");
+        });
+    </script>
+}

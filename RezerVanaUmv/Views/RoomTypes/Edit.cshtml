@@ -1,0 +1,101 @@
+﻿@model RezerVanaUmv.Models.RoomType
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Başlık -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="mb-0">@RezerVanaUmv.Resources.Resource.Edit</h2>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-arrow-left"></i> @RezerVanaUmv.Resources.Resource.Listeye_Geri
+                </a>
+            </div>
+
+            <!-- Kart -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">@RezerVanaUmv.Resources.Resource.Oda_Tipi</h5>
+                </div>
+                <div class="card-body">
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Name" class="form-label">@RezerVanaUmv.Resources.Resource.Ad</label>
+                                <input asp-for="Name" class="form-control" required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Description" class="form-label">@RezerVanaUmv.Resources.Resource.Açıklama</label>
+                                <input asp-for="Description" class="form-control" required />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            @*
+                            <div class="col-md-6">
+                                <label asp-for="Capacity" class="form-label">@RezerVanaUmv.Resources.Resource.Kapasite</label>
+                                <input asp-for="Capacity" class="form-control" required />
+                                <span asp-validation-for="Capacity" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="BedCount" class="form-label">@RezerVanaUmv.Resources.Resource.Yatak_Sayısı</label>
+                                <input asp-for="BedCount" class="form-control" required />
+                                <span asp-validation-for="BedCount" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="PricePerNight" class="form-label">@RezerVanaUmv.Resources.Resource.Gece_Fiyatı</label>
+                                <input asp-for="PricePerNight" class="form-control" required />
+                                <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                            </div>
+                            *@
+                            <input type="hidden" asp-for="TenantId" />
+                            @*
+                            <div class="col-md-6">
+                                <label asp-for="CreatedAt" class="form-label">Created At</label>
+                                <input asp-for="CreatedAt" class="form-control" required />
+                                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                            </div>
+                            *@
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" asp-for="IsActive" />
+                                    <label class="form-check-label" for="IsActive">
+                                        @Html.DisplayNameFor(model => model.IsActive)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> @RezerVanaUmv.Resources.Resource.Listeye_Geri
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> @RezerVanaUmv.Resources.Resource.Save
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

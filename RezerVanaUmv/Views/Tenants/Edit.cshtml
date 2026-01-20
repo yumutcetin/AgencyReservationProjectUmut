@@ -1,0 +1,54 @@
+﻿@model RezerVanaUmv.Models.Tenant
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Edit</h1>
+
+<h4>Tenant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">@RezerVanaUmv.Resources.Resource.Ad</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Subdomain" class="control-label">@RezerVanaUmv.Resources.Resource.Subdomain</label>
+                <input asp-for="Subdomain" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactEmail" class="control-label">@RezerVanaUmv.Resources.Resource.İletişim_Epostası</label>
+                <input asp-for="ContactEmail" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoUrl" class="control-label">@RezerVanaUmv.Resources.Resource.Logo_Url</label>
+                <input asp-for="LogoUrl" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label">@RezerVanaUmv.Resources.Resource.Aktif?</label>
+                <input asp-for="IsActive" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label">@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</label>
+                <input asp-for="CreatedAt" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@RezerVanaUmv.Resources.Resource.KAYDET" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

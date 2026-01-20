@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200">
+	<defs>
+		<!-- Güneş gradyanı -->
+		<radialGradient id="sunGradient" cx="50%" cy="50%" r="50%">
+			<stop offset="0%" stop-color="#fffcd5" />
+			<stop offset="60%" stop-color="#f7c842" />
+			<stop offset="100%" stop-color="#f1a501" />
+		</radialGradient>
+
+		<!-- Kumsal -->
+		<linearGradient id="beachGradient" x1="0" y1="1" x2="0" y2="0">
+			<stop offset="0%" stop-color="#f4e2b5" stop-opacity="0.9" />
+			<stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+		</linearGradient>
+
+		<!-- Deniz -->
+		<linearGradient id="seaGradient" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#b2e3f7" stop-opacity="0.6"/>
+			<stop offset="100%" stop-color="#87c1e8" stop-opacity="0.65"/>
+		</linearGradient>
+
+		<!-- Güneş parıltısı -->
+		<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+			<feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+			<feMerge>
+				<feMergeNode in="blur"/>
+				<feMergeNode in="SourceGraphic"/>
+			</feMerge>
+		</filter>
+	</defs>
+
+	<!-- Deniz -->
+	<rect x="0" y="50" width="700" height="110" fill="url(#seaGradient)" />
+
+	<!-- Kumsal -->
+	<rect x="0" y="150" width="700" height="50" fill="url(#beachGradient)" />
+
+	<!-- Güneş -->
+	<circle cx="160" cy="100" r="45" fill="url(#sunGradient)" filter="url(#glow)" />
+
+	<!-- Daha büyük bulutlar (hem yatay hem dikey genişletildi) -->
+	<g fill="#fff" opacity="0.8">
+		<ellipse cx="500" cy="50" rx="60" ry="20"/>
+		<ellipse cx="520" cy="50" rx="50" ry="18"/>
+		<ellipse cx="510" cy="42" rx="40" ry="18"/>
+	</g>
+
+	<!-- Yazılar -->
+	<text x="250" y="110" fill="#01295C" font-size="48" font-family="Arial, sans-serif" font-weight="bold">
+		RezerVanaUmv
+	</text>
+	<text x="252" y="150" fill="#333" font-size="20" font-family="Georgia, serif" font-style="italic">
+		Your Travel Compass
+	</text>
+</svg>

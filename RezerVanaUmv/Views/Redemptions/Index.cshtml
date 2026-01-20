@@ -1,0 +1,285 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "🎁 Harcama Puanları Gecelik";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+<!-- Bootstrap JS (v5 örneği) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<h2 class="mb-3">🎁 Oda Tipine Göre Harcama Puanları Gecelik</h2>
+<hr />
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success">➕ @RezerVanaUmv.Resources.Resource.Yeni_Kayıt_Ekle</a>
+</div>
+
+@Html.AntiForgeryToken()
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>@RezerVanaUmv.Resources.Resource.Oda_Tipi</th>
+                <th>Gece</th>
+                <th>@RezerVanaUmv.Resources.Resource.İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((val, index) => new { val, index }))
+            {
+                var roomKey = item.val.RoomType.Replace(" ", "-").Replace("/", "-").Replace("'", "").Replace("\"", "");
+                var modalId = $"modal-{roomKey}-{item.index}";
+                <tr>
+                    <td>@item.val.RoomType</td>
+                    <td>1</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#@modalId">
+                            ✏️ @RezerVanaUmv.Resources.Resource.Edit
+                        </button>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+    @foreach (var item in Model.Select((val, index) => new { val, index }))
+    {
+        var roomKey = item.val.RoomType.Replace(" ", "-").Replace("/", "-").Replace("'", "").Replace("\"", "");
+        var modalId = $"modal-{roomKey}-{item.index}";
+        <!-- MODAL -->
+        <div class="modal fade" id="@modalId" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@item.val.RoomType Dönemleri</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>@RezerVanaUmv.Resources.Resource.Start_Date</th>
+                                    <th>@RezerVanaUmv.Resources.Resource.End_Date</th>
+                                    <th>@RezerVanaUmv.Resources.Resource.Puan</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="periods-@roomKey">
+                                @foreach (var period in item.val.Periods)
+                                {
+                                    <tr>
+                                        <!-- Görünen değer dd-MM-yyyy, input value yyyy-MM-dd -->
+                                        <td>
+                                            <input type="date" value="@period.StartDate?.ToString("yyyy-MM-dd")" class="form-control"
+                                                   onchange="updateDisplayDate(this)" />
+                                        </td>
+                                        <td>
+                                            <input type="date" value="@period.EndDate?.ToString("yyyy-MM-dd")" class="form-control"
+                                                   onchange="updateDisplayDate(this)" />
+                                        </td>
+                                        <td><input type="number" value="@period.RequiredPoints" class="form-control" /></td>
+                                        <td><button type="button" class="btn btn-danger btn-sm" onclick="this.closest('tr').remove()">🗑️</button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="addPeriodRow('@roomKey')">➕ @RezerVanaUmv.Resources.Resource.Dönem_Ekle</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> @RezerVanaUmv.Resources.Resource.İptal</button>
+                        <button type="button"
+                                class="btn btn-primary save-periods-btn"
+                                data-roomtype="@item.val.RoomType">
+                            @RezerVanaUmv.Resources.Resource.KAYDET
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Tarih input değiştiğinde görünen tarihi güncelle
+        function updateDisplayDate(input) {
+            const displaySpan = input.parentElement.querySelector('.display-date');
+            if (displaySpan && input.value) {
+                const date = new Date(input.value);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                displaySpan.textContent = `${day}-${month}-${year}`;
+            }
+        }
+
+        // Görünen tarihleri başlangıçta formatla
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.display-date').forEach(span => {
+                if (span.textContent) {
+                    const parts = span.textContent.split('-');
+                    if (parts.length === 3) {
+                        // dd-MM-yyyy formatını koru, sadece görsel olarak göster
+                        span.textContent = `${parts[0]}-${parts[1]}-${parts[2]}`;
+                    }
+                }
+            });
+        });
+
+        // Tek bir yerde uyarı basmak için yardımcı
+        function showModalAlert(modalEl, type, text) {
+            const body = modalEl.querySelector('.modal-body');
+            let alert = modalEl.querySelector('.modal-alert');
+            if (!alert) {
+                alert = document.createElement('div');
+                alert.className = 'modal-alert';
+                body.prepend(alert);
+            }
+            alert.innerHTML = `<div class="alert alert-${type} mb-3" role="alert">${text}</div>`;
+            setTimeout(() => { alert.innerHTML = ''; }, 3000);
+        }
+
+        // Overlap kontrolü
+        function validatePeriods(periods) {
+            for (const period of periods) {
+                if (!period.startDate || !period.endDate || isNaN(period.requiredPoints) || period.requiredPoints <= 0) {
+                    return "Lütfen tüm alanları doldurun ve puan değerinin geçerli olduğundan emin olun.";
+                }
+
+                const startDate = new Date(period.startDate);
+                const endDate = new Date(period.endDate);
+
+                if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+                    return "Geçersiz tarih formatı.";
+                }
+
+                if (startDate > endDate) {
+                    return "Başlangıç tarihi, bitiş tarihinden sonra olamaz.";
+                }
+            }
+
+            const sorted = periods
+                .map(p => ({
+                    ...p,
+                    s: new Date(p.startDate),
+                    e: new Date(p.endDate)
+                }))
+                .sort((a, b) => a.s - b.s);
+
+            for (let i = 0; i < sorted.length - 1; i++) {
+                if (sorted[i].e >= sorted[i + 1].s) {
+                    return "Dönem tarihleri çakışıyor. Lütfen aralıklarda kesişme olmadığından emin olun.";
+                }
+            }
+
+            return null;
+        }
+
+        // Dinleyici: sadece tıklanan butonun içindeki modaldan veri topla
+        document.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.save-periods-btn');
+            if (!btn) return;
+
+            const modalEl = btn.closest('.modal');
+            const roomType = btn.getAttribute('data-roomtype');
+
+            const tbody = modalEl.querySelector('tbody');
+            const rows = tbody ? tbody.querySelectorAll('tr') : [];
+
+            const periods = Array.from(rows).map(row => {
+                const [startInp, endInp, pointInp] = row.querySelectorAll('input');
+                return {
+                    startDate: startInp?.value || '',
+                    endDate: endInp?.value || '',
+                    requiredPoints: parseInt(pointInp?.value) || 0
+                };
+            });
+
+            const err = validatePeriods(periods);
+            if (err) {
+                showModalAlert(modalEl, 'warning', err);
+                return;
+            }
+
+            const tokenEl = document.querySelector('input[name="__RequestVerificationToken"]');
+            const token = tokenEl ? tokenEl.value : null;
+
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Kaydediliyor...';
+
+            try {
+                const resp = await fetch('/Redemptions/UpdatePeriods', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { 'RequestVerificationToken': token } : {})
+                    },
+                    body: JSON.stringify({ roomType, periods })
+                });
+
+                if (resp.ok) {
+                    showModalAlert(modalEl, 'success', 'Başarıyla kaydedildi!');
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(modalEl);
+                        if (modal) modal.hide();
+                        location.reload(); // Sayfayı yenile
+                    }, 2000);
+                } else {
+                    const errorText = await resp.text();
+                    showModalAlert(modalEl, 'danger', 'Kaydedilirken hata oluştu: ' + errorText);
+                }
+            } catch (ex) {
+                showModalAlert(modalEl, 'danger', 'İstek gönderilemedi: ' + ex.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
+        });
+
+        // Satır ekleme (güncellenmiş)
+        function addPeriodRow(roomKey) {
+            const tbody = document.querySelector(`#periods-${roomKey}`);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <input type="date" class="form-control" onchange="updateDisplayDate(this)" />
+     
+                </td>
+                <td>
+                    <input type="date" class="form-control" onchange="updateDisplayDate(this)" />
+                  
+                </td>
+                <td><input type="number" class="form-control" min="1" /></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="this.closest('tr').remove()">🗑️</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        window.addPeriodRow = addPeriodRow;
+        window.updateDisplayDate = updateDisplayDate;
+    </script>
+
+    <style>
+        .display-date {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        input[type="date"] {
+            position: relative;
+        }
+        /* Tarih inputunun yerel takvim düğmesini gizle */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
+}

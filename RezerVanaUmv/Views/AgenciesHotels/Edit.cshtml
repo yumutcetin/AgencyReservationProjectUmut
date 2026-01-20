@@ -1,0 +1,197 @@
+﻿@model RezerVanaUmv.ViewModels.EditPointsViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1 class="mb-3">@RezerVanaUmv.Resources.Resource.Edit</h1>
+<h4 class="text-muted">@RezerVanaUmv.Resources.Resource.Ajans</h4>
+<hr />
+
+<form asp-action="Edit" class="row g-3" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="@Model.agency.Id" value="@Model.agency.Id"></input>
+
+    <div class="mb-4">
+        <h4 class="text-primary mb-3">@Model.TenantPoints.HotelName</h4>
+        <div class="row g-3">
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-secondary text-white p-3 rounded">
+                        <i class="fas fa-plus fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Bonus_Points</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.BonusPoints.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-secondary text-white p-3 rounded">
+                        <i class="fas fa-plus fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Earned</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.PointsEarned.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-info text-white p-3 rounded">
+                        <i class="fas fa-clock fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Pending</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.PointsPending.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-success text-white p-3 rounded">
+                        <i class="fas fa-arrow-up fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Points_Spent</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.PointsSpent.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-danger text-white p-3 rounded">
+                        <i class="fas fa-hourglass-half fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Pending_Spent</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.PointsSpentPending.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="d-flex align-items-center bg-white shadow-sm rounded p-3">
+                    <div class="me-2 bg-primary text-white p-3 rounded">
+                        <i class="fas fa-wallet fa-lg"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1">@RezerVanaUmv.Resources.Resource.Spendable</h6>
+                        <h4 class="mb-0">@Model.TenantPoints.PointsSpendable.ToString("N2")</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 🔐 Kullanıcı Şifresi -->
+    <div class="col-12 mt-4">
+        <h5>🔐 @RezerVanaUmv.Resources.Resource.Kullanıcı_Şifresi</h5>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label asp-for="NewPassword">@RezerVanaUmv.Resources.Resource.Yeni_Şifre</label>
+                <input asp-for="NewPassword" class="form-control" />
+                <span asp-validation-for="NewPassword" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="ConfirmPassword">@RezerVanaUmv.Resources.Resource.Yeni_Şifre_Tekrar</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+        <p class="text-muted small mt-2">
+            @RezerVanaUmv.Resources.Resource.Yeni_Şifre_Info
+        </p>
+    </div>
+
+    <!-- 📌 Temel Bilgiler -->
+    <div class="col-12 mt-4">
+        <h5>📌 @RezerVanaUmv.Resources.Resource.Temel_Bilgiler</h5>
+        <div class="form-group mt-2">
+            <label asp-for="@Model.agency.Name">@RezerVanaUmv.Resources.Resource.Ad</label>
+            <input asp-for="@Model.agency.Name" class="form-control" required />
+        </div>
+        @*<div class="form-group">
+            <label asp-for="TaxId">@RezerVanaUmv.Resources.Resource.Vergi_No</label>
+            <input asp-for="TaxId" class="form-control" required />
+        </div>  *@
+        <div class="form-group">
+            <label asp-for="@Model.agency.Email">@RezerVanaUmv.Resources.Resource.EPosta</label>
+            <input asp-for="@Model.agency.Email" class="form-control" required />
+        </div>
+    <!-- 🏢 Kurumsal Bilgiler -->
+    <div class="col-12 mt-4">
+        <h5>🏢 @RezerVanaUmv.Resources.Resource.Kurumsal_Bilgiler</h5>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.Unvan">@RezerVanaUmv.Resources.Resource.Unvan</label>
+                <input asp-for="@Model.agency.Unvan" class="form-control"  />
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.Ulke">@RezerVanaUmv.Resources.Resource.Ülke</label>
+                <input asp-for="@Model.agency.Ulke" class="form-control"  />
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.Sehir">@RezerVanaUmv.Resources.Resource.Şehir</label>
+                <input asp-for="@Model.agency.Sehir" class="form-control"  />
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏭 Şirket Bilgileri -->
+    <div class="col-12 mt-4">
+        <h5>🏭 @RezerVanaUmv.Resources.Resource.Şirket_Bilgileri</h5>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.SirketTelAlanKodu">@RezerVanaUmv.Resources.Resource.Şirket_Tel_Alan_Kodu</label>
+                <input asp-for="@Model.agency.SirketTelAlanKodu" class="form-control"  />
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.SirketTel">@RezerVanaUmv.Resources.Resource.Şirket_Telefonu</label>
+                <input asp-for="@Model.agency.SirketTel" class="form-control"  />
+            </div>
+            @*
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.SirketUlke">@RezerVanaUmv.Resources.Resource.Şirket_Ülkesi</label>
+                <input asp-for="@Model.agency.SirketUlke" class="form-control"  />
+            </div>
+            <div class="col-md-6 form-group">
+                <label asp-for="@Model.agency.SirketSehir">@RezerVanaUmv.Resources.Resource.Şirket_Şehri</label>
+                <input asp-for="@Model.agency.SirketSehir" class="form-control"  />
+            </div>
+            *@
+            <div class="col-md-12 form-group">
+                <label asp-for="@Model.agency.SirketAdres">@RezerVanaUmv.Resources.Resource.Şirket_Adresi</label>
+                <input asp-for="@Model.agency.SirketAdres" class="form-control"  />
+            </div>
+        </div>
+    </div>
+
+    <!-- ⚙️ Sistem -->
+    <div class="col-12 mt-4">
+        <h5>⚙️ @RezerVanaUmv.Resources.Resource.Diğer</h5>
+        <div class="form-group">
+            <label asp-for="@Model.agency.CreatedAt">@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</label>
+            <input asp-for="@Model.agency.CreatedAt" class="form-control" />
+        </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="col-12 mt-3">
+        <input type="submit" value="💾 @RezerVanaUmv.Resources.Resource.KAYDET" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary ml-2">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Bugünkü Satın Almalar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<h1 class="mb-4">@RezerVanaUmv.Resources.Resource.Bugünkü_Satın_Almalar</h1>
+
+<p>
+    <a asp-action="CreatePurchase" class="btn btn-primary">@RezerVanaUmv.Resources.Resource.Yeni_Satın_Alma_Ekle</a>
+</p>
+
+<table id="purchaseTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+    <thead class="table-light">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Satın_Alan</th>
+            <th>@RezerVanaUmv.Resources.Resource.Menü_Öğesi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Fiyat (₺)</th>
+            <th>@RezerVanaUmv.Resources.Resource.Adet</th>
+            <th>@RezerVanaUmv.Resources.Resource.Toplam_Tutar (₺)</th>
+            <th>@RezerVanaUmv.Resources.Resource.Satın_Alma_Tarihi</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.GuestId</td>
+                    <td>@item.MenuItemId</td>
+                <td>@(item.Price?.ToString("N2") ?? "-")</td>
+                <td>@item.Quantity</td>
+                <td>@((item.TotalAmount ?? 0).ToString("N2"))</td>
+                <td>@item.PurchasedAt?.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="EditPurchase" asp-route-id="@item.Id" class="btn btn-warning btn-sm">@RezerVanaUmv.Resources.Resource.Edit</a>
+                    <a asp-action="DeletePurchase" asp-route-id="@item.Id" class="btn btn-danger btn-sm">@RezerVanaUmv.Resources.Resource.Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#purchaseTable').DataTable({
+                dom: 'Bfrtip',
+                scrollX: true,
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                buttons: ['copy', 'excel', 'pdf', 'print'],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+                },
+                pageLength: 10
+            });
+        });
+    </script>
+}

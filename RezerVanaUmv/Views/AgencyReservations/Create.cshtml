@@ -1,0 +1,304 @@
+﻿@model RezerVanaUmv.ViewModels.ReservationWithPassengersViewModel
+
+@{
+    ViewData["Title"] = "Yeni Rezervasyon";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">➕ @RezerVanaUmv.Resources.Resource.Yeni_Rezervasyon</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <!-- Sol: Rezervasyon Bilgileri -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">🏨 @RezerVanaUmv.Resources.Resource.Rezervasyon_Bilgileri</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.TenantId">@RezerVanaUmv.Resources.Resource.Otel</label>
+                                <select asp-for="Reservation.TenantId" class="form-control" asp-items="ViewBag.TenantId" id="Reservation_TenantId" required></select>
+                            </div>
+
+                            <input type="hidden" asp-for="Reservation.AgencyId" value="@ViewBag.AgencyId" />
+
+                            <input type="hidden" id="Reservation_HotelName" name="Reservation.HotelName" class="form-control" readonly required/>
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.OperatorId">@RezerVanaUmv.Resources.Resource.Operator</label>
+                                <select asp-for="Reservation.OperatorId" class="form-control" id="Reservation_OperatorId" asp-items="ViewBag.OperatorId" required disabled>
+                                    <option value="">@RezerVanaUmv.Resources.Resource.Operatör_seçiniz</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.BookingReference" class="form-label">@RezerVanaUmv.Resources.Resource.Voucher_No</label>
+                                <input asp-for="Reservation.BookingReference" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.CheckinDate" class="form-label">@RezerVanaUmv.Resources.Resource.Giriş_Tarihi</label>
+                                <input asp-for="Reservation.CheckinDate" id="Reservation_CheckinDate" class="form-control" type="date" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.CheckoutDate" class="form-label">@RezerVanaUmv.Resources.Resource.Çıkış_Tarihi</label>
+                                <input asp-for="Reservation.CheckoutDate" id="Reservation_CheckoutDate" class="form-control" type="date" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Reservation.NightCount" class="form-label">@RezerVanaUmv.Resources.Resource.Konaklama_Süresi</label>
+                                <input asp-for="Reservation.NightCount" id="Reservation_NightCount" class="form-control" type="number" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Reservation.RoomType">@RezerVanaUmv.Resources.Resource.Oda_Tipi</label>
+                                <select asp-for="Reservation.RoomType" class="form-control" id="Reservation_RoomType" asp-items="ViewBag.RoomTypeId" required></select>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Reservation.Notes" class="form-label">@RezerVanaUmv.Resources.Resource.Notlar</label>
+                                <textarea asp-for="Reservation.Notes" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ: Yolcu Bilgileri -->
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">👤 @RezerVanaUmv.Resources.Resource.Misafir_Bilgileri</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered align-middle" id="passengerTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>@RezerVanaUmv.Resources.Resource.Cinsiyet</th>
+                                        <th>@RezerVanaUmv.Resources.Resource.Ad</th>
+                                        <th>@RezerVanaUmv.Resources.Resource.Soyad</th>
+                                        <th>@RezerVanaUmv.Resources.Resource.Doğum_Tarihi</th>
+                                        <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="passengerRows">
+                                    <tr>
+                                        <td>
+                                            <select name="Passengers[0].Gender" class="form-select" required>
+                                                <option value="MR">@RezerVanaUmv.Resources.Resource.BAY</option>
+                                                <option value="MRS">@RezerVanaUmv.Resources.Resource.BAYAN</option>
+                                            </select>
+                                        </td>
+                                        <!-- Existing passenger row inputs -->
+                                        <td><input name="Passengers[0].FirstName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+                                        <td><input name="Passengers[0].LastName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+
+                                        <td><input name="Passengers[0].BirthDate" type="date" class="form-control" required /></td>
+                                        <td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">@RezerVanaUmv.Resources.Resource.Sil</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <button type="button" class="btn btn-outline-secondary" onclick="addPassengerRow()">+ @RezerVanaUmv.Resources.Resource.Misafir_Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KAYDET BUTONU -->
+            <div class="form-group mt-4">
+                <input type="submit" value="💾 @RezerVanaUmv.Resources.Resource.Oluştur" class="btn btn-primary w-100" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            // Loop through all passenger rows
+            document.querySelectorAll('#passengerRows tr').forEach(row => {
+                const firstNameInput = row.querySelector('input[name$=".FirstName"]');
+                const lastNameInput = row.querySelector('input[name$=".LastName"]');
+
+                if (firstNameInput) firstNameInput.value = firstNameInput.value.toUpperCase();
+                if (lastNameInput) lastNameInput.value = lastNameInput.value.toUpperCase();
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#Reservation_TenantId').change(function () {
+                const tenantId = $(this).val();
+                const $operatorSelect = $('#Reservation_OperatorId');
+
+                $operatorSelect.prop('disabled', true); // Disable while fetching
+                $operatorSelect.empty();
+                $operatorSelect.append($('<option>', { value: '', text: 'Yükleniyor...' }));
+
+                if (tenantId) {
+                    $.get('/AgencyReservations/GetOperatorsByTenant', { tenantId: tenantId }, function (data) {
+                        $operatorSelect.empty();
+                        $operatorSelect.append($('<option>', { value: '', text: 'Operatör seçiniz' }));
+                        $.each(data, function (i, operator) {
+                            $operatorSelect.append($('<option>', {
+                                value: operator.value,
+                                text: operator.text
+                            }));
+                        });
+                        $operatorSelect.prop('disabled', false); // Re-enable after loading
+                    });
+                } else {
+                    $operatorSelect.empty().append('<option value="">Operatör seçiniz</option>');
+                    $operatorSelect.prop('disabled', true);
+                }
+            });
+        });
+
+
+
+        function addPassengerRow() {
+            const index = document.querySelectorAll('#passengerRows tr').length;
+            const row = `
+                <tr>
+                    <td>
+                        <select name="Passengers[${index}].Gender" class="form-control" required>
+                            <option value="MR">MR</option>
+                            <option value="MRS">MRS</option>
+                        </select>
+                    </td>
+                    <td><input name="Passengers[${index}].FirstName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+                    <td><input name="Passengers[${index}].LastName" class="form-control" required oninput="this.value = this.value.toUpperCase()" /></td>
+                    <td><input name="Passengers[${index}].BirthDate" type="date" class="form-control" required/></td>
+                    <td><button type="button" class="btn btn-danger" onclick="this.closest('tr').remove()">Sil</button></td>
+                </tr>
+            `;
+            document.getElementById('passengerRows').insertAdjacentHTML('beforeend', row);
+        }
+
+        // Gece sayısını hesapla
+        function calculateNights() {
+            const checkin = document.getElementById('Reservation_CheckinDate')?.value;
+            const checkout = document.getElementById('Reservation_CheckoutDate')?.value;
+            const nightInput = document.getElementById('Reservation_NightCount');
+
+            if (checkin && checkout && nightInput) {
+                const checkinDate = new Date(checkin);
+                const checkoutDate = new Date(checkout);
+                const timeDiff = checkoutDate - checkinDate;
+                const nights = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                nightInput.value = nights > 0 ? nights : 0;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('Reservation_CheckinDate')?.addEventListener('change', calculateNights);
+            document.getElementById('Reservation_CheckoutDate')?.addEventListener('change', calculateNights);
+            calculateNights(); // sayfa yüklendiğinde geceyi hesapla
+        });
+    </script>
+
+    <script>
+        document.getElementById("Reservation_TenantId").addEventListener("change", function () {
+            var tenantId = this.value;
+
+            // Seçim yapılmadıysa boş bırak
+            if (!tenantId) {
+                document.getElementById("Reservation_RoomType").innerHTML = '<option value="">Önce otel seçin</option>';
+                return;
+            }
+
+               fetch(`/AgencyReservations/GetRoomTypesByTenant?tenantId=${tenantId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const roomTypeSelect = document.getElementById("Reservation_RoomType");
+                        roomTypeSelect.innerHTML = "";
+
+                        data.forEach(name => {
+                            const option = document.createElement("option");
+                            option.value = name === "Oda tipi seçiniz" ? "" : name;
+                            option.text = name;
+                            roomTypeSelect.appendChild(option);
+                        });
+                    });
+
+        });
+    </script>
+    <script>
+        function handleTenantSelection() {
+            const select = document.getElementById('Reservation_TenantId');
+            const hotelNameInput = document.getElementById('Reservation_HotelName');
+            const hotelNameDiv = document.getElementById('hotelNameDiv');
+
+            if (!select || !hotelNameInput || !hotelNameDiv) return;
+
+            select.addEventListener('change', function () {
+                const selectedOption = this.options[this.selectedIndex];
+
+                if (selectedOption && selectedOption.value) {
+                    hotelNameInput.value = selectedOption.text;
+                    hotelNameDiv.style.display = 'block';
+                } else {
+                    hotelNameInput.value = '';
+                    hotelNameDiv.style.display = 'none';
+                }
+            });
+        }
+
+        // Sayfa yüklendiğinde tetikle
+        document.addEventListener('DOMContentLoaded', handleTenantSelection);
+    </script>
+
+    <script>
+        function validateReservationDateByBonusRules() {
+            const tenantId = document.getElementById("Reservation_TenantId")?.value;
+            const checkinDateStr = document.getElementById("Reservation_CheckinDate")?.value;
+            const checkoutDateStr = document.getElementById("Reservation_CheckoutDate")?.value;
+
+            if (!tenantId || !checkinDateStr || !checkoutDateStr) return;
+
+            fetch(`/AgencyReservations/GetBonusSettingsByTenant?tenantId=${tenantId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const checkin = new Date(checkinDateStr);
+                    const checkout = new Date(checkoutDateStr);
+
+                    // Sadece gün farkı (saat etkisi olmasın)
+                    const checkinDateOnly = new Date(checkin.getFullYear(), checkin.getMonth(), checkin.getDate());
+                    const checkoutDateOnly = new Date(checkout.getFullYear(), checkout.getMonth(), checkout.getDate());
+
+                    const diffInDays = Math.floor((checkoutDateOnly - checkinDateOnly) / (1000 * 60 * 60 * 24));
+                    console.log("Gece sayısı (diffInDays):", diffInDays);
+                    console.log("MinStayDay:", data.minStayDay);
+                    console.log("MaxStayDay:", data.maxStayDay);
+
+                    if (diffInDays < data.minStayDay || diffInDays > data.maxStayDay) {
+                        alert(`Konaklama süresi otel kurallarına uymuyor. Minimum ${data.minStayDay}, maksimum ${data.maxStayDay} gece kalınabilir.`);
+                    }
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tarihler değişince kontrol et
+            document.getElementById("Reservation_CheckinDate")?.addEventListener("change", validateReservationDateByBonusRules);
+            document.getElementById("Reservation_CheckoutDate")?.addEventListener("change", validateReservationDateByBonusRules);
+            document.getElementById("Reservation_TenantId")?.addEventListener("change", function () {
+                if (document.getElementById("Reservation_CheckinDate").value && document.getElementById("Reservation_CheckoutDate").value) {
+                    validateReservationDateByBonusRules();
+                }
+            });
+        });
+    </script>
+
+
+
+}

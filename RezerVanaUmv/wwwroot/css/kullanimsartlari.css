@@ -1,0 +1,137 @@
+.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.navbar .navbar-nav .nav-link {
+    margin-left: 15px;
+    font-size: 18px;
+    transition: .5s;
+}
+
+body {
+    background-color:#02609D ;
+}
+
+.navbar-container {
+    z-index: 9999;
+    position: sticky;
+    width: 100%;
+    background-color:#312F38;
+    margin-top: 0;
+    padding-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+
+.navbar {
+    background-color: #312F38;
+    padding: 0px;
+    margin: 0px;
+    height: 100px;
+    width: 100%;
+
+}
+
+.navbar-nav {
+    background-color: #312F38;
+}
+
+
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    vertical-align: middle;
+
+}
+
+@media (min-width: 1200px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        visibility: hidden;
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        border: 0;
+        transition: .5s;
+        opacity: 0;
+    }
+}
+
+.dropdown .dropdown-menu a:hover {
+    background: var(--bs-secondary);
+    color: var(--bs-primary);
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+    transform: rotateX(0deg);
+    visibility: visible;
+    background: var(--bs-light) !important;
+    border-radius: 10px !important;
+    transition: .5s;
+    opacity: 1;
+}
+
+
+
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    height:auto;
+
+}
+.auth-container {
+    margin: 18px;
+    height:auto;
+    background-color: #F6F7F9 ;
+    padding: 1.6rem; 
+    border-radius: 0.8rem; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+   
+}
+
+
+footer {
+    padding-top: 3rem;
+    padding-bottom:3rem;
+    background-color: #2C3E4F;
+    color: white;
+    text-align: center;
+  }
+  
+  
+  footer p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  footer li {
+    display: inline-block;
+    margin-right: 1rem ;
+  }
+  
+  footer .fa-brands {
+    margin-top: 1rem;
+    font-size: 2.5rem;
+  }
+  .about-icons {
+      margin: 0 auto;
+  }
+  .copyright {
+    background-color: #212529;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+    color: white;
+    text-align: center;
+  }
+  
+  .more-info {
+      
+      font-size: 1.5rem;
+  } 

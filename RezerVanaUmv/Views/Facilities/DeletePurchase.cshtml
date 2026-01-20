@@ -1,0 +1,37 @@
+﻿@model RezerVanaUmv.Models.Purchase
+
+@{
+    ViewData["Title"] = "Satın Alma Sil";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2>Satın Alma Kaydını Sil</h2>
+<hr />
+
+<div class="alert alert-warning">
+    <strong>Dikkat!</strong> @RezerVanaUmv.Resources.Resource.SILME_ONAYI_KAYIT
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Satın_Alan</dt>
+    <dd class="col-sm-9">@Model.GuestId</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Menü_Öğesi</dt>
+    <dd class="col-sm-9">@Model.MenuItemId</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Adet</dt>
+    <dd class="col-sm-9">@Model.Quantity</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Toplam_Tutar</dt>
+    <dd class="col-sm-9">@Model.TotalAmount ₺</dd>
+
+    <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Satın_Alma_Tarihi</dt>
+    <dd class="col-sm-9">@Model.PurchasedAt?.ToString("dd.MM.yyyy HH:mm")</dd>
+</dl>
+
+<form asp-action="DeletePurchase" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">@RezerVanaUmv.Resources.Resource.Evet_Sil</button>
+    <a asp-action="GetPurchasesToday" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.İptal</a>
+</form>

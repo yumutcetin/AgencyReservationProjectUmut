@@ -1,0 +1,40 @@
+﻿@model RezerVanaUmv.Models.Operator
+
+@{
+    ViewData["Title"] = "Operatör Sil";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-4 text-danger">❌ @RezerVanaUmv.Resources.Resource.Operatör_Silme</h2>
+
+<div class="alert alert-warning">
+    @RezerVanaUmv.Resources.Resource.Bu_operatörü_silmek
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Operatör_Adı</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("dd-MM-yyyy HH:mm")</dd>
+
+            <dt class="col-sm-3">@RezerVanaUmv.Resources.Resource.Güncellenme_Tarihi</dt>
+            <dd class="col-sm-9">@Model.UpdatedAt.ToString("dd-MM-yyyy HH:mm")</dd>
+
+            <dt class="col-sm-3">Tenant ID</dt>
+            <dd class="col-sm-9">@Model.Tenant?.Id</dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger me-2">
+                <i class="bi bi-trash"></i> @RezerVanaUmv.Resources.Resource.Evet_Sil
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> @RezerVanaUmv.Resources.Resource.Vazgeç
+            </a>
+        </form>
+    </div>
+</div>

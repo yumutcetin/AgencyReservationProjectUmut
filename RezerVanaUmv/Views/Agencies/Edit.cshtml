@@ -1,0 +1,123 @@
+﻿@model RezerVanaUmv.Models.Agency
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1 class="mb-3">@RezerVanaUmv.Resources.Resource.Edit</h1>
+<h2 class="text-muted">@RezerVanaUmv.Resources.Resource.Acente_Profili</h2>
+<hr />
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <!-- 📌 Temel Bilgiler -->
+    <h5 class="mt-4">📌 @RezerVanaUmv.Resources.Resource.Temel_Bilgiler</h5>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label asp-for="Name"> @RezerVanaUmv.Resources.Resource.Ad</label>
+            <input asp-for="Name" class="form-control" required />
+
+        </div>
+        @*<div class="col-md-6 form-group">
+            <label asp-for="TaxId"> @RezerVanaUmv.Resources.Resource.Vergi_No</label>
+            <input asp-for="TaxId" class="form-control" />
+        </div> *@
+        <div class="col-md-6 form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" required />
+        </div>
+    </div>
+    @*
+    <!-- 📱 Kişisel İletişim -->
+    <h5 class="mt-4">📱 @RezerVanaUmv.Resources.Resource.Kişisel_İletişim</h5>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label asp-for="IletisimAlanKodu"> @RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+            <input asp-for="IletisimAlanKodu" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="IletisimTel"> @RezerVanaUmv.Resources.Resource.Telefon</label>
+            <input asp-for="IletisimTel" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="WhatsappAlanKodu"> WhatsApp @RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+            <input asp-for="WhatsappAlanKodu" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="WhatsappNo">WhatsApp No</label>
+            <input asp-for="WhatsappNo" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="ViberAlanKodu">Viber  @RezerVanaUmv.Resources.Resource.Alan_Kodu</label>
+            <input asp-for="ViberAlanKodu" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="ViberNo">Viber No</label>
+            <input asp-for="ViberNo" class="form-control" />
+        </div>
+    </div>
+    *@
+    <!-- 🏢 Kurumsal Bilgiler -->
+    <h5 class="mt-4">🏢 @RezerVanaUmv.Resources.Resource.Kurumsal_Bilgiler</h5>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label asp-for="Unvan"> @RezerVanaUmv.Resources.Resource.Unvan</label>
+            <input asp-for="Unvan" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="Ulke"> @RezerVanaUmv.Resources.Resource.Ülke</label>
+            <input asp-for="Ulke" class="form-control" required />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="Sehir"> @RezerVanaUmv.Resources.Resource.Şehir</label>
+            <input asp-for="Sehir" class="form-control" required />
+        </div>
+    </div>
+
+    <!-- 🏭 Şirket Bilgileri -->
+    <h5 class="mt-4">🏭 @RezerVanaUmv.Resources.Resource.Şirket_Bilgileri</h5>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label asp-for="SirketTelAlanKodu"> @RezerVanaUmv.Resources.Resource.Şirket_Tel_Alan_Kodu</label>
+            <input asp-for="SirketTelAlanKodu" class="form-control"  />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="SirketTel"> @RezerVanaUmv.Resources.Resource.Şirket_Telefonu</label>
+            <input asp-for="SirketTel" class="form-control"  />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="SirketUlke"> @RezerVanaUmv.Resources.Resource.Şirket_Ülkesi</label>
+            <input asp-for="SirketUlke" class="form-control"  />
+        </div>
+        <div class="col-md-6 form-group">
+            <label asp-for="SirketSehir"> @RezerVanaUmv.Resources.Resource.Şirket_Şehri</label>
+            <input asp-for="SirketSehir" class="form-control"  />
+        </div>
+        <div class="col-md-12 form-group">
+            <label asp-for="SirketAdres"> @RezerVanaUmv.Resources.Resource.Şirket_Adresi</label>
+            <input asp-for="SirketAdres" class="form-control"  />
+        </div>
+    </div>
+
+    <!-- ⚙️ Sistem -->
+    <h5 class="mt-4">⚙️  @RezerVanaUmv.Resources.Resource.Diğer</h5>
+    <div class="form-group">
+        <label asp-for="CreatedAt"> @RezerVanaUmv.Resources.Resource.Oluşturulma_Tarihi</label>
+        <input asp-for="CreatedAt" class="form-control" />
+        <span asp-validation-for="CreatedAt" class="text-danger"></span>
+    </div>
+
+    <!-- 🔘 Submit & Back -->
+    <div class="form-group mt-4">
+        <input type="submit" value="💾 @RezerVanaUmv.Resources.Resource.KAYDET" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary ml-2">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

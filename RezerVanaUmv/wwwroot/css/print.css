@@ -1,0 +1,60 @@
+﻿
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #GFG {
+        width: 100%;
+    }
+
+    .button {
+        display: none;
+        font-family: "Armata";
+        font-weight: 600;
+        font-size: 0.8rem;
+        line-height: 1.15;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        background: #4db2b3;
+        color: #ffffff;
+        border: 1px solid transparent;
+        border-radius: 2.5rem;
+        margin: 0 0 0.5rem 0;
+        padding: 1.5rem 3.125rem;
+        vertical-align: middle;
+        text-shadow: none;
+        transition: all 0.2s;
+    }
+
+    /* Additional styles for the button div */
+    #button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .baslik {
+        background-color: cornflowerblue;
+        color: ghostwhite;
+    }
+
+    .gri {
+        background-color: white;
+        color: black;
+    }
+
+    .beyaz {
+        background-color: whitesmoke;
+        color: black;
+    }
+
+    .table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+    }
+
+    td {
+        padding: 5px;
+        max-width: 300px;
+        word-wrap: break-word;
+    }

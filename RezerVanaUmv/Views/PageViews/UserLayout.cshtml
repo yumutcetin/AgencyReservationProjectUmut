@@ -1,0 +1,964 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RezerVanaUmv.Models
+@using Microsoft.EntityFrameworkCore
+
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<AppUserRoles> RoleManager
+@inject RezerVanaUmv.Data.RzvnUmvUmvKrmnBlzrContext DbContext
+@using System.Globalization
+
+@{
+    // Önce kullanıcı hangi dili seçmiş ona bakalım
+    var selectedLangCookie = Context.Request.Cookies["SelectedLang"];
+    var selectedLang = (selectedLangCookie ?? "").ToLowerInvariant();
+
+    string langForFlag;
+
+    if (!string.IsNullOrEmpty(selectedLang))
+    {
+        // tr, en, ru, de, kr, zh gibi
+        langForFlag = selectedLang;
+    }
+    else
+    {
+        // Cookie yoksa kültürden devam
+        var culture = CultureInfo.CurrentUICulture;
+        langForFlag = culture.TwoLetterISOLanguageName; // "tr", "en", "ru", "de", "ko", "zh"
+    }
+
+    string flagUrl = langForFlag switch
+    {
+        "tr" => "https://flagcdn.com/w40/tr.png",
+        "en" => "https://flagcdn.com/w40/gb.png",
+        "ru" => "https://flagcdn.com/w40/ru.png",
+        "de" => "https://flagcdn.com/w40/de.png",
+        "kr" or "ko" => "https://flagcdn.com/w40/kr.png",
+        "zh" => "https://flagcdn.com/w40/cn.png",
+        _ => "https://flagcdn.com/w40/gb.png"
+    };
+}
+
+@{
+    bool isLoggedIn = User.Identity.IsAuthenticated;
+    string kurumAdi = "Bilinmiyor";
+    bool isAdmin = false;
+    bool isAdminQr = false;
+    bool isAgencyCrw = false;
+    bool isHotelCrw = false;
+    bool isPassenger = false;
+    bool isDavetKoduActive = false;
+    bool redirectToCreate = false;
+
+    if (isLoggedIn)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        var roles = await UserManager.GetRolesAsync(user);
+        var userClaims = await UserManager.GetClaimsAsync(user);
+
+        // Rol bazlı kontroller
+        isAdmin = roles.Contains("ADMIN");
+        isAdminQr = roles.Any(r => r.StartsWith("ADMIN/") && r.EndsWith("/QR"));
+        isHotelCrw = roles.Any(r => r.EndsWith("HTL"));
+        isPassenger = roles.Any(r => r.Contains("PASSENGER"));
+        isAgencyCrw = userClaims.Any(c => c.Type == "AgencyId");
+
+        // TenantId role claim kontrolü
+        foreach (var roleName in roles)
+        {
+            var role = await RoleManager.FindByNameAsync(roleName);
+            if (role == null) continue;
+
+            var roleClaims = await RoleManager.GetClaimsAsync(role);
+            var tenantClaim = roleClaims.FirstOrDefault(c => c.Type == "TenantId");
+
+            if (tenantClaim != null && int.TryParse(tenantClaim.Value, out int tenantId))
+            {
+                var tenant = await DbContext.Tenants.FindAsync(tenantId);
+                if (tenant != null)
+                {
+                    kurumAdi = tenant.Name;
+                    break; // Kurum bulunduysa diğer rollere bakmaya gerek yok
+                }
+            }
+        }
+
+        // Eğer tenant bulunamadıysa → AgencyId claim ile kontrol et
+        if (kurumAdi == "Bilinmiyor")
+        {
+            var agencyIdClaim = userClaims.FirstOrDefault(c => c.Type == "AgencyId");
+
+            if (!string.IsNullOrWhiteSpace(agencyIdClaim?.Value))
+            {
+                var agencyId = agencyIdClaim.Value;
+
+                var agency = await DbContext.Agencies
+                    .FirstOrDefaultAsync(a => a.Id == agencyId);
+
+                if (agency is not null)
+                {
+                    kurumAdi = agency.Name;
+
+                    // Acentaya ait aktif davet var mı?
+                    isDavetKoduActive = await DbContext.DavetKodlari
+                        .AnyAsync(d => d.AgencyId == agencyId && d.IsActive);
+                }
+                else
+                {
+                    redirectToCreate = true;
+                }
+            }
+            else
+            {
+                redirectToCreate = true;
+            }
+        }
+    }
+
+    // ViewBag aktarımı
+    ViewBag.IsLoggedIn = isLoggedIn;
+    ViewBag.IsAdmin = isAdmin;
+    ViewBag.IsAdminQr = isAdminQr;
+    ViewBag.IsAgencyCrw = isAgencyCrw;
+    ViewBag.IsHotelCrw = isHotelCrw;
+    ViewBag.IsPassenger = isPassenger;
+    ViewBag.KurumAdi = kurumAdi;
+    ViewBag.IsDavetKoduActive = isDavetKoduActive;
+}
+
+@if (redirectToCreate && Context.Request.Path != "/Agencies/Create")
+{
+    <script>
+        window.location.href = '@Url.Action("Create", "Agencies")';
+    </script>
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sayfa Başlığı</title>
+    <style>
+        .case {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    
+
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap Select CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/css/adminlte.min.css">
+    <!-- OverlayScrollbars CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js"></script>
+
+</head>
+
+<body class="hold-transition layout-fixed @(ViewBag.IsLoggedIn ? "" : "sidebar-collapse")">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                @if (ViewBag.IsLoggedIn)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item d-block d-lg-none">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                }
+
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/" class="nav-link">@RezerVanaUmv.Resources.Resource.Anasayfa</a>
+                </li>
+
+                @if (ViewBag.IsLoggedIn == false)
+                {
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="/Home/Iletisim" class="nav-link">@RezerVanaUmv.Resources.Resource.İletişim</a>
+                    </li>
+                }
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                @if (ViewBag.IsAgencyCrw == true && ViewBag.IsDavetKoduActive == true)
+                {
+                    <!-- Navbar Search -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                            <i class="fas fa-search"></i>
+                        </a>
+                        <div class="navbar-search-block">
+                            <form class="form-inline" method="post" asp-controller="ExtraFunctions" asp-action="Search">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control form-control-navbar" type="search" placeholder="" aria-label="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-navbar" type="submit"><i class="fas fa-search"></i></button>
+                                        <button class="btn btn-navbar" type="button" data-widget="navbar-search"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                }
+                @*
+                <!-- Messages Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="bi bi-chat-text"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <div class="media">
+                                <img src="/assets/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">Brad Diesel <span class="float-right text-sm text-danger"><i class="bi bi-star-fill"></i></span></h3>
+                                    <p class="text-sm">Call me whenever you can...</p>
+                                    <p class="text-sm text-muted"><i class="bi bi-clock-fill mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="#" class="dropdown-item">
+                            <div class="media">
+                                <img src="/assets/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">John Pierce <span class="float-right text-sm text-muted"><i class="bi bi-star-fill"></i></span></h3>
+                                    <p class="text-sm">I got your message bro</p>
+                                    <p class="text-sm text-muted"><i class="bi bi-clock-fill mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="#" class="dropdown-item">
+                            <div class="media">
+                                <img src="/assets/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">Nora Silvester <span class="float-right text-sm text-warning"><i class="bi bi-star-fill"></i></span></h3>
+                                    <p class="text-sm">The subject goes here</p>
+                                    <p class="text-sm text-muted"><i class="bi bi-clock-fill mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
+
+                <!-- Notifications Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"><i class="bi bi-envelope mr-2"></i> 4 new messages <span class="float-right text-muted text-sm">3 mins</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"><i class="bi bi-people-fill mr-2"></i> 8 friend requests <span class="float-right text-muted text-sm">12 hours</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"><i class="bi bi-file-earmark-fill mr-2"></i> 3 new reports <span class="float-right text-muted text-sm">2 days</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                *@
+        
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <img src="@flagUrl" width="24" />
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right p-0">
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "tr" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/tr.png" width="24"> Türkçe
+                        </a>
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "en" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/gb.png" width="24"> English
+                        </a>
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "ru" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/ru.png" width="24"> русский
+                        </a>
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "de" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/de.png" width="24"> Deutsch
+                        </a>
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "kr" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/kr.png" width="24"> 한국어
+                        </a>
+                        <a href="@Url.Action("ChangeLanguage", "ExtraFunctions", new { lang = "zh" })" class="dropdown-item">
+                            <img src="https://flagcdn.com/w40/cn.png" width="24"> 汉语
+                        </a>
+                    </div>
+                </li>
+
+                <!-- User Dropdown -->
+                @if (ViewBag.IsLoggedIn == true)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i class="far fa-user"></i></a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item">Hello, @User.Identity?.Name!</div>
+                            <div class="dropdown-divider"></div>
+                            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="dropdown-item"><i class="fas fa-user mr-2"></i> @RezerVanaUmv.Resources.Resource.Profil</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item"><i class="fas fa-cog mr-2"></i> @RezerVanaUmv.Resources.Resource.Ayarlar</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt mr-2"></i> @RezerVanaUmv.Resources.Resource.Çıkış</a>
+                            <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;"></form>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">@RezerVanaUmv.Resources.Resource.Kayıt_Ol</a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">@RezerVanaUmv.Resources.Resource.Giriş_Yap</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link d-block">
+                <i class="bi bi-award-fill text-success"></i>
+                <span class="brand-text font-weight-light d-block">
+                    RezerVana
+                </span>
+                @if (ViewBag.IsLoggedIn == true)
+                {
+                    <small class="text-muted d-block">
+                        @RezerVanaUmv.Resources.Resource.Hoşgeldiniz @ViewBag.KurumAdi
+                    </small>
+                }
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2 text-sm">
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add your sidebar menu items here -->
+                        @if (ViewBag.IsLoggedIn == false)
+                        {
+                            <li class="nav-item">
+                                <a href="/" class="nav-link">
+                                    <i class="nav-icon fas fa-home"></i>
+                                    <p>@RezerVanaUmv.Resources.Resource.Anasayfa</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Home/Iletisim" class="nav-link">
+                                    <i class="nav-icon fas fa-envelope"></i>
+                                    <p>@RezerVanaUmv.Resources.Resource.İletişim</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Identity/Account/Register" class="nav-link">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>@RezerVanaUmv.Resources.Resource.Kayıt_Ol</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Identity/Account/Login" class="nav-link">
+                                    <i class="nav-icon fas fa-sign-in-alt"></i>
+                                    <p>@RezerVanaUmv.Resources.Resource.Giriş_Yap</p>
+                                </a>
+                            </li>
+                        }
+
+                        @if (ViewBag.IsLoggedIn == true)
+                        {
+                            <!-- MAIN NAVIGATION -->
+                            <li class="nav-header">@RezerVanaUmv.Resources.Resource.ANA_NAVIGASYON</li>
+
+                            @if (ViewBag.IsAgencyCrw == true)
+                            {
+                                @if (ViewBag.IsDavetKoduActive == true)
+                                {
+                                <!-- acenta menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Rezervasyonlar
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/AgencyReservations/Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                    <p>@RezerVanaUmv.Resources.Resource.KAYDET</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/AgencyReservations/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                                @RezerVanaUmv.Resources.Resource.Harcamalar
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/AgencyReservations/PointUsage" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                    <p>@RezerVanaUmv.Resources.Resource.KAYDET</p>
+                                            </a>
+                                        </li>
+                                            <li class="nav-item">
+                                                <a href="/AgencyReservations/HarcamaListesi" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>@RezerVanaUmv.Resources.Resource.Listele</p>
+                                                </a>
+                                            </li>
+                                        <li class="nav-item">
+                                            <a href="/AgencyReservations/TotalPoints" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Toplam_Puan</p>
+                                            </a>
+                                        </li>
+                                            <li class="nav-item">
+                                                <a href="/AgencyReservations/RewardAndRedempt" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>@RezerVanaUmv.Resources.Resource.Harcama_Ve_Kazanç_Tanımları_Listesi</p>
+                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                    @*
+                                <!-- Kalan Menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Kampanyalar
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Campaigns" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Kayıt</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Campaigns" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                *@
+
+
+                                }
+
+
+
+                                @*
+                                <!-- Hasarlı Menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.LoyaltyPoints
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="LoyaltyPoints" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.Kayıt</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="LoyaltyPoints" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                *@
+                                <li class="nav-item">
+                                    <a href="/Agencies/Index" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Acente_Profili
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.ConnectToHotels
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="ConnectToHotels" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.ConnectToHotels</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="ConnectToHotels" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Bağlı_Otel_Listesi</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            }
+                            @if (ViewBag.IsHotelCrw == true)
+                            {
+                                <!-- hotel menu -->
+                                <li class="nav-item">
+                                    <a href="/AgenciesHotels/Index" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Ajanslar
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    @*
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/AgenciesHotels/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                         <li class="nav-item">
+                                            <a href="/UserManagement/AktifKullanicilar" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Kullanıcılar</p>
+                                            </a>
+                                        </li> 
+                                        
+                                        <li class="nav-item">
+                                            <a href="/UserManagement/PasifKullanicilar" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Pasif_Kullanıcılar</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                     *@
+                                </li>
+
+                                <!-- Kalan Menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Rezervasyonlar
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                         <li class="nav-item">
+                                            <a href="/HotelReservations/ConfirmedReservations" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Onaylanmış_Rezervasyonlar</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="HotelReservations" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/HotelReservations/RefusedReservations" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>İptal Edilmiş Rezervasyonlar</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="AgenciesHotels"
+                                       asp-action="Harcamalar"
+                                       class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString()=="AgenciesHotels"
+                                        && ViewContext.RouteData.Values["action"]?.ToString()=="Harcamalar" ? "active" : "")">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>@RezerVanaUmv.Resources.Resource.Harcamalar</p>
+                                    </a>
+                                </li>
+
+                                <!-- Harcamalar Menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Harcama_Tanımları
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Redemptions" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Ekle</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Redemptions" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!-- Ödüller Menu -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Kazanç_Tanımları
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="RewardCatalogs" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>@RezerVanaUmv.Resources.Resource.Ekle</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="RewardCatalogs" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Oda_Tanımlamaları
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/RoomTypes/Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.OdaTipiKayit</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/RoomTypes/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.OdaTipleriListe</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/ReservationBonusSettings/Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>
+                                                    @RezerVanaUmv.Resources.Resource.Bonus_Parametreleri_Kayıt
+                                                </p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/ReservationBonusSettings/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>   @RezerVanaUmv.Resources.Resource.Bonus_Parametreleri_Liste</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Ödüller Menu -->
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Operator
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Operators" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Kayıt</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Operators" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.Bonus_Puan
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a asp-controller="Balance" asp-action="Create" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>   @RezerVanaUmv.Resources.Resource.Bonus_Puan_Ekle</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a asp-controller="Balance" asp-action="Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/BulkEmail/Create" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                          Toplu E Posta Gönder
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                </li>
+                                @*
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-luggage-cart"></i>
+                                        <p>
+                                            @RezerVanaUmv.Resources.Resource.DavetKoduUret
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="/DavetKoduTablosus/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.Listele</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/DavetKoduTablosus/Index?isActive=true" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>  @RezerVanaUmv.Resources.Resource.AktifListe</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/DavetKoduTablosus/Index?isActive=false" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p> @RezerVanaUmv.Resources.Resource.PasifListe</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                *@
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <strong>
+                            Copyright &copy; 2019
+                            <a href="https://umvyazilim.com" target="_blank">UMV YAZILIM</a>
+                        </strong>
+                        <span class="d-block">All rights reserved.</span>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-links d-flex flex-column align-items-center align-items-md-end">
+                            <strong>
+                                <a asp-controller="ExtraFunctions" asp-action="Kvkk" target="_blank" class="mb-2 text-uppercase lato-regular">
+                                    @RezerVanaUmv.Resources.Resource.KVKK
+                                </a>
+                            </strong>
+                            <strong>
+                                <a asp-controller="ExtraFunctions" asp-action="Hakkimizda" target="_blank" class="mb-2 text-uppercase lato-regular">
+                                    @RezerVanaUmv.Resources.Resource.Hakkımızda
+                                </a>
+                            </strong>
+                            <strong>
+                                <a asp-controller="ExtraFunctions" asp-action="KullanimSartlari" target="_blank" class="mb-2 text-uppercase lato-regular">
+                                    @RezerVanaUmv.Resources.Resource.Kullanım_Şartları
+                                </a>
+                            </strong>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Select JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+    <!-- OverlayScrollbars -->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"></script>
+    <!-- Custom Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize OverlayScrollbars
+            OverlayScrollbars(document.querySelectorAll('.sidebar'), {
+                scrollbars: {
+                    autoHide: 'leave',
+                },
+            });
+        });
+    </script>
+
+    <script>
+              document.addEventListener('DOMContentLoaded', function () {
+            const requiredText = "@Html.Raw(RezerVanaUmv.Resources.Resource.field_required)";
+
+            document.querySelectorAll('form').forEach(function (form) {
+                form.addEventListener('submit', function (e) {
+                    let isValid = true;
+
+                    form.querySelectorAll('[required]').forEach(function (input) {
+                        // 👇 Hidden alanları atla
+                        if (input.type === 'hidden') {
+                            return;
+                        }
+
+                        if (!input.value.trim()) {
+                            isValid = false;
+
+                            if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('required-warning')) {
+                                const warning = document.createElement('div');
+                                warning.className = 'text-danger required-warning';
+                                warning.textContent = requiredText;
+                                input.parentElement.appendChild(warning);
+                            }
+                        } else {
+                            if (input.nextElementSibling && input.nextElementSibling.classList.contains('required-warning')) {
+                                input.nextElementSibling.remove();
+                            }
+                        }
+                    });
+
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("input", function (e) {
+          const el = e.target;
+
+          // Şifre ya da preserve-case işaretli alanları tamamen atla
+          if (el.getAttribute?.('data-preserve-case') === 'true') return;
+
+          // Şifre alanları ismi/id'si password içeriyorsa veya type=password/text fark etmeksizin atla
+          const id = (el.id || '').toLowerCase();
+          const name = (el.name || '').toLowerCase();
+          const t = (el.type || '').toLowerCase();
+          if (id.includes('password') || name.includes('password') || t === 'password') return;
+
+          // Email, file, checkbox, radio da hariç
+          if (t === 'email' || t === 'file' || t === 'checkbox' || t === 'radio') return;
+
+          // Uppercase sadece kalanlara
+          const start = el.selectionStart, end = el.selectionEnd;
+          const upper = el.value.toLocaleUpperCase('tr-TR');
+          if (el.value !== upper) {
+            el.value = upper;
+            try { el.setSelectionRange(start, end); } catch {}
+          }
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>
+
+@await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Styles", required: false)

@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["HideSidebar"] = true; // Sidebar'ı bu sayfa için gizle
+    ViewData["HomePage"] = true; // Ana sayfa olduğunu belirt
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+    string currentCulture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+<style>
+    /* Resim stilleri */
+    .img-ucak {
+        object-fit: cover; /* Oranı bozmadan sığdır */
+        display: block; /* Blok öğe olarak ayarla */
+        margin: 0 auto; /* Ortala */
+        border-radius: 10px;
+        padding: 0 3px; /* Yanlarda boşluk */
+    }
+    .img-c {
+        width: 100%;
+        height: 650px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* Video konteyner stilleri */
+    .video-container {
+        width: 100%;
+        max-width: 800px; /* Daha geniş video konteyner */
+        margin: 40px auto; /* Üst ve alt boşluk */
+        padding: 0 20px; /* Yanlarda boşluk */
+    }
+
+    /* Responsive video stilleri */
+    .responsive-video {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9; /* Video oranını koru */
+        border-radius: 10px; /* Köşeleri yuvarla */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+    }
+
+    /* Vizyon ve referans kutusu stilleri */
+    .vision-box {
+        text-align: center;
+        margin-top: 50px; /* Üst boşluk */
+        padding: 20px;
+        background-color: #f9f9f9; /* Arka plan rengi */
+        border-radius: 10px; /* Köşeleri yuvarla */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    }
+
+        .vision-box h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px; /* Alt boşluk */
+            color: #333; /* Başlık rengi */
+        }
+
+        .vision-box img {
+            width: 100%;
+            max-width: 600px; /* Maksimum genişlik */
+            height: auto;
+            border-radius: 10px; /* Köşeleri yuvarla */
+        }
+
+    /* Mobil uyumluluk */
+    @@media (max-width: 768px) {
+
+        .img-c  {
+            height:100% !important;
+        }
+        .img-ucak {
+            max-height: 300px; /* Mobilde daha küçük resim */
+        }
+
+        .video-container {
+            margin: 20px auto; /* Mobilde daha az boşluk */
+        }
+
+        .vision-box {
+            margin-top: 30px; /* Mobilde daha az boşluk */
+        }
+
+            .vision-box h3 {
+                font-size: 20px; /* Mobilde daha küçük başlık */
+            }
+    }
+</style>
+<div class="wrapper text-center">
+    <p></p>
+    <p></p>
+
+    <!-- Resim bölümü -->
+    <div class="img-c">
+        <img src="~/rezervana.jpeg" alt="rezevana_main" style="max-width: 100%; max-height: 100%; border-radius: 15px;" />
+    </div>
+
+    <!-- Referanslar bölümü -->
+    <div class="vision-box">
+        <h3 class="text-uppercase">Referanslarımız:</h3>
+        <h1>KİRMAN BELAZUR RESORT & SPA</h1>
+        <center>  <img src="~/kirmanbelazurmain.jpg" alt="kirman Logo" /></center>
+    </div>
+    <p></p>
+    <p></p>
+    </div> 
+    <p></p>
+    <p></p>

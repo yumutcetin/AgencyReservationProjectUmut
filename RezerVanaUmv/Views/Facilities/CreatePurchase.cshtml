@@ -1,0 +1,51 @@
+﻿@model RezerVanaUmv.Models.Purchase
+
+@{
+    ViewData["Title"] = "Satın Alma Kaydı";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+    var facilities = ViewBag.Facilities as IEnumerable<dynamic>;
+    var menuItems = ViewBag.MenuItems as IEnumerable<dynamic>;
+    string faciltyId = null;
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Yeni_Satın_Alma_Kaydı</h1>
+<hr />
+
+<form asp-action="CreatePurchase" method="post">
+    @Html.AntiForgeryToken()
+
+    <select asp-for="MenuItemId" class="form-control">
+        <option value="">-- @RezerVanaUmv.Resources.Resource.Menü_Öğesi_Seçin --</option>
+        @foreach (var item in menuItems)
+        {
+            <option value="@item.Id">@item.Name - @item.Price ₺</option>
+                faciltyId = item.FacilityId;
+            
+        }
+    </select>
+    <input type="hidden" asp-for="FacilityId" value="@faciltyId" readonly>
+
+
+
+
+    <div class="form-group mb-3">
+        <label asp-for="Quantity" class="control-label">@RezerVanaUmv.Resources.Resource.Miktar</label>
+        <input asp-for="Quantity" type="number" class="form-control" required min="1" value="1" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">@RezerVanaUmv.Resources.Resource.KAYDET</button>
+        <a asp-action="GetMenu" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.İptal</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        // Ensure the script runs after the DOM is fully loaded and libraries are available
+        $(document).ready(function () {
+            // Wait for jQuery to be ready, then target the dropdown by ID
+            // And tell Bootstrap-Select to refresh its state.
+            $('#MenuItemId').selectpicker('refresh');
+        });
+    </script>
+}

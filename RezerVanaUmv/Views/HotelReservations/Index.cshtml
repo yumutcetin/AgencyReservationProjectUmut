@@ -1,0 +1,197 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" />
+
+<h2>@RezerVanaUmv.Resources.Resource.Rezervasyonlar</h2>
+
+<style>
+    /* Tabloyu ekrana zorla sığdır */
+    #reservationTable {
+        font-size: 0.80rem; /* biraz daha küçük yazı */
+        table-layout: fixed; /* sütun genişliklerini sabitle, taşma yapmasın */
+        width: 100%;
+    }
+
+        #reservationTable th,
+        #reservationTable td {
+            padding: 4px 6px;
+            white-space: normal; /* satır içi metinler gerekirse alta insin */
+            word-wrap: break-word; /* uzun kelimeleri bölerek sığdır */
+        }
+
+            /* Kısa kolonları ortala (puan, durum, işlem) */
+            #reservationTable th:nth-child(9),
+            #reservationTable td:nth-child(9),
+            #reservationTable th:nth-child(11),
+            #reservationTable td:nth-child(11),
+            #reservationTable th:nth-child(12),
+            #reservationTable td:nth-child(12) {
+                text-align: center;
+            }
+
+                /* İşlem butonlarını biraz sıkılaştır */
+                #reservationTable td:nth-child(12) .btn {
+                    margin-bottom: 2px;
+                    padding: 2px 6px;
+                    font-size: 0.75rem;
+                }
+</style>
+
+@{
+    var ok = TempData["Success"] as string;
+    var err = TempData["Error"] as string;
+    var sim = TempData["SimilarRecord"] as string;
+}
+@if (!string.IsNullOrWhiteSpace(ok))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ok
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(err))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @err
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (!string.IsNullOrWhiteSpace(sim))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="white-space:pre-line">
+        @sim
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table id="reservationTable" class="table table-bordered table-hover" style="width:100%">
+    <thead class="table-light">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Kayıt_Tarihi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Kullanıcı_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ajans_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+            <th>@RezerVanaUmv.Resources.Resource.Otel</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ülke</th>
+            <th>@RezerVanaUmv.Resources.Resource.Şehir</th>
+            <th>@RezerVanaUmv.Resources.Resource.Misafir_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.BAŞLANGIÇ_TARİHİ</th>
+            <th>@RezerVanaUmv.Resources.Resource.BİTİŞ_TARİHİ</th>
+            <th>@RezerVanaUmv.Resources.Resource.Puan</th>
+            <th>@RezerVanaUmv.Resources.Resource.Oda_Tipi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Operator</th>
+            <th>@RezerVanaUmv.Resources.Resource.Durum</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-order="@(item.ReservationDate?.ToString("yyyy-MM-dd"))">
+                    @(item.ReservationDate?.ToString("dd-MM-yyyy"))
+                </td>
+                <td>@item.Agency?.Name</td>
+                <td>
+                    <a asp-controller="AgenciesHotels"
+                       asp-action="AgenciesDetails"
+                       asp-route-id="@item.Agency?.Id"
+                       style="font-size:11px; font-weight:600;">
+                        @item.Agency?.Unvan
+                    </a>
+                </td>
+                <td>@item.Agency?.Email</td>
+                <td>@item.Tenant?.Name</td>
+                <td>@item.Agency?.Ulke</td>
+                <td>@item.Agency?.Sehir</td>
+                <td>@string.Join(", ", item.Passengers.Select(p => $"{p.FirstName} {p.LastName}"))</td>
+                <td data-order="@(item.CheckinDate?.ToString("yyyy-MM-dd"))">
+                    @item.CheckinDate?.ToString("dd-MM-yyyy")
+                </td>
+                <td data-order="@(item.CheckoutDate?.ToString("yyyy-MM-dd"))">
+                    @item.CheckoutDate?.ToString("dd-MM-yyyy")
+                </td>
+                <td>@item.TotalAmount</td>
+                <td>@item.RoomType</td>
+                <td>@item.Operator?.Name</td>
+                <td>
+                    @{
+                        var statusKey = "Status_" + item.Status;  // ör: Status_Pending
+                        var translated = RezerVanaUmv.Resources.Resource.ResourceManager.GetString(
+                        statusKey,
+                        System.Threading.Thread.CurrentThread.CurrentUICulture
+                        );
+                    }
+
+                    @translated
+                </td>
+                <td>
+                        <form asp-action="Approve" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-sm btn-success" style="font-size:11px;">
+                                @RezerVanaUmv.Resources.Resource.Rezervasyon_onayla
+                            </button>
+                        </form>
+                    <a asp-action="ApproveManually"
+                       asp-controller="HotelReservations"
+                       asp-route-id="@item.Id"
+                       asp-route-returnPage="@ViewBag.Page"
+                       class="btn btn-warning btn-sm">
+                        Manuel Onay
+                    </a>
+                       <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       asp-route-returnList="pending"
+                       asp-route-returnPage="@ViewBag.Page"
+                       class="btn btn-warning" style="font-size:11px;"> @RezerVanaUmv.Resources.Resource.Edit</a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" style="font-size:11px;">
+                            @RezerVanaUmv.Resources.Resource.Sil
+                        </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(function () {
+
+                var table = $('#reservationTable').DataTable({
+                    dom: 'Bfrtip',
+                    scrollX: false,
+                    autoWidth: false,
+                    responsive: false,
+                    order: [[0, 'desc']],         // 0 = ReservationDate kolonu
+                    stateSave: true,
+                    stateDuration: -1,
+                    buttons: ['copy', 'excel', 'pdf', 'print'],
+                    language: { url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json' }
+                });
+
+            // Aktif sayfa numarasını al — buradan Edit butonuna ekleyeceğiz
+            var currentPage = table.page();  // 0,1,2...
+
+            console.log("Aktif DataTable sayfası:", currentPage);
+        });
+    </script>
+
+}

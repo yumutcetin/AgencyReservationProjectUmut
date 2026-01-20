@@ -1,0 +1,132 @@
+﻿@model RezerVanaUmv.Controllers.BalanceController.BalancePointCreatePageModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+
+    var agencies = Model.Users
+        .GroupBy(u => new { u.AgencyId, u.AgencyName })
+        .Select(g => new { g.Key.AgencyId, g.Key.AgencyName })
+        .OrderBy(x => x.AgencyName)
+        .ToList();
+}
+
+<!-- (Varsa layout'ta ekliyse bu 3 satırı kaldırabilirsin) -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<style>
+    /* Select2'yi Bootstrap 5 form-select yüksekliğiyle hizala */
+    .select2-container .select2-selection--single {
+        height: calc(2.5rem + 2px);
+        padding: .375rem .75rem;
+        border: 1px solid #ced4da;
+        border-radius: .375rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: calc(2.5rem + 2px);
+        right: .5rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: calc(2.5rem);
+    }
+</style>
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-light fw-semibold"></div>
+        <div class="card-body">
+            <form method="post" asp-action="Create" asp-controller="Balance" class="row g-3">
+
+                <div class="col-md-6">
+                    <label class="form-label"> @RezerVanaUmv.Resources.Resource.Agency</label>
+                    <select id="agencySelect" class="form-select">
+                        <option value="">— @RezerVanaUmv.Resources.Resource.Select_Agency —</option>
+                        @foreach (var agency in agencies)
+                        {
+                            <option value="@agency.AgencyId">@agency.AgencyName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">@RezerVanaUmv.Resources.Resource.Kullanıcı</label>
+                    <select id="userSelect" name="SelectedUserId" class="form-select">
+                        <option value="">— @RezerVanaUmv.Resources.Resource.Kullanıcı_Seç —</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">@RezerVanaUmv.Resources.Resource.Puan</label>
+                    <input type="number" name="Point" class="form-control" required />
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">@RezerVanaUmv.Resources.Resource.Açıklama</label>
+                    <textarea name="Explanation" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        @RezerVanaUmv.Resources.Resource.Gönder
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+      // Model.Users -> güvenli JSON (System.Text.Json kullan)
+      const allUsersRaw = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Users));
+
+      // PascalCase/camelCase farkını normalize et
+      const allUsers = (allUsersRaw || []).map(u => ({
+        agencyId: u.agencyId ?? u.AgencyId ?? u.agencyID ?? u.AgencyID ?? null,
+        userId:   u.userId   ?? u.UserId,
+        fullName: (u.fullName ?? u.FullName ?? '').toString(),
+        email:    u.email    ?? u.Email     ?? ''
+      }));
+
+      const $agency = $('#agencySelect');
+      const $user   = $('#userSelect');
+
+      // Select2 başlat (arama kutulu)
+      try {
+        $agency.select2({ placeholder: 'Agency seçiniz', allowClear: true, width: '100%' });
+        $user.select2({ placeholder: '@RezerVanaUmv.Resources.Resource.Kullanıcı_Seç', allowClear: true, width: '100%' });
+      } catch (e) {
+        // Select2 yüklenemediyse, native select ile devam eder.
+        console.warn('Select2 yüklenemedi:', e);
+      }
+
+      $agency.on('change', function () {
+        const agencyId = $(this).val();
+        // User select'i temizle
+        $user.empty().append(new Option('— @RezerVanaUmv.Resources.Resource.Kullanıcı_Seç —', ''));
+
+        if (!agencyId) {
+          $user.val(null).trigger('change');
+          return;
+        }
+
+        // Filtrele + ada göre sırala
+        const filtered = allUsers
+          .filter(u => u.agencyId != null && u.agencyId.toString() === agencyId.toString())
+          .sort((a, b) => a.fullName.localeCompare(b.fullName));
+
+        // Seçenekleri ekle
+        for (const u of filtered) {
+          const text = u.email ? `${u.fullName} (${u.email})` : u.fullName;
+          $user.append(new Option(text, u.userId));
+        }
+
+        // Select2 varsa yenile
+        $user.val(null).trigger('change');
+      });
+    })();
+</script>

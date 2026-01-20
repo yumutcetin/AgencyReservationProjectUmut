@@ -1,0 +1,46 @@
+﻿
+@model RezerVanaUmv.Controllers.HotelReservationsController.ApproveResultViewModel
+@{
+    ViewData["Title"] = "Similar Records Found";
+}
+
+<h2 class="mb-3 text-danger">Possible Similar Records Found</h2>
+<p>@Model.Message</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Voucher_No </th>
+            <th>@RezerVanaUmv.Resources.Resource.CHECK_IN</th>
+            <th>@RezerVanaUmv.Resources.Resource.CHECK_OUT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model.SimilarRecords)
+        {
+            <tr>
+                <td>@r.firstname @r.lastname</td>
+                <td>@r.voucherno</td>
+                <td>@r.checkindate.ToString("dd.MM.yyyy")</td>
+                <td>@r.checkOutdate.ToString("dd.MM.yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <form asp-action="ApproveAction" method="post">
+        <input type="hidden" name="id" value="@Model.ReservationId" />
+
+        <button type="submit" name="decision" value="approve" class="btn btn-success">
+            ✅ @RezerVanaUmv.Resources.Resource.Approve_Anyway
+        </button>
+        <button type="submit" name="decision" value="cancel" class="btn btn-danger">
+            ❌ @RezerVanaUmv.Resources.Resource.Cancel_Reservation
+        </button>
+        <button type="submit" name="decision" value="pending" class="btn btn-secondary">
+            ⏸ @RezerVanaUmv.Resources.Resource.Keep_Pending
+        </button>
+    </form>
+</div>

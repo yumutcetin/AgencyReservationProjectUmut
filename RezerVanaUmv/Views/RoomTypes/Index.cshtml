@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.RoomType>
+
+@{
+    ViewData["Title"] = "Oda Tipleri";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">🏨 @RezerVanaUmv.Resources.Resource.Oda_Tipleri</h2>
+<a asp-action="Create" class="btn btn-success mb-3">
+    ➕ @RezerVanaUmv.Resources.Resource.Yeni_Oluştur
+</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Oda_Tipi</th>
+            <th>@RezerVanaUmv.Resources.Resource.AÇIKLAMA</th>
+            @*<th>@Html.DisplayNameFor(model => model.Capacity)</th>
+            <th>@Html.DisplayNameFor(model => model.BedCount)</th>*@
+            <th>@Html.DisplayNameFor(model => model.IsActive)</th>
+            @*<th>@Html.DisplayNameFor(model => model.CreatedAt)</th>*@
+            <th>@Html.DisplayNameFor(model => model.Tenant.Name)</th>
+            <th> @RezerVanaUmv.Resources.Resource.Aksiyonlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                @*<td>@item.Capacity</td>
+                <td>@item.BedCount</td>*@
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge bg-success">@RezerVanaUmv.Resources.Resource.Aktif</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@RezerVanaUmv.Resources.Resource.Pasif</span>
+                    }
+                </td>
+               @*<td></td>*@
+                <td>@item.Tenant?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">✏️ @RezerVanaUmv.Resources.Resource.Edit</a>
+                   
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️ @RezerVanaUmv.Resources.Resource.Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

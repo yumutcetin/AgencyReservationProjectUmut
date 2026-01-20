@@ -1,0 +1,217 @@
+﻿@model RezerVanaUmv.ViewModels.ReservationWithPassengersViewModel
+
+@{
+    ViewData["Title"] = "Rezervasyon Düzenle";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">✏️ @RezerVanaUmv.Resources.Resource.Rezervasyon_Düzenle</h2>
+<hr />
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Reservation.Id" />
+    <input type="hidden" asp-for="Reservation.TenantId" />
+    <input type="hidden" asp-for="Reservation.AgencyId" />
+
+    <div class="row">
+        <!-- Sol: Rezervasyon Bilgileri -->
+        <div class="col-md-6">
+            <!-- 📅 Tarihler -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>📅 @RezerVanaUmv.Resources.Resource.Tarihler</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.CheckinDate" class="form-label">@RezerVanaUmv.Resources.Resource.Giriş_Tarihi</label>
+                        <input asp-for="Reservation.CheckinDate" class="form-control" type="date" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.CheckoutDate" class="form-label">@RezerVanaUmv.Resources.Resource.Çıkış_Tarihi</label>
+                        <input asp-for="Reservation.CheckoutDate" class="form-control" type="date" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.ReservationDate" class="form-label">@RezerVanaUmv.Resources.Resource.Rezervasyon_Tarihi</label>
+                        <input asp-for="Reservation.ReservationDate" class="form-control" type="datetime-local" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.NightCount" class="form-label">@RezerVanaUmv.Resources.Resource.Konaklama_Süresi</label>
+                        <input asp-for="Reservation.NightCount" class="form-control" type="number" id="Reservation_NightCount" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🏨 Konaklama Bilgileri -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5>🏨 @RezerVanaUmv.Resources.Resource.Konaklama_Bilgileri</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.RoomCount">@RezerVanaUmv.Resources.Resource.Oda_Sayısı</label>
+                        <input asp-for="Reservation.RoomCount" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.RoomType">@RezerVanaUmv.Resources.Resource.Oda_Tipi</label>
+                        <input asp-for="Reservation.RoomType" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.TotalAmount" class="form-label">
+                            @RezerVanaUmv.Resources.Resource.Toplam_Puan
+                        </label>
+                        <input asp-for="Reservation.TotalAmount" readonly
+                               class="form-control-plaintext fs-4 fw-bold text-success" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label asp-for="Reservation.BookingReference">@RezerVanaUmv.Resources.Resource.Rezervasyon_Kodu</label>
+                        <input asp-for="Reservation.BookingReference" class="form-control" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ: Yolcu Bilgileri -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">👥 @RezerVanaUmv.Resources.Resource.Yolcu_Bilgileri</h5>
+                    <button type="button" class="btn btn-sm btn-success" onclick="addPassenger()">+ @RezerVanaUmv.Resources.Resource.Yeni_Yolcu</button>
+                </div>
+                <div class="card-body" id="passenger-container">
+                    @for (int i = 0; i < Model.Passengers.Count; i++)
+                    {
+                        <div class="border p-3 mb-3 rounded passenger-block">
+                            <input type="hidden" name="Passengers[@i].Id" value="@Model.Passengers[i].Id" />
+                            <div class="form-group mb-2">
+                                <label>@RezerVanaUmv.Resources.Resource.Ad</label>
+                                <input type="text" name="Passengers[@i].FirstName" class="form-control" value="@Model.Passengers[i].FirstName" />
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>@RezerVanaUmv.Resources.Resource.Soyad</label>
+                                <input type="text" name="Passengers[@i].LastName" class="form-control" value="@Model.Passengers[i].LastName" />
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>Cinsiyet</label>
+                                @Html.DropDownList($"Passengers[{i}].Gender", new List<SelectListItem>
+                            {
+                            new SelectListItem { Text = "MR", Value = "MR", Selected = Model.Passengers[i].Gender == "MR" },
+                            new SelectListItem { Text = "MRS", Value = "MRS", Selected = Model.Passengers[i].Gender == "MRS" }
+                            }, new { @class = "form-select", required = "required" })
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>@RezerVanaUmv.Resources.Resource.Doğum_Tarihi</label>
+                                <input type="date"
+                                       name="Passengers[@i].BirthDate"
+                                       class="form-control"
+                                       value="@(Model.Passengers[i].BirthDate?.ToString("dd-MM-yyyy"))" />
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="removePassenger(this)">🗑 @RezerVanaUmv.Resources.Resource.Sil</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="DeletedPassengerIds" name="DeletedPassengerIds" />
+    <!-- Kaydet Butonları -->
+    <!-- Kaydet Butonları -->
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">💾 @RezerVanaUmv.Resources.Resource.KAYDET</button>
+        <a asp-action="Index" class="btn btn-secondary">📋 @RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+    </div>
+</form>
+
+<!-- Manuel Onay Butonu (Status = Acquired) -->
+<form asp-action="ApproveManually" method="post" class="mt-2">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Reservation.Id" />
+
+    <button type="submit"
+            class="btn btn-warning"
+            onclick="return confirm('Bu rezervasyonu MANUEL olarak onaylamak istediğinize emin misiniz?');">
+        ✅ Manuel Onayla
+    </button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+                       function removePassenger(button) {
+            console.log("removePassenger tetiklendi!");
+
+            const block = button.closest('.passenger-block');
+            const idInput = block.querySelector('input[name$=".Id"]');
+            const deletedIdsInput = document.getElementById("DeletedPassengerIds");
+
+            if (idInput && idInput.value !== "0") {
+                let deletedIds = [];
+
+                try {
+                    deletedIds = JSON.parse(deletedIdsInput.value || "[]");
+                } catch (e) {
+                    console.error("JSON parse error:", e);
+                }
+
+                if (!deletedIds.includes(parseInt(idInput.value))) {
+                    deletedIds.push(parseInt(idInput.value));
+                    deletedIdsInput.value = JSON.stringify(deletedIds);
+                    console.log("Yeni Silinen ID Eklendi:", idInput.value);
+                }
+            }
+
+            block.remove();
+        }
+
+
+        function calculateNights() {
+            const checkin = document.getElementById('Reservation_CheckinDate').value;
+            const checkout = document.getElementById('Reservation_CheckoutDate').value;
+            const nightInput = document.getElementById('Reservation_NightCount');
+
+            if (checkin && checkout) {
+                const checkinDate = new Date(checkin);
+                const checkoutDate = new Date(checkout);
+                const nights = Math.floor((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+                nightInput.value = nights > 0 ? nights : 0;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('Reservation_CheckinDate')?.addEventListener('change', calculateNights);
+            document.getElementById('Reservation_CheckoutDate')?.addEventListener('change', calculateNights);
+            calculateNights();
+        });
+
+        let passengerIndex = @Model.Passengers.Count;
+
+        function addPassenger() {
+            const container = document.getElementById('passenger-container');
+            const html = `
+                <div class="border p-3 mb-3 rounded passenger-block">
+                    <input type="hidden" name="Passengers[${passengerIndex}].Id" value="0" />
+                    <div class="form-group mb-2">
+                        <label>Ad</label>
+                        <input type="text" name="Passengers[${passengerIndex}].FirstName" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Soyad</label>
+                        <input type="text" name="Passengers[${passengerIndex}].LastName" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Cinsiyet</label>
+                        <input type="text" name="Passengers[${passengerIndex}].Gender" class="form-control" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Doğum Tarihi</label>
+                        <input type="date" name="Passengers[${passengerIndex}].BirthDate" class="form-control" />
+                    </div>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="removePassenger(this)">🗑 Sil</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            passengerIndex++;
+        }
+    </script>
+}

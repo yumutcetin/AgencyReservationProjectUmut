@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+     Layout = "~/Views/PageViews/UserLayout.cshtml";
+    string currentCulture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@RezerVanaUmv.Resources.Resource.İletişim_Formu</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">@RezerVanaUmv.Resources.Resource.İletişim</h2>
+                <form method="post" action="Send">
+                    <!-- Ad Soyad -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">@RezerVanaUmv.Resources.Resource.Ad @RezerVanaUmv.Resources.Resource.Soyad</label>
+                        <input type="text" class="form-control" id="name" name="Name" placeholder="@RezerVanaUmv.Resources.Resource.İSİM" required>
+                    </div>
+
+                    <!-- E-posta -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">@RezerVanaUmv.Resources.Resource.EPosta</label>
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="@RezerVanaUmv.Resources.Resource.EPosta" required>
+                    </div>
+
+                    <!-- Konu -->
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">@RezerVanaUmv.Resources.Resource.Konu</label>
+                        <input type="text" class="form-control" id="subject" name="Subject" placeholder="@RezerVanaUmv.Resources.Resource.Konuyu_Girin" required>
+                    </div>
+
+                    <!-- Mesaj -->
+                    <div class="mb-3">
+                        <label for="message" class="form-label">@RezerVanaUmv.Resources.Resource.Mesajınız</label>
+                        <textarea class="form-control" id="message" name="Message" rows="5" placeholder="@RezerVanaUmv.Resources.Resource.Acele_Mesaj_Bilgileri" required></textarea>
+                    </div>
+                    <div class="g-recaptcha" data-sitekey="6Lc88nUrAAAAAMPK34Ycb0fgIv0QDto_movtDG89"></div>
+                    <br /><br />
+                    <!-- Gönder Butonu -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">@RezerVanaUmv.Resources.Resource.Gönder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <!-- Bootstrap 5 JS ve Bağımlılıkları -->
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

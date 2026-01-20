@@ -1,0 +1,262 @@
+body {
+    margin: 0;
+    padding: 0;
+background-color: #f4f4f4;
+}
+
+html {
+    font-size: 16px;
+     
+}
+
+header {
+
+    background-color: #0E0E0E;
+    color: white;
+    padding: 0.2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    align-items: center;
+}
+
+#nav-links .nav-icon {
+    display: none;
+
+
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.logo {
+ 
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    text-decoration: none;
+    margin: 0;
+}
+
+
+svg {
+    margin: 0;
+    padding: 0;
+    left: 0;
+    width: 20rem;
+}
+#logo-box h2
+{
+    margin-top:0.5rem;
+    margin-left: 0.1rem;
+}
+#nav-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+
+
+#nav-links  {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 1rem;
+    margin-top: 1.2rem;
+    letter-spacing: 0.1rem;
+    transition: color 0.4s;
+}
+
+.nav-link:hover {
+    color: red
+}
+
+  
+  
+  
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 5rem;
+
+}
+.auth-container {
+    margin-top: 5rem;
+    height:auto;
+    background-color: #F6F7F9 ;
+    padding: 1.6rem; 
+    border-radius: 0.8rem; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+   
+}
+
+.text-space {
+    font-size: 1.2rem;
+}
+
+
+/* Footer */
+
+footer {
+  padding-top: 3rem;
+  padding-bottom:3rem;
+  background-color: #2C3E4F;
+  color: white;
+  text-align: center;
+}
+
+
+footer p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+footer li {
+  display: inline-block;
+  margin-right: 1rem ;
+}
+
+footer .fa-brands {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+}
+.about-icons {
+    margin: 0 auto;
+}
+.copyright {
+  background-color: #212529;
+  padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+  color: white;
+  text-align: center;
+}
+
+.more-info {
+    
+    font-size: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .auth-container {
+    height: auto;
+  }
+
+
+    html {
+        font-size: 15px;
+    }
+    header {
+        height: auto;
+        justify-content: space-between;
+    }
+
+    #logo-box{
+        float: none;
+        text-align: left;
+        top:0
+    }  
+    #nav-links {
+   
+        flex-direction: column;
+        align-items: center;
+        top: 8rem;
+        left: 0;
+        font-size: 1.2rem;
+       
+    }
+
+    #nav-links.active {
+        display: flex;
+    }
+  
+    #nav-links .nav-icon {
+        display: block;
+        font-size: 1rem;
+        
+    }
+
+    #nav-links.responsive li:not(:first-child){
+        display: none;
+
+    }
+
+    #nav-links ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .purple-div {
+        margin-top: 0;
+    }
+
+    .vision-box {
+        padding: 1rem;
+    }
+}
+
+
+@media (min-width: 992px) and (max-width: 1200.00px) {
+
+    
+    .logo {
+        font-size: 2rem;
+    }
+
+    .nav-link {
+        font-size: 1.8rem;
+        padding: 1.8rem;
+    }
+
+    .vision-box {
+        padding: 2.5rem;
+    }
+    
+    #acc-box {
+        height: 40rem; 
+    }
+}
+
+@media (min-width: 1200.01px) {
+    .logo {
+        margin-top: 1rem;
+        font-size: 2.2rem;
+    }
+
+    .nav-link {
+        font-size: 2rem;
+        padding: 2rem;
+    }
+
+    .vision-box {
+        padding: 3rem;
+    }
+    #acc-box {
+        height: 40rem; 
+    }
+}
+
+@media (max-width: 575.98px) {
+    #signupForm .password-inputs {
+        flex-direction: column;
+    }
+
+.auth-container {
+ height: auto;
+  font-size: 0.7rem;
+}}
+

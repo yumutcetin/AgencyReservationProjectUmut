@@ -1,0 +1,44 @@
+﻿@model RezerVanaUmv.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Menü Öğesi Düzenle";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+    var facilities = ViewBag.Facilities as IEnumerable<dynamic>;
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Menü_Öğesini_Düzenle</h1>
+<hr />
+
+<form asp-action="EditMenuItem" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="control-label">@RezerVanaUmv.Resources.Resource.Ad</label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="control-label">@RezerVanaUmv.Resources.Resource.Açıklama</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="control-label">@RezerVanaUmv.Resources.Resource.Fiyat</label>
+        <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">@RezerVanaUmv.Resources.Resource.Güncelle</button>
+        <a asp-action="GetMenu" asp-route-facilityId="@Model.FacilityId" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

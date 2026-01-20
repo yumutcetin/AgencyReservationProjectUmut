@@ -1,0 +1,93 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Rezervasyonlar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" />
+
+<h2> @RezerVanaUmv.Resources.Resource.Rezervasyonlar</h2>
+
+<table id="reservationTable" class="display nowrap table table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Kayıt_Tarihi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ajans_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Otel</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ülke</th>
+            <th>@RezerVanaUmv.Resources.Resource.Şehir</th>
+            <th>@RezerVanaUmv.Resources.Resource.Misafir_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Start_Date</th>
+            <th>@RezerVanaUmv.Resources.Resource.End_Date</th>
+            <th>@RezerVanaUmv.Resources.Resource.Puan</th>
+            <th>@RezerVanaUmv.Resources.Resource.Oda_Tipi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Durum</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(item.ReservationDate.HasValue ? item.ReservationDate.Value.ToString("dd-MM-yyyy") : "")</td>
+                <td>@item.Agency?.Name</td>
+                <td>@item.Tenant?.Name</td>
+                <td>@item.Agency?.Ulke</td>
+                <td>@item.Agency?.Sehir</td>
+                <td>
+                    @string.Join(", ", item.Passengers.Select(p => p.FirstName + " " + p.LastName))
+                </td>
+                <td>@(item.CheckinDate.HasValue ? item.CheckinDate.Value.ToString("dd-MM-yyyy") : "")</td>
+                <td>@(item.CheckoutDate.HasValue ? item.CheckoutDate.Value.ToString("dd-MM-yyyy") : "")</td>
+                <td>@item.TotalAmount</td>
+                <td>@item.RoomType</td>
+                <td>@item.Status</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">@RezerVanaUmv.Resources.Resource.Edit</a>
+ 
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">@RezerVanaUmv.Resources.Resource.Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- DataTables JS -->
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#reservationTable').DataTable({
+                dom: 'Bfrtip',
+                scrollX: false,
+                autoWidth: false,
+                responsive: true,
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                buttons: [
+                    'copy', 'excel', 'pdf', 'print'
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json'
+                }
+            });
+        });
+    </script>
+}

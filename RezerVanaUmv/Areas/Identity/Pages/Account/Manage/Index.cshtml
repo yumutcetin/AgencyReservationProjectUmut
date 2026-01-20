@@ -1,0 +1,64 @@
+@page
+@model IndexModel
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="content">
+            <div class="table-container">
+<br /><br />
+<h1>Manage your account</h1>
+
+<div>
+    <h2>Change your account settings</h2>
+    <hr />
+    <div class="row row-p">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+
+            <h3>Manage Profile</h3>
+            <partial name="_StatusMessage" for="StatusMessage" />
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="profile-form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div class="form-floating mb-3">
+                            <label asp-for="Username" class="form-label"></label>
+                            <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                       
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div></section>
+<style>
+    .row-p {
+        background: #fff;
+        min-height: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+  
+</style>

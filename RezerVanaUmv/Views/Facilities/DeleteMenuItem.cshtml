@@ -1,0 +1,23 @@
+﻿@model RezerVanaUmv.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Menü Öğesi Sil";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>Menü Öğesi Sil</h1>
+<hr />
+
+<div class="alert alert-warning">
+    <h4>@RezerVanaUmv.Resources.Resource.SILME_ONAYI_MENU</h4>
+    <p><strong>@Model.Name</strong> (@Model.Price ₺)</p>
+    <p>@Model.Description</p>
+</div>
+
+<form asp-action="DeleteMenuItem" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <button type="submit" class="btn btn-danger">@RezerVanaUmv.Resources.Resource.Evet_Sil</button>
+    <a asp-action="GetMenu" class="btn btn-secondary">@RezerVanaUmv.Resources.Resource.İptal</a>
+</form>

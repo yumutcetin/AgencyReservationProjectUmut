@@ -1,0 +1,78 @@
+﻿@model List<RezerVanaUmv.ViewModels.UserPointsViewModel>
+
+@{
+    ViewData["Title"] = "Aktif Kullanıcılar";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2> @RezerVanaUmv.Resources.Resource.Kullanıcılar</h2>
+
+<table id="aktifTable" class="table table-bordered table-striped display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+            <th>@RezerVanaUmv.Resources.Resource.Kullanıcı_Adı</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ajans</th>
+            <th>@RezerVanaUmv.Resources.Resource.Toplam_Puan</th>
+            <th>@RezerVanaUmv.Resources.Resource.Bonus_Puan</th>
+            <th>@RezerVanaUmv.Resources.Resource.Points_Earned</th>
+            <th>@RezerVanaUmv.Resources.Resource.Points_Pending</th>
+            <th>@RezerVanaUmv.Resources.Resource.Ülke</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.User.Email</td>
+                <td>@item.User.UserName</td>
+                <td>@item.User.AgencyName</td>
+                <td>@item.TotalPoints</td>
+                <td>@item.BonusPoints</td>
+                <td>@item.GainedPoints</td>
+                <td>@item.PendingPoints</td>
+                <td>@item.User.AgencyCountry</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#aktifTable').DataTable({
+                dom: 'Bfrtip',
+                scrollX: true,
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                buttons: [
+                    'copy', 'excel', 'pdf', 'print'
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json'
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,52 @@
+﻿@model RezerVanaUmv.Models.RoomType
+
+@{
+    ViewData["Title"] = "Yeni Oda Tipi";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-4">➕ @RezerVanaUmv.Resources.Resource.Yeni_Oluştur</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">@RezerVanaUmv.Resources.Resource.Oda_Tipi</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">@RezerVanaUmv.Resources.Resource.Açıklama</label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            @*
+            <div class="mb-3">
+                <label asp-for="Capacity" class="form-label">@RezerVanaUmv.Resources.Resource.Kapasite</label>
+                <input asp-for="Capacity" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BedCount" class="form-label">@RezerVanaUmv.Resources.Resource.Yatak_Sayısı</label>
+                <input asp-for="BedCount" class="form-control" />
+            </div>
+            *@
+            <!-- 🔒 Hidden TenantId -->
+            <input type="hidden" asp-for="TenantId" value="@ViewBag.TenantId" />
+
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="Index" class="btn btn-secondary">
+                    🔙 @RezerVanaUmv.Resources.Resource.Listeye_Geri
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    💾 @RezerVanaUmv.Resources.Resource.KAYDET
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

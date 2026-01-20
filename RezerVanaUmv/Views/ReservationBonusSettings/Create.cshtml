@@ -1,0 +1,97 @@
+﻿@model RezerVanaUmv.Models.ReservationBonusSetting
+
+@{
+    ViewData["Title"] = "Bonus Parametreleri";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-warning text-center">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success text-center">
+        @ViewBag.SuccessMessage
+    </div>
+}
+<h2 class="mb-4">🔧 @RezerVanaUmv.Resources.Resource.Bonus_Parametreleri</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="MinStayDay" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Stay</label>
+            <input asp-for="MinStayDay" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="MaxStayDay" class="form-label">@RezerVanaUmv.Resources.Resource.Max_Stay</label>
+            <input asp-for="MaxStayDay" class="form-control" required />
+        </div>
+        @*
+        <div class="col-md-6 mb-3">
+            <label asp-for="MinReservationDay" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Reservation_Day</label>
+            <input asp-for="MinReservationDay" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="MaxReservationDay" class="form-label">@RezerVanaUmv.Resources.Resource.Max_Reservation_Day</label>
+            <input asp-for="MaxReservationDay" class="form-control" required />
+        </div>
+        *@
+        <div class="col-md-6 mb-3">
+            <label asp-for="MinBalance" class="form-label">@RezerVanaUmv.Resources.Resource.Min_Balance</label>
+            <input asp-for="MinBalance" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="YearlyUsePoint" class="form-label">@RezerVanaUmv.Resources.Resource.Yearly_Use_Point</label>
+            <input asp-for="YearlyUsePoint" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="BonusProcedureUrl" class="form-label">@RezerVanaUmv.Resources.Resource.Bonus_Prosedür_Adresi</label>
+            <input asp-for="BonusProcedureUrl" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="BonusInfoEmail" class="form-label">@RezerVanaUmv.Resources.Resource.Bonus_Bilgi_Maili</label>
+            <input asp-for="BonusInfoEmail" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3 form-check">
+            <input asp-for="IsBonusProcEnabled" class="form-check-input" />
+            <label asp-for="IsBonusProcEnabled" class="form-check-label">@RezerVanaUmv.Resources.Resource.Bonus_Prosedür_Kontrol</label>
+        </div>
+
+        <div class="col-md-6 mb-3 form-check">
+            <input asp-for="IsExcheckinDateControl" class="form-check-input" />
+            <label asp-for="IsExcheckinDateControl" class="form-check-label">@RezerVanaUmv.Resources.Resource.ExCheckin_Date_Kontrol</label>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="SearchType" class="form-label">@RezerVanaUmv.Resources.Resource.Arama_Tipi</label>
+            <select asp-for="SearchType" class="form-select" required>
+                <option value="">@RezerVanaUmv.Resources.Resource.Seçiniz</option>
+                <option value="KIRMAN BELAZUR BONUS"> @RezerVanaUmv.Resources.Resource.KIRMAN_BELAZUR_BONUS</option>
+
+            </select>
+         
+        </div>
+
+        <!-- Hidden TenantId -->
+        <input type="hidden" asp-for="TenantId" />
+    </div>
+
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success px-5">💾 @RezerVanaUmv.Resources.Resource.KAYDET</button>
+    </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

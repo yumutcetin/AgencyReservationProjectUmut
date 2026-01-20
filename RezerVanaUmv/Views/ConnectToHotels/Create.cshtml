@@ -1,0 +1,39 @@
+﻿@model RezerVanaUmv.Models.DavetKoduTablosu
+
+@{
+    ViewData["Title"] = "Davet Kodu Güncelle";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+
+    @* Hataları göster *@
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <h3> @RezerVanaUmv.Resources.Resource.Otel_Seç</h3>
+    @if (ViewBag.Tenants != null && ((SelectList)ViewBag.Tenants).Any())
+    {
+        <form asp-action="Create" method="post">
+    
+            <div class="form-group">
+                <label> @RezerVanaUmv.Resources.Resource.Acenta_Seç:</label>
+                <select name="SelectedTenant" class="form-control">
+                    <option value="">--  @RezerVanaUmv.Resources.Resource.Seçiniz --</option>
+                    @foreach (var item in (SelectList)ViewBag.Tenants)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+            </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2"> @RezerVanaUmv.Resources.Resource.Devam_Et</button>
+    </form>
+}
+else
+{
+    <p>@RezerVanaUmv.Resources.Resource.Herhangi_bir_otel_bulunamadı_</p>
+}
+

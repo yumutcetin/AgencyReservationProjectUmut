@@ -1,0 +1,65 @@
+﻿@inject SignInManager<RezerVanaUmv.Models.ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<div class="account-container-profile">
+    <div class="sidebar-profile">
+        <ul class="nav nav-profile nav-pills flex-column">
+            <li class="nav-item nav-item-profile">
+                <a class="nav-link nav-link-profile @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a>
+            </li>
+            <li class="nav-item nav-item-profile">
+                <a class="nav-link nav-link-profile @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a>
+            </li>
+            <li class="nav-item nav-item-profile">
+                <a class="nav-link nav-link-profile @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a>
+            </li>
+            @if (hasExternalLogins)
+            {
+                <li id="external-logins" class="nav-item nav-item-profile">
+                    <a id="external-login" class="nav-link nav-link-profile @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a>
+                </li>
+            }
+            <li class="nav-item nav-item-profile">
+                <a class="nav-link nav-link-profile @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a>
+            </li>
+            <li class="nav-item nav-item-profile">
+                <a class="nav-link nav-link-profile @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    .nav-profile {
+        display: flex;
+        flex-direction: column; /* Stacks the items vertically */
+        padding: 0; /* Remove default padding */
+        margin: 0; /* Remove default margin */
+        list-style: none; /* Remove bullets from the list */
+    }
+
+    .nav-item-profile {
+        width: 100%; /* Ensure the links span full width */
+        margin-bottom: 10px; /* Add spacing between items */
+    }
+
+    .nav-link-profile {
+        display: block;
+        padding: 10px 15px;
+        color: #007bff !important; /* Set link color */
+        text-decoration: none;
+        border-radius: 3px; /* Rounded corners for the links */
+        background-color: #f8f9fa; /* Add a background color */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .nav-link-profile:hover {
+            background-color: #e2e6ea; /* Change background on hover */
+            color: #0056b3 !important; /* Change text color on hover */
+        }
+        button {
+            margin-top: 7px;
+        }
+</style>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<RezerVanaUmv.ViewModels.DavetKoduViewModel>
+
+@{
+    ViewData["Title"] = "Davet Kodları";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1 class="mb-3">📋@RezerVanaUmv.Resources.Resource.Davet_Kodları</h1>
+
+<table id="davetKoduTable" class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Davet_Kodu</th>
+            <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+            <th>Tenant (Otel)</th>
+            <th>Agency (Acenta)</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DavetKodu</td>
+                <td>@item.Email</td>
+                <td>@item.TenantName</td>
+                <td>@item.AgencyName</td>
+                <td>
+                    <form asp-action="SetActive" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-sm btn-primary" title="@RezerVanaUmv.Resources.Resource.Aktifleştir">+</button>
+                    </form>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">📄</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">🗑️</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#davetKoduTable').DataTable({
+                dom: 'Bfrtip',
+                stateSave: true,
+                stateDuration: -1,
+                stateLoadParams: function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                buttons: ['copy', 'excel', 'pdf', 'print'],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+                }
+            });
+        });
+    </script>
+}

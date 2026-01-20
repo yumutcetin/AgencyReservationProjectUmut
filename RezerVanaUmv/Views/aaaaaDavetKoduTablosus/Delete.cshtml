@@ -1,0 +1,41 @@
+﻿@model RezerVanaUmv.Models.DavetKoduTablosu
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h1>@RezerVanaUmv.Resources.Resource.Sil</h1>
+
+<h3>@RezerVanaUmv.Resources.Resource.Silmek_İstiyor</h3>
+<h3>@RezerVanaUmv.Resources.Resource.Acenta_bağ_silme</h3>
+<div>
+    <h4>@RezerVanaUmv.Resources.Resource.Davet_Kodu_Tablosu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DavetKodu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DavetKodu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenantId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenantId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AgencyId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AgencyId)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">@RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "🎁 Bonus Puan Listesi";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">🎁 @RezerVanaUmv.Resources.Resource.Bonus_Puan_Listesi</h2>
+<hr />
+
+@Html.AntiForgeryToken()
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>@RezerVanaUmv.Resources.Resource.Kullanıcı_Adı</th>
+                <th>@RezerVanaUmv.Resources.Resource.Puan</th>
+                <th>@RezerVanaUmv.Resources.Resource.Açıklama</th>
+                <th>@RezerVanaUmv.Resources.Resource.Tarih</th>
+                <th>@RezerVanaUmv.Resources.Resource.EPosta</th>
+                <th>@RezerVanaUmv.Resources.Resource.Aksiyon</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.Points</td>
+                    <td>@item.Description</td>
+                    <td>@(item.CreatedAt != null ? ((DateTime)item.CreatedAt).ToLocalTime().ToString("dd.MM.yyyy HH:mm") : "")</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">@RezerVanaUmv.Resources.Resource.Edit</a>
+
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline" onsubmit="return confirm('@RezerVanaUmv.Resources.Resource.Silme_Onayı');">
+                            <button type="submit" class="btn btn-sm btn-danger">@RezerVanaUmv.Resources.Resource.Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+ 
+</div>

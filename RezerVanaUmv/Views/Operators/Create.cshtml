@@ -1,0 +1,41 @@
+﻿@model RezerVanaUmv.Models.Operator
+
+@{
+    ViewData["Title"] = "Yeni Operatör Ekle";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-4">➕ @RezerVanaUmv.Resources.Resource.Yeni_Operatör_Tanımı</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Create">
+                    @* TenantId gizli olarak alınıyor *@
+                    <input type="hidden" asp-for="TenantId" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">@RezerVanaUmv.Resources.Resource.Operatör_Adı</label>
+                        <input asp-for="Name" class="form-control" placeholder="@RezerVanaUmv.Resources.Resource.Örn_CIS_ANEX_TOUR" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">@RezerVanaUmv.Resources.Resource.KAYDET</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a asp-action="Index" class="btn btn-link">← @RezerVanaUmv.Resources.Resource.Listeye_Geri</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

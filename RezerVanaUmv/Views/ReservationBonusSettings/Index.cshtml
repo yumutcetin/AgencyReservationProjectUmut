@@ -1,0 +1,105 @@
+﻿@model IEnumerable<RezerVanaUmv.Models.ReservationBonusSetting>
+
+@{
+    ViewData["Title"] = "Bonus Parametreleri";
+    Layout = "~/Views/PageViews/UserLayout.cshtml";
+}
+
+<h2 class="mb-3">🎯@RezerVanaUmv.Resources.Resource.Bonus_Parametreleri</h2>
+<div class="table-responsive">
+<table id="bonusTable" class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>@RezerVanaUmv.Resources.Resource.Bonus_Prosedür_Adresi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Oluşturulma</th>
+            <th>@RezerVanaUmv.Resources.Resource.Bonus_Bilgi_Maili</th>
+            <th>@RezerVanaUmv.Resources.Resource.Arama_Tipi</th>
+            <th>@RezerVanaUmv.Resources.Resource.Min_Stay</th>
+            <th>@RezerVanaUmv.Resources.Resource.Max_Stay</th>
+           @* <th>@RezerVanaUmv.Resources.Resource.Min_Reservation_Day</th>
+            <th>@RezerVanaUmv.Resources.Resource.Max_Reservation_Day</th>*@
+            <th>@RezerVanaUmv.Resources.Resource.Min_Balance</th>
+            <th>@RezerVanaUmv.Resources.Resource.Yearly_Use_Point</th>
+            <th>@RezerVanaUmv.Resources.Resource.Prosedür_Aktif</th>
+            <th>@RezerVanaUmv.Resources.Resource.Checkin_Kontrol</th>
+            <th>@RezerVanaUmv.Resources.Resource.İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BonusProcedureUrl</td>
+                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                <td>@item.BonusInfoEmail</td>
+                <td>@item.SearchType</td>
+                <td>@item.MinStayDay</td>
+                <td>@item.MaxStayDay</td>
+                @*<td>@item.MinReservationDay</td>
+                <td>@item.MaxReservationDay</td>*@
+                <td>@item.MinBalance.ToString("C")</td>
+                <td>@item.YearlyUsePoint</td>
+                <td>
+                    @if (item.IsBonusProcEnabled)
+                    {
+                        <span class="badge bg-success">@RezerVanaUmv.Resources.Resource.Evet</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@RezerVanaUmv.Resources.Resource.Hayır</span>
+                    }
+                </td>
+                <td>
+                    @if (item.IsExcheckinDateControl)
+                    {
+                        <span class="badge bg-success">@RezerVanaUmv.Resources.Resource.Evet</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@RezerVanaUmv.Resources.Resource.Hayır</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">✏️</a>
+                    
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">🗑️</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+@section Scripts {
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Türkçe dil dosyası -->
+    <script src="https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#bonusTable').DataTable({
+                "scrollX": true,
+                "stateSave": true,
+                "stateDuration": -1,
+                "stateLoadParams": function (settings, data) {
+                    var navigationType = performance.getEntriesByType("navigation")[0].type;
+                    if (navigationType !== 'back_forward') {
+                        return false;
+                    }
+                },
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+                },
+                "pageLength": 10,
+                "lengthMenu": [5, 10, 25, 50],
+                "order": [[1, "desc"]] // Tarihe göre sıralama
+            });
+        });
+    </script>
+}
