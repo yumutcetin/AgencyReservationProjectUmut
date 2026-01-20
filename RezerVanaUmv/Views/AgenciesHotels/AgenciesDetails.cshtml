@@ -236,7 +236,7 @@
                 <td class="text-center">
                    @if (item.Reservation != null)
                    {
-                       <a asp-action="EditHarcamalar" asp-route-id="@item.Reservation.Id" class="btn btn-warning btn-sm" style="font-size: 0.75rem;">
+                       <a href="/AgenciesHotels/EditHarcamalar/@item.Reservation.Id" class="btn btn-primary btn-sm" style="font-size: 0.75rem;">
                            <i class="fas fa-edit"></i> Düzenle
                        </a>
                    }
